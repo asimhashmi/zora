@@ -9,8 +9,28 @@
         <%= f.text_field :name, autofocus: false, class: 'form-control', placeholder: "Full name" %>
       </div>
 
+      <%= current_user.email %>
+
+      <!--
       <div class="mb-3">
         <%= f.email_field :email, class: 'form-control', placeholder: 'Email Address' %>
+      </div>
+      -->
+
+      <div class="mb-3">
+        <%= f.text_area :bio, class: 'form-control', placeholder: 'Short Bio' %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.select :province, User.provinces.keys, class: 'form-control', placeholder: 'Province' %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.text_area :address, class: 'form-control', placeholder: 'Address' %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.date_field :birth_date, class: 'form-control', placeholder: 'Date of Birth' %>
       </div>
 
       <div class="mb-3">
@@ -24,14 +44,16 @@
         <div class="alert alert-warning">Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
       <% end %>
 
+      <!--
       <div class="mb-3">
-        <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: 'Password'  %>
+        <%#= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: 'Password'  %>
         <p class="form-text text-muted"><small>Leave password blank if you don't want to change it</small></p>
       </div>
 
       <div class="mb-3">
-        <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control', placeholder: 'Confirm Password'  %>
+        <%#= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control', placeholder: 'Confirm Password'  %>
       </div>
+      -->
 
       <div class="mb-3">
         <%= f.password_field :current_password, autocomplete: "off", class: 'form-control', placeholder: 'Current Password'  %>

@@ -8,4 +8,7 @@ class User < ApplicationRecord
 
   has_many :notifications, as: :recipient
   has_many :services
+
+  enum role: [:Student, :Teacher]
+  enum province: [:Eastern_Cape, :Free_State, :Gauteng, :KwaZulu_Natal, :Limpopo, :Mpumalanga, :Northern_Cape, :North_West, :Western_Cape]
 end
