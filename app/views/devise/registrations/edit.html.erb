@@ -56,6 +56,13 @@
       -->
 
       <div class="mb-3">
+        <%= f.label :"Verification Document", class: "form-label" %>
+        <%= f.file_field :id_card %>
+      </div>
+
+      <%= image_tag @user.id_card.thumb.url, class: "rounded border shadow-sm d-block mx-auto my-3" %>
+
+      <div class="mb-3">
         <%= f.password_field :current_password, autocomplete: "off", class: 'form-control', placeholder: 'Current Password'  %>
         <p class="form-text text-muted"><small>We need your current password to confirm your changes</small></p>
       </div>

@@ -13,6 +13,8 @@ class User < ApplicationRecord
   has_many :student_meetings, foreign_key: :student_id, class_name: "Meeting", dependent: :destroy
   has_many :teacher_meetings, foreign_key: :teacher_id, class_name: "Meeting", dependent: :destroy
 
+  mount_uploader :id_card, DocumentUploader
+
   enum province: [:Eastern_Cape, :Free_State, :Gauteng, :KwaZulu_Natal, :Limpopo, :Mpumalanga, :Northern_Cape, :North_West, :Western_Cape]
 
   validates :first_name, :last_name, :email, presence: true
