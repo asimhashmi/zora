@@ -15,8 +15,11 @@ class MessagesController < ApplicationController
 
     def create
         @message = @conversation.messages.new(message_params)
+        @user = current_user
+
         if @message.save
             ModelMailer.new_message_notification(@message, current_user.email).deliver_now
+            
             redirect_to conversation_messages_path(@conversation)
         end
     end
