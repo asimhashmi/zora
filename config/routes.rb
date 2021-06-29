@@ -4,6 +4,10 @@ Rails.application.routes.draw do
   root to: 'home#index'
 
   resources :meetings
+  
+  resources :conversations do
+    resources :messages
+  end
   get '/privacy', to: 'home#privacy'
   get '/terms', to: 'home#terms'
   get '/student', to: 'home#student_home'

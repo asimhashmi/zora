@@ -75,3 +75,5 @@ gem 'whenever', require: false
 gem "rolify"
 gem "httparty"
 gem 'carrierwave', '~> 2.0'
+gem 'ransack', github: 'activerecord-hackery/ransack'
+ 
