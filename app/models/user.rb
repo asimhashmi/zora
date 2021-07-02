@@ -34,4 +34,12 @@ class User < ApplicationRecord
   def role_name
     roles_name.join(', ').titleize
   end
+
+  def self.search(search)
+    if search
+      find(:all, :conditions => ['first_name LIKE ?', "%#{search}%"])
+    else
+      find(1..10)
+    end
+  end
 end

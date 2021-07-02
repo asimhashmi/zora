@@ -1,6 +1,13 @@
 <h1>Student</h1>
 <p class="lead">Use this for your student home page</p>
 
+<% form_tag student_path, :method => 'get' do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
+<br>
 <br>
 
 <h5>List of verified teachers</h5>
