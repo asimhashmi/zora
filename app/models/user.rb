@@ -4,6 +4,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :masqueradable, :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :omniauthable
 
+  scope :filtered, ->(query_params) { User::Filter.new.filter(self, query_params) }
+
   has_one_attached :avatar
   has_person_name
 

@@ -61,6 +61,9 @@
       </div>
 
       <%#= image_tag @user.id_card.thumb.url, class: "rounded border shadow-sm d-block mx-auto my-3" %>
+      <% if @user.id_card == !nil %>
+        <%= image_tag @user.id_card.thumb.url, class: "rounded border shadow-sm d-block mx-auto my-3" %>
+      <% end %>
 
       <div class="mb-3">
         <%= f.password_field :current_password, autocomplete: "off", class: 'form-control', placeholder: 'Current Password'  %>

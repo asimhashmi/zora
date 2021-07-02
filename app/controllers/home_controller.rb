@@ -18,3 +18,10 @@ class HomeController < ApplicationController
   def privacy
   end
 end
+
+
+private
+def query_params
+  query_params = params[:query]
+  query_params ? query_params.permit(:first_name, :role) : {}
+end

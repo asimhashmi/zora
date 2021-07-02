@@ -1,3 +1,21 @@
+<%= form_for :query, method: :get do |form| %>
+  <div class="field">
+    <%= form.text_field :first_name, placeholder: 'Search...', value: params.dig('query', 'first_name') %>
+  </div>
+
+
+  <div class="field">
+    <%= form.label :role %>
+    <%= form.select :role, [['Teacher', 'teacher'], ['Student', 'student']], include_blank: true, selected: params.dig('query', 'role') %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Search' %>
+  </div>
+<% end  %>
+
+
+
 <h1>Student</h1>
 <p class="lead">Use this for your student home page</p>
 
