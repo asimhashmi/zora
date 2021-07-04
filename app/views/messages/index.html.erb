@@ -2,6 +2,7 @@
   <% if message.body %>
     <% user = User.find(message.user_id) %>
     <div <% if user == current_user %>style="text-align: right;"<% end %> >
+        <%= user.name %>
         <%= user.created_at.strftime("%H:%M") %><%#= message.message_time %>
         <%= message.body %> <br>
     </div>

@@ -4,7 +4,8 @@ class MessagesController < ApplicationController
     end
     
     def index
-        @messages = @conversation.messages
+        # byebug
+        @messages = @conversation.messages if @conversation.sender_id == current_user.id || @conversation.recipient_id == current_user.id
         @message = @conversation.messages.new
         # @message = Message.new(conversation: @conversation)
     end
