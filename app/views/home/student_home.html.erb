@@ -1,18 +1,13 @@
-<%= form_for :query, method: :get do |form| %>
-  <div class="field">
-    <%= form.text_field :first_name, placeholder: 'Search...', value: params.dig('query', 'first_name') %>
-  </div>
 
 
-  <div class="field">
-    <%= form.label :role %>
-    <%= form.select :role, [['Teacher', 'teacher'], ['Student', 'student']], include_blank: true, selected: params.dig('query', 'role') %>
-  </div>
 
-  <div class="actions">
-    <%= form.submit 'Search' %>
-  </div>
-<% end  %>
+hkbjbkjbkjbj
+<% form_tag @teachers_path, :method => 'get' do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :first_name => nil %>
+  </p>
+<% end %>
 
 
 
