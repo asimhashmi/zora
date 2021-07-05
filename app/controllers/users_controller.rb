@@ -3,7 +3,9 @@ class UsersController < ApplicationController
   before_action :set_user
 
   def index
-    @user = User.search(params[:search])
+      # @user = User.search(params[:search])
+      @q = User.ransack(params[:q])
+      @user = @q.result(distinct: true)
   end
 
   def show
