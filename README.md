@@ -1,5 +1,7 @@
 # MsZora Tutor Application
 
+The MsZora application is a system in which...
+
 ## Table of contents
 * [General info](#general-info)
 * [Technologies](#technologies)
@@ -7,7 +9,11 @@
 * [Setup](#setup)
 
 ## General info
-This project is...
+
+* Provide general information about your project here.
+* What problem does it (intend to) solve?
+* What is the purpose of your project?
+* Why did you undertake it?
 	
 ## Technologies
 Project is created with:
