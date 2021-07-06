@@ -3,16 +3,20 @@
 ## Table of contents
 * [General info](#general-info)
 * [Technologies](#technologies)
+* [Project Status](#project-statusa)
 * [Setup](#setup)
 
 ## General info
-This project is simple Lorem ipsum dolor generator.
+This project is...
 	
 ## Technologies
 Project is created with:
-* Lorem version: 12.3
-* Ipsum version: 2.33
-* Ament library version: 999
+* Bootstrap
+* Ubuntu
+*
+
+## Project Status
+This project is in progress, and is scheduled for deployment in August.
 	
 ## Setup
 To run this project, install it locally using npm:
