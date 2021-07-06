@@ -1,10 +1,11 @@
 # MsZora Tutor Application
 
-The MsZora application is a system in which...
+The MsZora Tutor application is a system in which...
 
 ## Table of contents
 * [General info](#general-info)
 * [Technologies](#technologies)
+* [Features](#features)
 * [Project Status](#project-statusa)
 * [Setup](#setup)
 
@@ -20,6 +21,15 @@ Project is created with:
 * Bootstrap
 * Ubuntu
 *
+
+## Features
+
+MsZora Tutor possesses the following features:
+
+* Feature 1
+* Feature 2 
+* Feature 3 
+* Feature 4 
 
 ## Project Status
 This project is in progress, and is scheduled for deployment in August.
