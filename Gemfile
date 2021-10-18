@@ -77,3 +77,4 @@ gem "httparty"
 gem 'carrierwave', '~> 2.0'
 gem 'ransack', github: 'activerecord-hackery/ransack'
  
+gem "nokogiri", ">= 1.5.9" 
