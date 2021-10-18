@@ -16,10 +16,12 @@
 <%= @user.address %>
 <br><br><br><br>
 <h5>Profile Picture</h5>
-<%= image_tag @user.avatar, style:"width: 400px;" %>
+<%= image_tag(@user.avatar, :size => "260x180") if @user.avatar.attached?%>
 <br><br><br><br>
 <h5>ID Card</h5>
-<img src="<%= @user.id_card %>">
+
+
+<img src="<%= @user.id_card %>" style="width:260px">
 
 
 
