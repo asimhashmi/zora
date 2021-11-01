@@ -1,0 +1,9 @@
+<% if @meeting.errors.any? %>
+$('#error_messages').html(`<button type="button" class=" btn close_alert" data-dismiss="alerts">&times;</button>
+                            <ul>
+                              <% @meeting.errors.each do |field, message|%>
+                                <li><strong><%= field.to_s.humanize %> : </strong><%= message %></li>
+                              <% end %>
+                            </ul>`)
+$(".alerts").slideDown(100);  
+<% end %>

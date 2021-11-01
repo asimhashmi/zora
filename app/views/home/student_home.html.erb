@@ -14,11 +14,11 @@
             </tr>
             </thead>
             <tbody>
-                <% @teacher_list.each do |list|%>
+                <% @teacher_list.each do |teacher|%>
                     <tr>
-                        <td scope="row"><%= link_to list.name %></td>
-                        <td><%= list.bio %></td>
-                        <td><%= list.province %></td>
+                        <td scope="row"><%= link_to teacher.name, user_path(teacher.id) %></td>
+                        <td><%= teacher.bio %></td>
+                        <td><%= teacher.province %></td>
                     </tr>
                 <% end %>
             </tbody>

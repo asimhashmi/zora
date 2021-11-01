@@ -14,4 +14,15 @@
 
     <%= render 'shared/footer' %>
   </body>
+  <script>
+    $(".notice-alert").delay(5000).slideUp(200, function() {
+        $(this).alert('close');
+    });
+    $('body').on('click', '.close_alert', function(){
+        $(".alerts").slideUp(100); 
+    })
+    $('body').on('click', '.close', function () {
+        $(this).parents('.modal').modal('hide')
+    });
+  </script>
 </html>

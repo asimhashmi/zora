@@ -1,0 +1,55 @@
+<div class="modal fade" id="meeting-modal" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Meeting</h5><br>
+        <%= params[:student_id]%>
+        <%= params[:teacher_id]%>
+        <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="alert alerts alert-danger"  id="error_messages">
+      </div>
+      <%= form_for(@meeting, as: :meeting, url: meetings_path(@meeting), html: { method: :post, remote: true }) do |f| %>
+        <div class="modal-body">
+          <strong><%= current_user.name.titleize %></strong>
+          <hr>
+          <div class="form__row">
+            <div class="component__block">
+            <label for="fname">Title</label>
+            <%= f.text_field :title, value: @meeting.title, class: "form-control" %>
+
+            <label for="fname">Start Time</label>
+            <%= f.datetime_field :start_time, autocomplete: "time", placeholder: "please select your time", class: "form-control" %>
+            <label for="fname">End Time</label>
+            <%= f.datetime_field :end_time, autocomplete: "time", placeholder: "please select your time", class: "form-control" %>
+            <label for="fname">Purpose</label>
+            <%= f.text_field :purpose, value: @meeting.title, class: "form-control" %>
+            
+            </div>
+          </div>
+          <div class="form__row mt-3">
+            <div class="component__block">
+            
+
+            <label for="fname">Please give a small description about your doubts.</label>
+            <%= f.text_area :description, value: @meeting.description, class: "form-control", rows: "4" %>
+            </div>
+          </div>
+          <%= f.hidden_field :teacher_id, value: params[:teacher_id] %>
+          <%= f.hidden_field :student_id, value: params[:student_id] %>
+        </div>
+        <div class="modal-footer">
+          <%= f.submit "Call Request", class: "btn ftf-round-btn" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<script>
+$(document).ready(function() {
+  $('.alerts').hide()
+});
+</script>

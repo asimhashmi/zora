@@ -14,7 +14,7 @@
       </div>
 
       <div class="mb-3">
-        <%= f.select :role, User.roles.keys, class: 'form-control' %>
+        <%= f.select :role_ids, Role.pluck(:name, :id), class: 'form-control' %>
       </div>
 
       <div class="mb-3">
