@@ -3,13 +3,11 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Meeting</h5><br>
-        <%= params[:student_id]%>
-        <%= params[:teacher_id]%>
         <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="alert alerts alert-danger"  id="error_messages">
+      <div class="alert alerts alert-danger"  id="error_messages" hidden>
       </div>
       <%= form_for(@meeting, as: :meeting, url: meetings_path(@meeting), html: { method: :post, remote: true }) do |f| %>
         <div class="modal-body">
@@ -21,12 +19,11 @@
             <%= f.text_field :title, value: @meeting.title, class: "form-control" %>
 
             <label for="fname">Start Time</label>
-            <%= f.datetime_field :start_time, autocomplete: "time", placeholder: "please select your time", class: "form-control" %>
-            <label for="fname">End Time</label>
-            <%= f.datetime_field :end_time, autocomplete: "time", placeholder: "please select your time", class: "form-control" %>
+            <%= f.datetime_field :time, autocomplete: "time", placeholder: "please select your time", class: "form-control" %>
+            <label for="fname">Duration</label>
+            <%= f.select :duration, Meeting::DURATIONS, { include_blank: 'Select a duration', disabled: false}, class: "form-control" %>
             <label for="fname">Purpose</label>
-            <%= f.text_field :purpose, value: @meeting.title, class: "form-control" %>
-            
+            <%= f.text_field :purpose, value: @meeting.purpose, class: "form-control" %>            
             </div>
           </div>
           <div class="form__row mt-3">
@@ -48,8 +45,3 @@
   </div>
 </div>
 
-<script>
-$(document).ready(function() {
-  $('.alerts').hide()
-});
-</script>

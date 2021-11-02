@@ -65,10 +65,11 @@ ActiveRecord::Schema.define(version: 2021_10_30_144455) do
 
   create_table "meetings", force: :cascade do |t|
     t.string "meeting_url"
+    t.string "meeting_id"
     t.string "title"
     t.text "description"
-    t.datetime "start_time"
-    t.datetime "end_time"
+    t.datetime "time"
+    t.integer "duration"
     t.string "purpose"
     t.integer "student_id"
     t.integer "teacher_id"

@@ -1,4 +1,5 @@
 class MeetingsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_meeting, only: %i[show edit update destroy]
 
   def index
@@ -7,7 +8,6 @@ class MeetingsController < ApplicationController
 
   def show
   end
-
 
   def new
     @meeting = Meeting.new
@@ -24,6 +24,9 @@ class MeetingsController < ApplicationController
 
     respond_to do |format|
       if @meeting.save
+        result = Zoom::Api::CreateMeetingService.new(@meeting).perform
+        @meeting.update_zoom_meeting_url(result.resource) if result.success?
+
         format.html { redirect_to @meeting.student, notice: "Meeting was successfully created." }
       else
         format.js { render template: "meetings/create.js.erb" }
@@ -35,10 +38,8 @@ class MeetingsController < ApplicationController
     respond_to do |format|
       if @meeting.update(meeting_params)
         format.html { redirect_to @meeting, notice: "Meeting was successfully updated." }
-        format.json { render :show, status: :ok, location: @meeting }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @meeting.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -46,8 +47,7 @@ class MeetingsController < ApplicationController
   def destroy
     @meeting.destroy
     respond_to do |format|
-      format.html { redirect_to meetings_url, notice: "Meeting was successfully destroyed." }
-      format.json { head :no_content }
+      format.html { redirect_to @meeting.student, notice: "Meeting was successfully canceled." }
     end
   end
 
@@ -58,6 +58,6 @@ class MeetingsController < ApplicationController
   end
 
   def meeting_params
-    params.require(:meeting).permit(:meeting_url, :title, :description, :start_time, :end_time, :purpose, :student_id, :teacher_id)
+    params.require(:meeting).permit(:meeting_url, :title, :description, :time, :duration, :purpose, :student_id, :teacher_id)
   end
 end

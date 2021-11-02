@@ -21,4 +21,8 @@ module Zoratutorr
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
   end
+
+  def self.credentials
+    @credentials ||= Rails.application.credentials[Rails.env.to_sym]
+  end
 end

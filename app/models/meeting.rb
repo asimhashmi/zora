@@ -1,27 +1,19 @@
 class Meeting < ApplicationRecord
+  DURATIONS = [15, 30, 45, 60]
   belongs_to :student, class_name: "User"
   belongs_to :teacher, class_name: "User"
 
-  validates :title, presence: true
-  validate :validate_duration
+  validates :title, :time, presence: true
+  after_destroy :destroy_zoom_meeting
+  # validate :validate_duration
+
+  def update_zoom_meeting_url(resource)
+    self.update!(meeting_url: resource[:zoom_meeting_url], meeting_id: resource[:zoom_meeting_id])
+  end
 
   private
 
-  def validate_duration
-    if start_time.nil?
-      errors.add(:start_time, 'must be selected')
-    elsif end_time.nil?
-      errors.add(:end_time, 'must be selected')
-    elsif start_time >= end_time
-      errors.add(:end_time, 'must be later than start time')
-    elsif total_time > 60.minutes
-      errors.add(:meeting, 'cannot be longer than 60 mins')
-    end
-  end
-
-  def total_time
-    return 0 if start_time.nil? || end_time.nil?
-
-    end_time - start_time
+  def destroy_zoom_meeting
+    Zoom::Api::CancelMeetingService.new(meeting_id).perform
   end
 end
