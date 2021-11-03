@@ -1,0 +1,28 @@
+<div class="page-header">
+  <%= link_to meetings_path, class: 'btn btn-default' do %>
+    All Meetings
+  <% end %>
+  <%= link_to edit_meeting_path(@meeting), class: 'btn btn-primary' do %>
+    Edit
+  <% end %>
+  <h1>Show meeting</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Meeting url:</dt>
+  <dd><%= @meeting.meeting_url %></dd>
+  <dt>Title:</dt>
+  <dd><%= @meeting.title %></dd>
+  <dt>Description:</dt>
+  <dd><%= @meeting.description %></dd>
+  <dt>Strat time:</dt>
+  <dd><%= @meeting.time %></dd>
+  <dt>Duration:</dt>
+  <dd><%= @meeting.duration %> Mins</dd>
+  <dt>Purpose:</dt>
+  <dd><%= @meeting.purpose %></dd>
+  <dt>Student:</dt>
+  <dd><%= @meeting.student_id %></dd>
+  <dt>Teacher:</dt>
+  <dd><%= @meeting.teacher_id %></dd>
+</dl>

@@ -1,0 +1,10 @@
+<h1><%= @user.name.titleize %></h1>
+<div id="meeting_model"></div>
+<% if @user.is_student? %> 
+  <%= render 'meetings/list', meetings: @user.student_meetings %>
+<% elsif @user.is_teacher? %>
+  <% if current_user.is_student? %>
+    <%= link_to "Schedule a Meeting", new_meeting_path(student_id: current_user.id, teacher_id: @user.id), remote: true %>
+  <% end %>
+  <%= render 'meetings/list', meetings: @user.teacher_meetings %>
+<% end %>

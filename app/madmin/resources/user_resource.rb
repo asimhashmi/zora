@@ -10,7 +10,6 @@ class UserResource < Madmin::Resource
   attribute :last_name
   attribute :announcements_last_read_at
   attribute :admin
-  attribute :role
   attribute :bio
   attribute :province
   attribute :address
