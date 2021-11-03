@@ -10,7 +10,7 @@
   <h3><%= link_to recipient.name, conversation_messages_path(conversation)%></h3>
  <% end %>
 <% end %>
-<% if current_user.Student? %>
+<% if current_user.is_student? %>
 <h1>All Teachers:</h1>
   <% @teacher_list.each do |teacher| %>
     <% if teacher.id != current_user.id %><h3>

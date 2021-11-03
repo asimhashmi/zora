@@ -4,7 +4,7 @@ class ConversationsController < ApplicationController
   def index
     @users = User.all
     @conversations = Conversation.all
-    @teacher_list = User.Teacher.where(:is_verified => true)
+    @teacher_list = Role.find_by_name('teacher').users.where(is_verified: true)
   end
   def create  
     if Conversation.between(params[:sender_id], params[:recipient_id]).present? 
