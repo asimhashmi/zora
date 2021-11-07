@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_30_144455) do
+ActiveRecord::Schema.define(version: 2021_11_07_193712) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,20 @@ ActiveRecord::Schema.define(version: 2021_10_30_144455) do
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
+  end
+
+  create_table "hires", force: :cascade do |t|
+    t.string "grade"
+    t.string "subject"
+    t.integer "weekly_hours"
+    t.integer "duration"
+    t.float "price"
+    t.bigint "hire_by_id"
+    t.bigint "hire_to_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["hire_by_id"], name: "index_hires_on_hire_by_id"
+    t.index ["hire_to_id"], name: "index_hires_on_hire_to_id"
   end
 
   create_table "meetings", force: :cascade do |t|
@@ -145,5 +159,7 @@ ActiveRecord::Schema.define(version: 2021_10_30_144455) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "hires", "users", column: "hire_by_id"
+  add_foreign_key "hires", "users", column: "hire_to_id"
   add_foreign_key "services", "users"
 end
