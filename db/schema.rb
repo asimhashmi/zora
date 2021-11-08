@@ -67,7 +67,7 @@ ActiveRecord::Schema.define(version: 2021_11_07_193712) do
     t.string "grade"
     t.string "subject"
     t.integer "weekly_hours"
-    t.integer "duration"
+    t.string "duration"
     t.float "price"
     t.bigint "hire_by_id"
     t.bigint "hire_to_id"
