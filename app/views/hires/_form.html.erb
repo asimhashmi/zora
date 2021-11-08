@@ -1,0 +1,40 @@
+<div class="modal fade" id="hire-modal" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Hire</h5><br>
+        <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="alert alerts alert-danger"  id="error_messages" hidden>
+      </div>
+      <%= form_for(@hire, as: :hire, url: hires_path(@hire), html: { method: :post, remote: true }) do |f| %>
+        <div class="modal-body">
+          <strong><%= current_user.name.titleize %></strong>
+          <hr>
+          <div class="form__row">
+            <div class="component__block">
+            <label for="fname">Grade</label>
+            <%= f.text_field :grade, value: @hire.grade, class: "form-control" %>
+
+            <label for="fname">Subject</label>
+            <%= f.text_field :subject, value: @hire.subject, class: "form-control" %>
+
+            <label for="fname">Price per hour</label>
+            <%= f.number_field :price, autocomplete: "price", min:"0", placeholder: "per hour price", class: "form-control" %>
+
+            <label for="fname">Duration</label>
+            <%= f.select :duration, Hire::DURATIONS, { include_blank: 'Select a duration', disabled: false}, class: "form-control" %>
+          </div>
+
+          <%= f.hidden_field :hire_to_id, value: params[:teacher_id] %>
+          <%= f.hidden_field :hire_by_id, value: params[:student_id] %>
+        </div>
+        <div class="modal-footer">
+          <%= f.submit "Hire Request", class: "btn ftf-round-btn" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
