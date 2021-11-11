@@ -1,40 +1,83 @@
-<div class="modal fade" id="hire-modal" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Hire</h5><br>
-        <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="alert alerts alert-danger"  id="error_messages" hidden>
-      </div>
-      <%= form_for(@hire, as: :hire, url: hires_path(@hire), html: { method: :post, remote: true }) do |f| %>
-        <div class="modal-body">
-          <strong><%= current_user.name.titleize %></strong>
-          <hr>
-          <div class="form__row">
-            <div class="component__block">
-            <label for="fname">Grade</label>
-            <%= f.text_field :grade, value: @hire.grade, class: "form-control" %>
+<%= form_tag("/hires", method: "post", id: "payment-form") do %>
+        <section>
+          <label for="grade">
+            <span class="input-label">Amount</span>
+            <div class="input-wrapper amount-wrapper">
+              <input id="amount" name="amount" type="tel" min="1" placeholder="Amount" value="10">
+            </div>
+          </label>
+          <label for="grade">
+            <span class="input-label">Grade</span>
+            <div class="input-wrapper amount-wrapper">
+              <input  name="grade" type="text" placeholder="A">
+            </div>
+          </label>
+          <label for="subject">
+            <span class="input-label">Subject</span>
+            <div class="input-wrapper amount-wrapper">
+              <input name="subject" type="text" placeholder="Math">
+            </div>
+          </label>
 
-            <label for="fname">Subject</label>
-            <%= f.text_field :subject, value: @hire.subject, class: "form-control" %>
+          <label for="amount">
+            <span class="input-label">Price per Sesssion</span>
+            <div class="input-wrapper amount-wrapper">
+              <input name="amount" type="tel" min="1" placeholder="Amount" value="10">
+            </div>
+          </label>
 
-            <label for="fname">Price per hour</label>
-            <%= f.number_field :price, autocomplete: "price", min:"0", placeholder: "per hour price", class: "form-control" %>
+          <label for="amount">
+            <span class="input-label">Duration</span>
+            <div class="input-wrapper amount-wrapper">
+              <select name="duration"><% Hire::DURATIONS.each do |option|%>
+                 <option value=<%= option%>><%= option%></option>
+              <% end %>
+              </select>
+            </div>
+          </label>
 
-            <label for="fname">Duration</label>
-            <%= f.select :duration, Hire::DURATIONS, { include_blank: 'Select a duration', disabled: false}, class: "form-control" %>
+          <div class="bt-drop-in-wrapper">
+            <div id="bt-dropin"></div>
           </div>
-
-          <%= f.hidden_field :hire_to_id, value: params[:teacher_id] %>
-          <%= f.hidden_field :hire_by_id, value: params[:student_id] %>
-        </div>
-        <div class="modal-footer">
-          <%= f.submit "Hire Request", class: "btn ftf-round-btn" %>
-        </div>
+        </section>
+        <% byebug%>
+        <input type="hidden" name="hire_to_id" value= <%= params[:teacher_id]%> />
+        <input type="hidden" name="hire_by_id" value=<%= params[:student_id]%> />
+        <input type="hidden" id="nonce" name="braintree_payment_id" />
+        <button class="button" type="submit"><span>Test Transaction</span></button>
       <% end %>
+
     </div>
   </div>
 </div>
+
+<script src="https://js.braintreegateway.com/web/dropin/1.32.0/js/dropin.min.js"></script>
+<script>
+  var form = document.querySelector('#payment-form');
+  var client_token = "<%= Braintree::ClientToken.generate %>";
+
+  braintree.dropin.create({
+    authorization: client_token,
+    container: '#bt-dropin',
+    paypal: {
+          flow: 'checkout',
+          amount: '10.00',
+          currency: 'USD'
+        }
+    }, function (createErr, instance) {
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      instance.requestPaymentMethod(function (err, payload) {
+        if (err) {
+          console.log('Error', err);
+          return;
+        }
+
+        // Add the nonce to the form and submit
+        document.querySelector('#nonce').value = payload.nonce;
+        form.submit();
+      });
+    });
+  });
+</script>

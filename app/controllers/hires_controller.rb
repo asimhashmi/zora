@@ -1,60 +1,47 @@
 class HiresController < ApplicationController
   before_action :authenticate_user!
 
-  def index
-    @hires = Hire.all
-  end
-
-  def show
-  end
-
   def new
     @hire = Hire.new
-    respond_to do |format|
-      format.js {  }
-    end
-  end
-
-  def edit
   end
 
   def create
-    @hire = Hire.new(hire_params)
+     @hire = Hire.new(hire_params)
+    if current_user.braintree_id?
+      customer = Braintree::Customer.find(current_user.braintree_id)
+    else
+      result = Braintree::Customer.create(
+        email: current_user.email,
+        braintree_payment_id: params[:braintree_payment_id]
+      )
+      customer = result.customer
+      current_user.update(braintree_id: customer.id)
+    end
 
-    respond_to do |format|
+    result = Braintree::Transaction.sale(
+      :amount => "10.00",
+      :payment_method_nonce => params[:braintree_payment_id],
+      :options => {
+        :submit_for_settlement => true
+      }
+    )
+
+    if result.success?
+      @hire.braintree_payment_id= result.transaction.id
       if @hire.save
-
-        format.html { redirect_to @hire.hire_by, notice: "Hired successfully." }
-      else
-        format.js { render template: "hires/create.js.erb" }
+        return redirect_to @hire.hire_by, notice: "Hired successfully."
       end
+    elsif result.transaction
+      return redirect_to root_path, alert: "Error processing transaction:"
+    else
+      return redirect_to root_path, alert: "Error Try Again"
     end
-  end
-
-  def update
-    respond_to do |format|
-      if @hire.update(hire_params)
-        format.html { redirect_to @hire, notice: "Hire was successfully updated." }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  def destroy
-    @hire.destroy
-    respond_to do |format|
-      format.html { redirect_to @hire.student, notice: "Hire was successfully canceled." }
-    end
+    redirect_to root_path
   end
 
   private
 
-  def set_hire
-    @hire = Hire.find(params[:id])
-  end
-
   def hire_params
-    params.require(:hire).permit(:grade, :subject, :weekly_hours, :price, :duration, :hire_by_id, :hire_to_id)
+    params.permit(:grade, :subject, :number_of_session, :price, :duration, :hire_by_id, :hire_to_id, :braintree_payment_id)
   end
 end
