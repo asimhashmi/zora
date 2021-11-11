@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_07_193712) do
+ActiveRecord::Schema.define(version: 2021_11_10_171554) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,9 +66,10 @@ ActiveRecord::Schema.define(version: 2021_11_07_193712) do
   create_table "hires", force: :cascade do |t|
     t.string "grade"
     t.string "subject"
-    t.integer "weekly_hours"
+    t.integer "number_of_session"
     t.string "duration"
     t.float "price"
+    t.string "braintree_payment_id"
     t.bigint "hire_by_id"
     t.bigint "hire_to_id"
     t.datetime "created_at", precision: 6, null: false
@@ -145,6 +146,7 @@ ActiveRecord::Schema.define(version: 2021_11_07_193712) do
     t.string "id_card"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "braintree_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
