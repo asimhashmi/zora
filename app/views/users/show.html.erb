@@ -1,6 +1,6 @@
 <h1><%= @user.name.titleize %></h1>
 <div id="hire_model"></div>
-<%= link_to "Hire", new_hire_path(student_id: current_user.id, teacher_id: @user.id), class:"btn btn-success", remote: true%>
+<%= link_to "Hire", new_hire_path(student_id: current_user.id, teacher_id: @user.id), class:"btn btn-success"%>
 
 <div id="meeting_model"></div>
 <% if @user.is_student? %>

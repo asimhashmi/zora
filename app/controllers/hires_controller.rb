@@ -7,16 +7,17 @@ class HiresController < ApplicationController
 
   def create
      @hire = Hire.new(hire_params)
-    if current_user.braintree_id?
-      customer = Braintree::Customer.find(current_user.braintree_id)
-    else
-      result = Braintree::Customer.create(
-        email: current_user.email,
-        braintree_payment_id: params[:braintree_payment_id]
-      )
-      customer = result.customer
-      current_user.update(braintree_id: customer.id)
-    end
+    # if current_user.braintree_id?
+    #   customer = Braintree::Customer.find(current_user.braintree_id)
+    # else
+    #   byebug
+    #   result = Braintree::Customer.create(
+    #     email: current_user.email,
+    #     payment_method_nonce: params[:braintree_payment_id]
+    #   )
+    #   customer = result.customer
+    #   current_user.update(braintree_id: customer.id)
+    # end
 
     result = Braintree::Transaction.sale(
       :amount => "10.00",
