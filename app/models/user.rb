@@ -10,6 +10,9 @@ class User < ApplicationRecord
   has_many :notifications, as: :recipient, dependent: :destroy
   has_many :services, dependent: :destroy
 
+  has_many :student_hires, foreign_key: :hire_by_id, class_name: "Hire", dependent: :destroy
+  has_many :teacher_hires, foreign_key: :hire_to_id, class_name: "Hire", dependent: :destroy
+
   has_many :student_meetings, foreign_key: :student_id, class_name: "Meeting", dependent: :destroy
   has_many :teacher_meetings, foreign_key: :teacher_id, class_name: "Meeting", dependent: :destroy
 
