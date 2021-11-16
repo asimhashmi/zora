@@ -4,6 +4,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :masqueradable, :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :omniauthable
 
+  scope :filtered, ->(query_params) { User::Filter.new.filter(self, query_params) }
+
   has_one_attached :avatar
   has_person_name
 
@@ -12,6 +14,8 @@ class User < ApplicationRecord
 
   has_many :student_meetings, foreign_key: :student_id, class_name: "Meeting", dependent: :destroy
   has_many :teacher_meetings, foreign_key: :teacher_id, class_name: "Meeting", dependent: :destroy
+
+  mount_uploader :id_card, DocumentUploader
 
   enum province: [:Eastern_Cape, :Free_State, :Gauteng, :KwaZulu_Natal, :Limpopo, :Mpumalanga, :Northern_Cape, :North_West, :Western_Cape]
 
@@ -31,5 +35,13 @@ class User < ApplicationRecord
 
   def role_name
     roles_name.join(', ').titleize
+  end
+
+  def self.search(search)
+    if search
+      find(:all, :conditions => ['first_name LIKE ?', "%#{search}%"])
+    else
+      find(1..10)
+    end
   end
 end

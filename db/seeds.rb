@@ -9,3 +9,9 @@ ROLES = %i[student teacher]
 ROLES.each do |role|
   Role.find_or_create_by(name: role)
 end
+a = User.create(name: 'teacher user', email: 's@t.com', is_verified: true, password: 123456 )
+a.add_role :teacher
+a.add_role :admin
+
+b = User.create(name: 'student user', email: 's@s.com',  is_verified: true, password: 123456 )
+b.add_role :student

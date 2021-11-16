@@ -1,10 +1,31 @@
 <h1><%= @user.name.titleize %></h1>
 <div id="meeting_model"></div>
-<% if @user.is_student? %> 
-  <%= render 'meetings/list', meetings: @user.student_meetings %>
-<% elsif @user.is_teacher? %>
-  <% if current_user.is_student? %>
-    <%= link_to "Schedule a Meeting", new_meeting_path(student_id: current_user.id, teacher_id: @user.id), remote: true %>
-  <% end %>
-  <%= render 'meetings/list', meetings: @user.teacher_meetings %>
+<%= render 'meetings/list', meetings: @meetings %>
+
+<% if current_user.is_student? %>
+  <%= link_to "Schedule a Meeting", new_meeting_path(student_id: current_user.id, teacher_id: @user.id), remote: true %>
 <% end %>
+
+<%= @user.name %><br>
+<%= @user.bio %><br>
+<%= @user.role_name %><br>
+<%= @user.province %><br>
+<%= @user.address %>
+<br><br><br><br>
+<h5>Profile Picture</h5>
+<%= image_tag(@user.avatar, :size => "260x180") if @user.avatar.attached?%>
+<br><br><br><br>
+<h5>ID Card</h5>
+
+
+<img src="<%= @user.id_card %>" style="width:260px">
+
+
+
+
+<%#= link_to "Message", conversations_path(sender_id: current_user.id, recipient_id: teacher.id), method: "post"%></h3>
+
+<h1>Message</h1>
+<%# if teacher.id != current_user.id %><h3>
+    <%= link_to @user.name, conversations_path(sender_id: current_user.id, recipient_id: @user.id), method: "post"%></h3>
+<%# end %>
