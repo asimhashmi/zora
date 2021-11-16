@@ -9,6 +9,12 @@ class UsersController < ApplicationController
   end
 
   def show
+    if @user.is_student?
+      @meetings = @user.student_meetings.where(teacher: current_user)
+    elsif @user.is_teacher?
+      @meetings = @user.teacher_meetings.where(student: current_user)
+    end
+
     # if Conversation.between(params[:sender_id], params[:recipient_id]).present? 
     #     @conversation = Conversation.between(params[:sender_id], params[:recipient_id]).first
     # else
