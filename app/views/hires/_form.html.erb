@@ -1,28 +1,29 @@
 <%= form_tag("/hires", method: "post", id: "payment-form") do %>
         <section>
           <label for="grade">
-            <span class="input-label">Amount</span>
-            <div class="input-wrapper amount-wrapper">
-              <input id="amount" name="amount" type="tel" min="1" placeholder="Amount" value="10">
-            </div>
-          </label>
-          <label for="grade">
             <span class="input-label">Grade</span>
             <div class="input-wrapper amount-wrapper">
-              <input  name="grade" type="text" placeholder="A">
+              <input  name="grade" type="text" placeholder="A" required>
             </div>
           </label>
           <label for="subject">
             <span class="input-label">Subject</span>
             <div class="input-wrapper amount-wrapper">
-              <input name="subject" type="text" placeholder="Math">
+              <input name="subject" type="text" placeholder="Math" required>
             </div>
           </label>
 
           <label for="amount">
             <span class="input-label">Price per Sesssion</span>
             <div class="input-wrapper amount-wrapper">
-              <input name="amount" type="tel" min="1" placeholder="Amount" value="10">
+              <input type="number" name="price" type="tel" min="1" required>
+            </div>
+          </label>
+
+          <label for="amount">
+            <span class="input-label">Sesssions per Week</span>
+            <div class="input-wrapper amount-wrapper">
+              <input type="number" name="number_of_session" type="tel" min="1" required>
             </div>
           </label>
 
@@ -42,20 +43,18 @@
         </section>
         <input type="hidden" name="hire_to_id" value= <%= params[:teacher_id]%> />
         <input type="hidden" name="hire_by_id" value=<%= params[:student_id]%> />
-        <input type="hidden" id="nonce" name="braintree_payment_id" />
+        <input type="hidden" id="nonce" name="nonce_id" />
         <button class="button" type="submit"><span>Test Transaction</span></button>
       <% end %>
 
     </div>
   </div>
 </div>
-
-<script src="https://js.braintreegateway.com/web/dropin/1.32.0/js/dropin.min.js"></script>
 <script>
   var form = document.querySelector('#payment-form');
   var client_token = "<%= Braintree::ClientToken.generate %>";
 
-  braintree.dropin.create({
+  dropin.create({
     authorization: client_token,
     container: '#bt-dropin',
     paypal: {

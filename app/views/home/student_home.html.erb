@@ -1,25 +1,35 @@
-<h1>Student</h1>
-<p class="lead">Use this for your student home page</p>
+<% if current_user.is_student?%>
+    <h1>Student</h1>
+    <p class="lead">Use this for your student home page</p>
 
-<br>
+    <br>
 
-<h5>List of verified teachers</h5>
+    <h5>List of verified teachers</h5>
 
-    <table class="table table-striped table-inverse table-responsive">
-        <thead class="thead-inverse">
-            <tr>
-                <th>name</th>
-                <th>Bio</th>
-                <th>Province</th>
-            </tr>
-            </thead>
-            <tbody>
-                <% @teacher_list.each do |teacher|%>
-                    <tr>
-                        <td scope="row"><%= link_to teacher.name, user_path(teacher.id) %></td>
-                        <td><%= teacher.bio %></td>
-                        <td><%= teacher.province %></td>
-                    </tr>
-                <% end %>
-            </tbody>
-    </table>
+        <table class="table table-striped table-inverse table-responsive">
+            <thead class="thead-inverse">
+                <tr>
+                    <th>name</th>
+                    <th>Bio</th>
+                    <th>Province</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <% @teacher_list.each do |teacher|%>
+                        <tr>
+                            <td scope="row"><%= link_to teacher.name, user_path(teacher.id) %></td>
+                            <td><%= teacher.bio %></td>
+                            <td><%= teacher.province %></td>
+                        </tr>
+                    <% end %>
+                </tbody>
+        </table>
+
+  <%= render 'hires/list', hires: current_user.student_hires %>
+
+<% elsif current_user.is_teacher? %>
+    <h1>Wrong Page</h1>
+    <%=link_to "Teacher Home Page", teacher_path%>
+
+    <br>
+<% end %>

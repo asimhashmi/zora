@@ -9,6 +9,7 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 require("local-time").start()
+window.dropin = require('braintree-web-drop-in')
 
 window.Rails = Rails
 

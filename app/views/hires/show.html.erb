@@ -1,0 +1,28 @@
+<div class="page-header">
+  <%= link_to hires_path, class: 'btn btn-default' do %>
+    All Hirings
+  <% end %>
+  <%= link_to edit_hire_path(@hire), class: 'btn btn-primary' do %>
+    Edit
+  <% end %>
+  <h1>Show hire</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Grade</dt>
+  <dd><%= @hire.grade %></dd>
+  <dt>Subject:</dt>
+  <dd><%= @hire.subject %></dd>
+  <dt>Price/week:</dt>
+  <dd><%= @hire.price %>$</dd>
+  <dt>Sesssion/week:</dt>
+  <dd><%= @hire.number_of_session %></dd>
+  <dt>Duration:</dt>
+  <dd><%= @hire.duration %></dd>
+  <dt>Student:</dt>
+  <dd><%= @hire.hire_by_id %></dd>
+  <dt>Teacher:</dt>
+  <dd><%= @hire.hire_to_id %></dd>
+  <dt>Status:</dt>
+  <dd><%= @hire.status %></dd>
+</dl>

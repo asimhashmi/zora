@@ -1,5 +1,14 @@
-<h1>Teacher</h1>
-<p class="lead">Use this for your teacher home page</p>
+<% if current_user.is_teacher? %>
+  <h1>Teacher</h1>
+  <p class="lead">Use this for your teacher home page</p>
+  <%= link_to "Schedule a Meeting", new_meeting_path(student_id: 1, teacher_id: params[:id]), remote: true %>
 
-<%= link_to "Schedule a Meeting", new_meeting_path(student_id: 1, teacher_id: params[:id]), remote: true %>
+  <%= render 'hires/list', hires: current_user.teacher_hires %>
+
 <div id="meeting_model">
+<% elsif current_user.is_student? %>
+    <h1>Wrong Page</h1>
+    <%=link_to "Student Home Page", student_path%>
+
+    <br>
+<% end %>
