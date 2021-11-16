@@ -74,6 +74,8 @@ ActiveRecord::Schema.define(version: 2021_11_10_171554) do
     t.bigint "hire_to_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "nonce_id"
+    t.string "status"
     t.index ["hire_by_id"], name: "index_hires_on_hire_by_id"
     t.index ["hire_to_id"], name: "index_hires_on_hire_to_id"
   end
