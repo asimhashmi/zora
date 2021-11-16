@@ -39,7 +39,7 @@ class HiresController < ApplicationController
     # if result.success?
       # @hire.braintree_payment_id= result.transaction.id
     if @hire.save
-      return redirect_to @hire.hire_by, notice: "Hire Requested."
+      return redirect_to root_path, notice: "Hire Requested."
     end
     # elsif result.transaction
     #   return redirect_to root_path, alert: "Error processing transaction:"
