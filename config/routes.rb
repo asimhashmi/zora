@@ -4,12 +4,16 @@ Rails.application.routes.draw do
   root to: 'home#index'
 
   resources :meetings
+  
+  resources :conversations do
+    resources :messages
+  end
   get '/privacy', to: 'home#privacy'
   get '/terms', to: 'home#terms'
   get '/student', to: 'home#student_home'
   get '/teacher', to: 'home#teacher_home'
 
-authenticate :user, lambda { |u| u.admin? } do
+authenticate :user, lambda { |u|  u.is_admin? } do
   mount Sidekiq::Web => '/sidekiq'
 
   namespace :madmin do

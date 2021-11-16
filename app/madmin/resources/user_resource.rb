@@ -9,13 +9,11 @@ class UserResource < Madmin::Resource
   attribute :first_name
   attribute :last_name
   attribute :announcements_last_read_at
-  attribute :admin
   attribute :bio
   attribute :province
   attribute :address
   attribute :birth_date
   attribute :profile_pic
-  attribute :is_teacher
   attribute :is_verified
   attribute :id_card
   attribute :created_at, form: false

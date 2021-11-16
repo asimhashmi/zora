@@ -14,7 +14,7 @@
       </div>
 
       <div class="mb-3">
-        <%= f.select :role_ids, Role.pluck(:name, :id), class: 'form-control' %>
+        <%= f.select :role_ids, Role.where.not(name: :admin).pluck(:name, :id).map{|role, id| [role.humanize, id]}, class: 'form-control' %>
       </div>
 
       <div class="mb-3">

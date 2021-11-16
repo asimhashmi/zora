@@ -77,3 +77,7 @@ gem 'sitemap_generator', '~> 6.1', '>= 6.1.2'
 gem 'whenever', require: false
 gem "rolify"
 gem "httparty"
+gem 'carrierwave', '~> 2.0'
+gem 'ransack', github: 'activerecord-hackery/ransack'
+ 
+gem "nokogiri", ">= 1.5.9" 
