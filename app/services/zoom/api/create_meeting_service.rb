@@ -29,7 +29,7 @@ class Zoom::Api::CreateMeetingService < ApplicationService
 
   def query
     {
-      "topic": "1:1 Meeting #{meeting.teacher.name} with #{meeting.student.name}",
+      "topic": meeting.title,
       "type": 2,
       "start_time": meeting.time,
       "duration": meeting.duration,
@@ -38,8 +38,9 @@ class Zoom::Api::CreateMeetingService < ApplicationService
           "mute_upon_entry": true,
           "waiting_room": true,
           "in_meeting": true,
-          "jbh_time":0,
-          "join_before_host": false
+          "jbh_time": 0,
+          "join_before_host": false,
+          "scedule_for": meeting.teacher.zoom_user_id
       }
     }.to_json
   end

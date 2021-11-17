@@ -5,7 +5,6 @@ class Meeting < ApplicationRecord
 
   validates :title, :time, presence: true
   after_destroy :destroy_zoom_meeting
-  # validate :validate_duration
 
   def update_zoom_meeting_url(resource)
     self.update!(meeting_url: resource[:zoom_meeting_url], meeting_id: resource[:zoom_meeting_id])

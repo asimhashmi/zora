@@ -21,6 +21,8 @@ class User < ApplicationRecord
 
   validates :first_name, :last_name, :email, presence: true
 
+  after_create :store_zoom_user_id
+
   def is_teacher?
     has_role?(:teacher)
   end
@@ -37,11 +39,18 @@ class User < ApplicationRecord
     roles_name.join(', ').titleize
   end
 
+  def store_zoom_user_id
+    service = Zoom::Api::CreateCustomerService.new(self).perform
+    if service.success?
+      update(zoom_user_id: service.resources['id'])
+    end
+  end
+
   def self.search(search)
     if search
-      find(:all, :conditions => ['first_name LIKE ?', "%#{search}%"])
+      where('first_name LIKE :keyword OR last_name LIKE :keyword OR email LIKE :keyword', keyword: "%#{search}%").limigt(10)
     else
-      find(1..10)
+      first(10)
     end
   end
 end
