@@ -6,12 +6,11 @@ class Zoom::Api::CreateMeetingService < ApplicationService
 
   def initialize(meeting)
     @token     = Zoratutorr.credentials[:zoom_jwt_token]
-    @host_id   = Zoratutorr.credentials[:zoom_user_id]
     @meeting = meeting
   end
 
   def perform
-    response = self.class.post("/users/#{host_id}/meetings", headers: headers, body: query)
+    response = self.class.post("/users/#{@meeting.student.zoom_user_id}/meetings", headers: headers, body: query)
     if response.success?
       meeting_info = {
         zoom_meeting_url: response["start_url"],
@@ -29,18 +28,18 @@ class Zoom::Api::CreateMeetingService < ApplicationService
 
   def query
     {
-      "topic": meeting.title,
+      "topic": @meeting.title,
       "type": 2,
-      "start_time": meeting.time,
-      "duration": meeting.duration,
+      "start_time": @meeting.time,
+      "duration": @meeting.duration,
       "timezone": Time.zone.name,
       "settings": {
-          "mute_upon_entry": true,
-          "waiting_room": true,
-          "in_meeting": true,
-          "jbh_time": 0,
-          "join_before_host": false,
-          "scedule_for": meeting.teacher.zoom_user_id
+        "mute_upon_entry": true,
+        "waiting_room": true,
+        "in_meeting": true,
+        "jbh_time": 0,
+        "join_before_host": false,
+        "scedule_for": @meeting.teacher.zoom_user_id
       }
     }.to_json
   end

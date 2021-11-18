@@ -27,7 +27,7 @@ class MeetingsController < ApplicationController
         result = Zoom::Api::CreateMeetingService.new(@meeting).perform
         @meeting.update_zoom_meeting_url(result.resource) if result.success?
 
-        format.html { redirect_to @meeting.student, notice: "Meeting was successfully created." }
+        format.html { redirect_to @meeting.teacher, notice: "Meeting was successfully created." }
       else
         format.js { render template: "meetings/create.js.erb" }
       end
@@ -47,7 +47,7 @@ class MeetingsController < ApplicationController
   def destroy
     @meeting.destroy
     respond_to do |format|
-      format.html { redirect_to @meeting.student, notice: "Meeting was successfully canceled." }
+      format.html { redirect_to @meeting.teacher, notice: "Meeting was successfully canceled." }
     end
   end
 
