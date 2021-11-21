@@ -15,6 +15,7 @@ class HiresController < ApplicationController
 
   def create
      @hire = Hire.new(hire_params)
+     @hire.total_price = @hire.price * @hire.number_of_session
      @hire.status = "requested"
     # if current_user.braintree_id?
     #   customer = Braintree::Customer.find(current_user.braintree_id)
@@ -75,7 +76,7 @@ class HiresController < ApplicationController
   def payment_proceed
     @hire = Hire.find(params[:id])
     result = Braintree::Transaction.sale(
-        :amount => @hire.price * @hire.number_of_session,
+        :amount => @hire.total_price,
         :payment_method_nonce => @hire.nonce_id,
         :options => {
           :submit_for_settlement => true
