@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_21_124212) do
+ActiveRecord::Schema.define(version: 2021_11_21_175713) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,16 +74,17 @@ ActiveRecord::Schema.define(version: 2021_11_21_124212) do
     t.string "grade"
     t.string "subject"
     t.integer "number_of_session"
-    t.string "duration"
+    t.integer "duration"
     t.float "price"
     t.string "braintree_payment_id"
+    t.float "total_price"
     t.bigint "hire_by_id"
     t.bigint "hire_to_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "nonce_id"
     t.string "status"
-    t.float "total_price"
+    t.date "end_contract"
     t.index ["hire_by_id"], name: "index_hires_on_hire_by_id"
     t.index ["hire_to_id"], name: "index_hires_on_hire_to_id"
   end

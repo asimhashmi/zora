@@ -4,9 +4,10 @@ class CreateHires < ActiveRecord::Migration[6.1]
       t.string :grade
       t.string :subject
       t.integer :number_of_session
-      t.string :duration
+      t.integer :duration
       t.float :price
       t.string :braintree_payment_id
+      t.float :total_price
 
       t.references :hire_by, index: true, foreign_key: { to_table: :users }
       t.references :hire_to, index: true, foreign_key: { to_table: :users }

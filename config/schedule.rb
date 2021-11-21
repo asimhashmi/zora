@@ -18,3 +18,6 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
+every :day, :at => '12pm' do
+  rake 'end_contract_mail'
+end

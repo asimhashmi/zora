@@ -25,7 +25,7 @@
           <label for="amount" id="teacher">
           <span class="input-label">Price per Sesssion</span>
             <div class="input-wrapper amount-wrapper">
-              <input type="text" name="price" type="tel" min="1" value = "<%= User.find_by(id: params[:teacher_id]).price %>" readonly>
+              <input type="number" name="price" type="tel" min="1" value = "<%= User.find_by(id: params[:teacher_id]).price.present? ? User.find_by(id: params[:teacher_id]).price : 20 %>" readonly>
             </div>
           </label>
 
@@ -46,12 +46,9 @@
           <br>
 
           <label for="amount">
-            <span class="input-label">Duration</span>
+            <span class="input-label">No of Weeks</span>
             <div class="input-wrapper amount-wrapper">
-              <select name="duration"><% Hire::DURATIONS.each do |option|%>
-                 <option value=<%= option%>><%= option%></option>
-              <% end %>
-              </select>
+              <input type="number" name="duration" type="tel" min="1" required>
             </div>
           </label>
           <br>

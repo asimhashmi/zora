@@ -15,38 +15,11 @@ class HiresController < ApplicationController
 
   def create
      @hire = Hire.new(hire_params)
-     @hire.total_price = @hire.price * @hire.number_of_session
+     @hire.total_price = @hire.price * @hire.number_of_session * @hire.duration
      @hire.status = "requested"
-    # if current_user.braintree_id?
-    #   customer = Braintree::Customer.find(current_user.braintree_id)
-    # else
-    #   byebug
-    #   result = Braintree::Customer.create(
-    #     email: current_user.email,
-    #     payment_method_nonce: params[:braintree_payment_id]
-    #   )
-    #   customer = result.customer
-    #   current_user.update(braintree_id: customer.id)
-    # end
-
-    # result = Braintree::Transaction.sale(
-    #   :amount => "10.00",
-    #   :payment_method_nonce => params[:braintree_payment_id],
-    #   :options => {
-    #     :submit_for_settlement => true
-    #   }
-    # )
-
-    # if result.success?
-      # @hire.braintree_payment_id= result.transaction.id
     if @hire.save
       return redirect_to root_path, notice: "Hire Requested."
     end
-    # elsif result.transaction
-    #   return redirect_to root_path, alert: "Error processing transaction:"
-    # else
-    #   return redirect_to root_path, alert: "Error Try Again"
-    # end
     redirect_to root_path
   end
 
@@ -56,14 +29,41 @@ class HiresController < ApplicationController
 
   def update
     @hire = Hire.find(params[:id])
+
     if params[:status].present? && params[:status] == "hired"
       payment_proceed
-    end
+      @hire.update(end_contract: @hire.duration.weeks.from_now)
 
-    if @hire.update(hire_params)
-      return redirect_to root_path, notice: "Hired successfully."
-    else
-      return redirect_to root_path, notice: "Not Hired"
+      HireMailer.with(hire: @hire).contract_email.deliver_now
+
+      if @hire.update(hire_params)
+        return redirect_to root_path, notice: "Hired successfully."
+      else
+        return redirect_to root_path, notice: "Not Hired"
+      end
+
+    elsif params[:status].present? && params[:status] == "requested"
+      HireMailer.with(hire: @hire).hiring_email.deliver_now
+
+      if @hire.update(hire_params)
+        return redirect_to root_path, notice: "Hiring Request Sent successfully."
+      else
+        return redirect_to root_path, notice: "Not Sent Try Again"
+      end
+
+    elsif params[:status].present? && params[:status] == "reject"
+      if @hire.update(hire_params)
+        return redirect_to root_path, notice: "Hiring Rejected successfully."
+      else
+        return redirect_to root_path, notice: " Try Again"
+      end
+
+    elsif params[:status].present? && params[:status] == "processing"
+      if @hire.update(hire_params)
+        return redirect_to root_path, notice: "Acceptance Sent."
+      else
+        return redirect_to root_path, notice: " Try Again"
+      end
     end
   end
 
