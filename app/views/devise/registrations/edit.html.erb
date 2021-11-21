@@ -29,6 +29,12 @@
         <%= f.text_area :address, class: 'form-control', placeholder: 'Address' %>
       </div>
 
+      <% if current_user.is_teacher? %>
+        <div class="mb-3">
+          <%= f.number_field :price, class: 'form-control', min: 1, placeholder: 'price per session', required: true%>
+        </div>
+      <% end %>
+
       <div class="mb-3">
         <%= f.date_field :birth_date, class: 'form-control', placeholder: 'Date of Birth' %>
       </div>

@@ -6,19 +6,36 @@
               <input  name="grade" type="text" placeholder="A" required>
             </div>
           </label>
+          <br>
+
           <label for="subject">
             <span class="input-label">Subject</span>
             <div class="input-wrapper amount-wrapper">
               <input name="subject" type="text" placeholder="Math" required>
             </div>
           </label>
+          <br>
 
-          <label for="amount">
+
+          <div>
+            <label><input type="radio" name="price-check" value="teacher" class="input-label" checked>Teacher Price</label>
+            <label><input type="radio" name="price-check" value="offer"class="input-label" >Offer</label>
+          </div>
+
+          <label for="amount" id="teacher">
+          <span class="input-label">Price per Sesssion</span>
+            <div class="input-wrapper amount-wrapper">
+              <input type="text" name="price" type="tel" min="1" value = "<%= User.find_by(id: params[:teacher_id]).price %>" readonly>
+            </div>
+          </label>
+
+          <label for="amount" id="offer">
             <span class="input-label">Price per Sesssion</span>
             <div class="input-wrapper amount-wrapper">
               <input type="number" name="price" type="tel" min="1" required>
             </div>
           </label>
+          <br>
 
           <label for="amount">
             <span class="input-label">Sesssions per Week</span>
@@ -26,6 +43,7 @@
               <input type="number" name="number_of_session" type="tel" min="1" required>
             </div>
           </label>
+          <br>
 
           <label for="amount">
             <span class="input-label">Duration</span>
@@ -36,6 +54,7 @@
               </select>
             </div>
           </label>
+          <br>
 
           <div class="bt-drop-in-wrapper">
             <div id="bt-dropin"></div>
@@ -50,6 +69,7 @@
     </div>
   </div>
 </div>
+
 <script>
   var form = document.querySelector('#payment-form');
   var client_token = "<%= Braintree::ClientToken.generate %>";
@@ -78,4 +98,31 @@
       });
     });
   });
+
+$(document).ready(function(){
+
+  function show_hide(radio)
+  {
+    if($(radio).attr("value") == 'teacher')
+        {
+          $("#teacher").show();
+          $("#teacher :input").attr('disabled', false);
+          $("#offer").hide();
+          $("#offer :input").attr('disabled', true);
+        }
+    if($(radio).attr("value") == 'offer')
+      {
+        $("#teacher").hide();
+        $("#teacher :input").attr('disabled', true);
+        $("#offer").show();
+        $("#offer :input").attr('disabled', false);
+      }
+  }
+
+  show_hide(document.querySelector('input[type="radio"]'));
+
+  $('input[type="radio"]').click(function(){
+    show_hide(this);
+  });
+});
 </script>
