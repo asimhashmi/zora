@@ -1,4 +1,5 @@
 <div class="table-responsive">
+  <h2>Hire table</h2>
   <table class="table table-striped table-bordered table-hover">
     <thead>
       <tr>
@@ -23,17 +24,17 @@
           <td><%= hire.number_of_session %></td>
           <td><%= hire.duration %> weeks</td>
           <td><%= hire.total_price %>$</td>
-          <td><%= hire.hire_by.name%></td>
-          <td><%= hire.hire_to.name %></td>
-          <td><%= hire.status %></td>
-          <td><% if current_user.is_teacher? && hire.status == "requested" %>
+          <td><%= link_to hire.hire_by.name, user_path(hire.hire_by) %></td>
+          <td><%= link_to hire.hire_to.name, user_path(hire.hire_to)  %></td>
+          <td><%= link_to hire.status, hire_path(hire) %></td>
+          <td><% if current_user.is_teacher? && current_user == hire.hire_to && hire.status == "requested" %>
                 <%= link_to 'Accept', hire_path(hire.id, { status: "processing"  }),
                                             method: :patch
                                             %>
                 <%= link_to 'Reject', hire_path(hire.id, { status: "reject" }),
                                             method: :patch,
                                             data: { confirm: "Are you sure to Reject?" }%>
-              <% elsif current_user.is_student? && hire.status == "processing" %>
+              <% elsif current_user.is_student? && current_user == hire.hire_by && hire.status == "processing" %>
                 <%= link_to 'Proceed Payment', hire_path(hire.id, { status: "hired"  }),
                                             method: :patch
                                             %>

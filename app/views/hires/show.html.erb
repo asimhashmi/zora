@@ -1,9 +1,6 @@
 <div class="page-header">
-  <%= link_to hires_path, class: 'btn btn-default' do %>
+  <%= link_to hires_path, class: 'btn btn-warning' do %>
     All Hirings
-  <% end %>
-  <%= link_to edit_hire_path(@hire), class: 'btn btn-primary' do %>
-    Edit
   <% end %>
   <h1>Show hire</h1>
 </div>
@@ -25,4 +22,8 @@
   <dd><%= @hire.hire_to_id %></dd>
   <dt>Status:</dt>
   <dd><%= @hire.status %></dd>
+  <% if @hire.end_contract.present? %>
+    <dt>Contract End Date:</dt>
+    <dd><%= @hire.end_contract %></dd>
+  <% end %>
 </dl>
