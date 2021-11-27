@@ -13,5 +13,14 @@ a = User.create(name: 'teacher user', email: 's@t.com', is_verified: true, passw
 a.add_role :teacher
 a.add_role :admin
 
-b = User.create(name: 'student user', email: 's@s.com',  is_verified: true, password: 123456 )
-b.add_role :student
+b = User.create(name: 'teacher user 2', email: 's2@t.com', is_verified: true, password: 123456 )
+b.add_role :teacher
+
+c = User.create(name: 'teacher user3', email: 's3@t.com', is_verified: true, password: 123456 )
+c.add_role :teacher
+
+d = User.create(name: 'student user', email: 's@s.com',  is_verified: true, password: 123456 )
+d.add_role :student
+
+e = User.create(name: 'student user 2', email: 's2@s.com',  is_verified: true, password: 123456 )
+e.add_role :student

@@ -25,7 +25,7 @@
     <%= f.label :Name %>
     <%= f.search_field :first_name_or_last_name_cont, placeholder: 'search First name, last name... ' %>
     <%#= f.select :schedules_county_matches_all, Schedule.counties.map { |r| [r[0], r[1].to_i] }, include_blank: true %>
-    <%= f.select :roles_id_eq, Role.pluck(:name, :id).map{|role, a|[role.humanize,a]},
+    <%#= f.select :roles_id_eq, Role.pluck(:name, :id).map{|role, a|[role.humanize,a]},
           {:include_blank => 'Select role'} %>
     <%= f.select :province_eq, User.provinces.to_a.map { |w| [w[0].humanize, w[1]] },
           {:include_blank => 'Select province'} %>

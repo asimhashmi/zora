@@ -3,6 +3,11 @@ class HomeController < ApplicationController
   before_action :authenticate_user!, except: [:index]
 
   def index
+    if user_signed_in? && current_user.is_teacher?
+      return redirect_to teacher_path
+    elsif user_signed_in? && current_user.is_student?
+      return redirect_to student_path
+    end
   end
 
   def student_home

@@ -5,12 +5,11 @@
       <tr>
         <th>Grade</th>
         <th>Subject</th>
-        <th>Price/Sesssion</th>
+        <th>Price/Sesssion</th>git 
         <th>Sesssion/week</th>
         <th>Duration</th>
         <th>Total Payment</th>
-        <th>Student</th>
-        <th>Teacher</th>
+        <th>With</th>
         <th>Status</th>
         <th rowspan="2">Action</th>
       </tr>
@@ -24,8 +23,16 @@
           <td><%= hire.number_of_session %></td>
           <td><%= hire.duration %> weeks</td>
           <td><%= hire.total_price %>$</td>
-          <td><%= link_to hire.hire_by.name, user_path(hire.hire_by) %></td>
+
+
+        <% if current_user.is_student? %>
           <td><%= link_to hire.hire_to.name, user_path(hire.hire_to)  %></td>
+        <%else%>
+          <td><%= link_to hire.hire_by.name, user_path(hire.hire_by) %></td>
+        <%end%>
+
+          
+          
           <td><%= link_to hire.status, hire_path(hire) %></td>
           <td><% if current_user.is_teacher? && current_user == hire.hire_to && hire.status == "requested" %>
                 <%= link_to 'Accept', hire_path(hire.id, { status: "processing"  }),
