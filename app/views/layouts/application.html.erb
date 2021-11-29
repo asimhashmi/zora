@@ -1,18 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <%= render 'shared/head' %>
+    <%= render 'shared/newhead' %>
   </head>
 
   <body>
-    <%= render 'shared/navbar' %>
+    <%= render 'shared/newnavbar' %>
     <%= render 'shared/notices' %>
 
-    <div class="container mx-auto">
-      <%= yield %>
-    </div>
+    <%= yield %>
 
-    <%= render 'shared/footer' %>
+    <%= render 'shared/newfooter' %>
   </body>
   <script>
     $(".notice-alert").delay(5000).slideUp(200, function() {

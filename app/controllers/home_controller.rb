@@ -18,6 +18,12 @@ class HomeController < ApplicationController
   def teacher_home
   end
 
+  def frontend
+  end
+
+  def frontendtest
+  end
+
   def terms
   end
 

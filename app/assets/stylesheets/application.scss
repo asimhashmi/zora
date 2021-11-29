@@ -9,13 +9,13 @@
 @import "jumpstart/announcements";
 @import "meetings";
 
-// Fixes bootstrap nav-brand container overlap
-@include media-breakpoint-down(xs) {
-  .container {
-    margin-left: 0;
-    margin-right: 0;
-  }
-}
+// // Fixes bootstrap nav-brand container overlap
+// @include media-breakpoint-down(xs) {
+//   .container {
+//     margin-left: 0;
+//     margin-right: 0;
+//   }
+// }
 
 // Masquerade alert shouldn't have a bottom margin
 body > .alert {
