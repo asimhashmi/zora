@@ -1,21 +1,4 @@
 <% if current_user.is_student?%>
-  <%#= search_form_for @q do |f| %>
-
-    <%#= f.label :bio_cont %>
-    <%#= f.search_field :first_name_cont %>
-    <%#= f.select :schedules_county_matches_all, Schedule.counties.map { |r| [r[0], r[1].to_i] }, include_blank: true %>
-    <%#= f.select :role_eq, User.roles.to_a.map { |w| [w[0].humanize, w[1]] },
-                           {:include_blank => true} %>
-
-
-    <%#= f.submit %>
-  <%# end %>
-
-  <%#= search_form_for @q, url: root_path do |f| %>
-    <%#= f.label :name %>
-    <%#= f.search_field :first_name_cont %>
-    <%#= f.submit %>
-  <%# end %>
 
   <h1>Student</h1>
   <p class="lead">Use this for your student home page</p>
@@ -24,9 +7,6 @@
 
     <%= f.label :Name %>
     <%= f.search_field :first_name_or_last_name_cont, placeholder: 'search First name, last name... ' %>
-    <%#= f.select :schedules_county_matches_all, Schedule.counties.map { |r| [r[0], r[1].to_i] }, include_blank: true %>
-    <%#= f.select :roles_id_eq, Role.pluck(:name, :id).map{|role, a|[role.humanize,a]},
-          {:include_blank => 'Select role'} %>
     <%= f.select :province_eq, User.provinces.to_a.map { |w| [w[0].humanize, w[1]] },
           {:include_blank => 'Select province'} %>
 

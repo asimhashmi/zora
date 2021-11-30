@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   get '/student', to: 'home#student_home'
   get '/teacher', to: 'home#teacher_home'
   get '/frontendhome', to: 'home#frontend'
-  get '/frontendtest', to: 'home#frontendtest'
+  get '/student_dashboard', to: 'home#student_dashboard'
 
 authenticate :user, lambda { |u|  u.is_admin? } do
   mount Sidekiq::Web => '/sidekiq'

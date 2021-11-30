@@ -5,7 +5,7 @@
       <tr>
         <th>Grade</th>
         <th>Subject</th>
-        <th>Price/Sesssion</th>git 
+        <th>Price/Sesssion</th>
         <th>Sesssion/week</th>
         <th>Duration</th>
         <th>Total Payment</th>
@@ -36,15 +36,13 @@
           <td><%= link_to hire.status, hire_path(hire) %></td>
           <td><% if current_user.is_teacher? && current_user == hire.hire_to && hire.status == "requested" %>
                 <%= link_to 'Accept', hire_path(hire.id, { status: "processing"  }),
-                                            method: :patch
-                                            %>
+                                            method: :patch %>
                 <%= link_to 'Reject', hire_path(hire.id, { status: "reject" }),
                                             method: :patch,
                                             data: { confirm: "Are you sure to Reject?" }%>
               <% elsif current_user.is_student? && current_user == hire.hire_by && hire.status == "processing" %>
                 <%= link_to 'Proceed Payment', hire_path(hire.id, { status: "hired"  }),
-                                            method: :patch
-                                            %>
+                                            method: :patch %>
             <% end %>
           </td>
         <% end %>

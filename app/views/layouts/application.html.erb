@@ -5,7 +5,12 @@
   </head>
 
   <body>
-    <%= render 'shared/newnavbar' %>
+    <% if current_user %>
+      <%= render 'shared/accountNavbar' %>
+    <% else %>
+      <%= render 'shared/newnavbar' %>
+    <% end %>
+
     <%= render 'shared/notices' %>
 
     <%= yield %>

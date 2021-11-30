@@ -1,267 +1,33 @@
-<!-- Demo switcher (offcanvas)-->
-<!--<button class="btn btn-icon btn-light rounded-circle shadow position-fixed top-50 end-0 translate-middle-y me-3" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Choose Demo" style="z-index: 1035;">
-  <div class="d-flex align-items-center justify-content-center position-absolute top-0 start-0 w-100 h-100 rounded-circle" data-bs-toggle="offcanvas" data-bs-target="#demo-switcher"><i class="fi-layers"></i></div>
-</button>
-<div class="offcanvas offcanvas-end" id="demo-switcher">
-  <div class="offcanvas-header d-block border-bottom">
-    <div class="d-flex align-items-center justify-content-between mb-4">
-      <h2 class="h5 mb-0">Menu one</h2>
-      <button class="btn-close" type="button" data-bs-dismiss="offcanvas"></button>
-    </div>
-    <div class="d-flex"><a class="btn btn-outline-secondary btn-sm w-100 me-2" href="#"><i class="fi-home me-2"></i>Main Page</a><a class="btn btn-outline-secondary btn-sm w-100" href="#"><i class="fi-file me-2"></i>Docs / UI Kit</a></div>
-  </div>
-  <div class="offcanvas-body">
-    <div class="card card-hover shadow-sm mb-4"><img class="card-img-top" src="frontend/img/intro/demos/offcanvas/car-finder.jpg" alt="Car Finder Demo">
-      <div class="card-body p-3">
-        <h3 class="fs-base card-title text-center"><a class="nav-link stretched-link" href="#">Sub-menu 1</a></h3>
-      </div>
-    </div>
-    <div class="card card-hover shadow-sm mb-4"><img class="card-img-top" src="frontend/img/intro/demos/offcanvas/real-estate.jpg" alt="Real Estate Demo">
-      <div class="card-body p-3">
-        <h3 class="fs-base card-title text-center"><a class="nav-link stretched-link" href="#">Sub-menu 2</a></h3>
-      </div>
-    </div>
-    <div class="card card-hover shadow-sm mb-4"><img class="card-img-top" src="frontend/img/intro/demos/offcanvas/job-board.jpg" alt="Job Board Demo">
-      <div class="card-body p-3">
-        <h3 class="fs-base card-title text-center"><a class="nav-link stretched-link" href="#">Sub-menu 3</a></h3>
-      </div>
-    </div>
-    <div class="card card-hover shadow-sm mb-4"><img class="card-img-top" src="frontend/img/intro/demos/offcanvas/city-guide.jpg" alt="City Guide Demo">
-      <div class="card-body p-3">
-        <h3 class="fs-base card-title text-center"><a class="nav-link stretched-link" href="#">Sub-menu 4</a></h3>
-      </div>
-    </div>
-  </div>
-  <div class="offcanvas-footer border-top"><a class="btn btn-primary btn-lg w-100" href="#" target="_blank" rel="noopener"><i class="fi-cart fs-lg me-2"></i>Menu 2</a></div>
-</div>
--->
 <!-- Page loading spinner-->
 <div class="page-loading active">
   <div class="page-loading-inner">
     <div class="page-spinner"></div><span>Loading...</span>
   </div>
 </div>
-<main class="page-wrapper">
-  <!-- Sign In Modal-->
-  <div class="modal fade" id="signin-modal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered p-2 my-0 mx-auto" style="max-width: 950px;">
-      <div class="modal-content">
-        <div class="modal-body px-0 py-2 py-sm-0">
-          <button class="btn-close position-absolute top-0 end-0 mt-3 me-3" type="button" data-bs-dismiss="modal"></button>
-          <div class="row mx-0 align-items-center">
-            <div class="col-md-6 border-end-md p-4 p-sm-5">
-              <h2 class="h3 mb-4 mb-sm-5">Hey there!<br>Welcome back.</h2><img class="d-block mx-auto" src="frontend/img/signin-modal/signin.svg" width="344" alt="Illustartion">
-              <div class="mt-4 mt-sm-5">Don't have an account? <a href="#signup-modal" data-bs-toggle="modal" data-bs-dismiss="modal">Sign up here</a></div>
-            </div>
-            <div class="col-md-6 px-4 pt-2 pb-4 px-sm-5 pb-sm-5 pt-md-5"><a class="btn btn-outline-info w-100 rounded-pill mb-3" href="#"><i class="fi-google fs-lg me-1"></i>Sign in with Google</a><a class="btn btn-outline-info w-100 rounded-pill mb-3" href="#"><i class="fi-facebook fs-lg me-1"></i>Sign in with Facebook</a>
-              <div class="d-flex align-items-center py-3 mb-3">
-                <hr class="w-100">
-                <div class="px-3">Or</div>
-                <hr class="w-100">
-              </div>
-              <form class="needs-validation" novalidate>
-                <div class="mb-4">
-                  <label class="form-label mb-2" for="signin-email">Email address</label>
-                  <input class="form-control" type="email" id="signin-email" placeholder="Enter your email" required>
-                </div>
-                <div class="mb-4">
-                  <div class="d-flex align-items-center justify-content-between mb-2">
-                    <label class="form-label mb-0" for="signin-password">Password</label><a class="fs-sm" href="#">Forgot password?</a>
-                  </div>
-                  <div class="password-toggle">
-                    <input class="form-control" type="password" id="signin-password" placeholder="Enter password" required>
-                    <label class="password-toggle-btn" aria-label="Show/hide password">
-                      <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
-                    </label>
-                  </div>
-                </div>
-                <button class="btn btn-primary btn-lg w-100 rounded-pill" type="submit">Sign in</button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Sign Up Modal-->
-  <div class="modal fade" id="signup-modal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered p-2 my-0 mx-auto" style="max-width: 734px;">
-      <div class="modal-content">
-        <div class="modal-body p-sm-5">
-          <button class="btn-close position-absolute top-0 end-0 mt-3 me-3" type="button" data-bs-dismiss="modal"></button>
-          <ul class="nav nav-pills flex-column flex-sm-row border-bottom pb-4 mt-sm-n2 my-4" role="tablist">
-            <li class="nav-item me-sm-3 mb-sm-0"><a class="nav-link active" href="#job-seeker" data-bs-toggle="tab" role="tab" aria-controls="job-seeker" aria-selected="true"><i class="fi-user me-2"></i>I am a student</a></li>
-            <li class="nav-item mb-sm-0"><a class="nav-link" href="#employer" data-bs-toggle="tab" role="tab" aria-controls="employer" aria-selected="false"><i class="fi-briefcase me-2"></i>I am a tutor</a></li>
-          </ul>
-          <div class="tab-content">
-            <div class="tab-pane fade show active" id="job-seeker" role="tabpanel">
-              <h3>Register to get your tutor</h3>
-              <p class="pb-3">Get access to all the functions of the site that will help you find a great tutor.</p>
-              <div class="row gx-2 gx-md-4">
-                <div class="col-sm-6 mb-3"><a class="btn btn-outline-info w-100 rounded-pill" href="#"><i class="fi-google fs-lg me-1"></i>Sign in with Google</a></div>
-                <div class="col-sm-6 mb-3"><a class="btn btn-outline-info w-100 rounded-pill" href="#"><i class="fi-facebook fs-lg me-1"></i>Sign in with Facebook</a></div>
-              </div>
-              <div class="d-flex align-items-center py-2 mb-2">
-                <hr class="w-100">
-                <div class="px-3">Or</div>
-                <hr class="w-100">
-              </div>
-              <form class="needs-validation" novalidate>
-                <div class="row gx-2 gx-md-4">
-                  <div class="col-sm-6 mb-4">
-                    <label class="form-label" for="js-fn">Full name</label>
-                    <input class="form-control" type="text" id="js-fn" placeholder="Enter your full name" required>
-                  </div>
-                  <div class="col-sm-6 mb-4">
-                    <label class="form-label" for="js-email">Emaill address</label>
-                    <input class="form-control" type="email" id="js-email" placeholder="Enter your email" required>
-                  </div>
-                  <div class="col-sm-6 mb-4">
-                    <label class="form-label" for="js-password">Password <span class='text-muted'>(min. 8 char)</span></label>
-                    <div class="password-toggle">
-                      <input class="form-control" type="password" id="js-password" minlength="8" required>
-                      <label class="password-toggle-btn" aria-label="Show/hide password">
-                        <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
-                      </label>
-                    </div>
-                  </div>
-                  <div class="col-sm-6 mb-4">
-                    <label class="form-label" for="js-password-confirm">Confirm password</label>
-                    <div class="password-toggle">
-                      <input class="form-control" type="password" id="js-password-confirm" minlength="8" required>
-                      <label class="password-toggle-btn" aria-label="Show/hide password">
-                        <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
-                      </label>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-check mb-4">
-                  <input class="form-check-input" type="checkbox" id="agree-to-terms" required>
-                  <label class="form-check-label" for="agree-to-terms">By joining, I agree to the <a href='#'>Terms of use</a> and <a href='#'>Privacy policy</a></label>
-                </div>
-                <button class="btn btn-primary btn-lg w-100 rounded-pill" type="submit">Sign up</button>
-              </form>
-            </div>
-            <div class="tab-pane fade" id="employer" role="tabpanel">
-              <h3>Register as a tutor</h3>
-              <p class="pb-3">Get access to all special services for tutor on Zora Tutors.</p>
-              <form class="needs-validation" novalidate>
-                <div class="row gx-2 gx-md-4">
-                  <div class="col-sm-6 mb-4">
-                    <label class="form-label" for="em-fn">Full name</label>
-                    <input class="form-control" type="text" id="em-fn" placeholder="Enter your full name" required>
-                  </div>
-                  <div class="col-sm-6 mb-4">
-                    <label class="form-label" for="em-email">Emaill <span class='text-muted'>(better corporate)</span></label>
-                    <input class="form-control" type="email" id="em-email" placeholder="Enter email" required>
-                  </div>
-                  <div class="col-sm-6 mb-4">
-                    <label class="form-label" for="em-company">Company name</label>
-                    <input class="form-control" type="text" id="em-company" placeholder="Enter company name" required>
-                  </div>
-                  <div class="col-sm-6 mb-4">
-                    <label class="form-label" for="em-location">Province</label>
-                    <input class="form-control" type="text" id="em-location" placeholder="Country, City, Address" required>
-                  </div>
-                  <div class="col-sm-6 mb-4">
-                    <label class="form-label" for="em-password">Password <span class='text-muted'>(min. 8 char)</span></label>
-                    <div class="password-toggle">
-                      <input class="form-control" type="password" id="em-password" minlength="8" required>
-                      <label class="password-toggle-btn" aria-label="Show/hide password">
-                        <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
-                      </label>
-                    </div>
-                  </div>
-                  <div class="col-sm-6 mb-4">
-                    <label class="form-label" for="em-password-confirm">Confirm password</label>
-                    <div class="password-toggle">
-                      <input class="form-control" type="password" id="em-password-confirm" minlength="8" required>
-                      <label class="password-toggle-btn" aria-label="Show/hide password">
-                        <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
-                      </label>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-check mb-4">
-                  <input class="form-check-input" type="checkbox" id="agree-to-terms2" required>
-                  <label class="form-check-label" for="agree-to-terms2">By joining, I agree to the <a href='#'>Terms of use</a> and <a href='#'>Privacy policy</a></label>
-                </div>
-                <button class="btn btn-primary btn-lg w-100 rounded-pill" type="submit">Sign up</button>
-              </form>
-            </div>
-          </div>
-          <div class="pt-4 pb-3 pb-sm-0 mt-2">Already have an account? <a href="#signin-modal" data-bs-toggle="modal" data-bs-dismiss="modal">Sign in</a></div>
-        </div>
-      </div>
-    </div>
-  </div>
+
+<%= render 'devise/sessions/new' %>
+
+<%= render 'devise/registrations/new' %>
+
   <!-- Navbar-->
   <header class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" data-scroll-header>
     <div class="container">
       <h3>ZoraTutor</h3>
-      <a class="navbar-brand me-0 me-xl-4" href="#">
+      <a class="navbar-brand me-0 me-xl-4" href="/">
         <img class="d-block" src="frontend/img/logo/tutor.png" width="116" alt="ZoraTutor"></a>
-      <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button><a class="btn btn-link btn-light btn-sm d-none d-lg-block order-lg-3" href="#signin-modal" data-bs-toggle="modal"><i class="fi-user me-2"></i>Sign in</a><a class="btn btn-primary btn-sm rounded-pill ms-2 order-lg-3" href="#"><i class="fi-plus me-2"></i>Something</a><a class="btn btn-link btn-light btn-sm d-none d-lg-block order-lg-3 pe-0 ms-2" href="#">For tutors<i class="fi-arrow-long-right ms-2"></i></a>
+      <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <a class="btn btn-link btn-light btn-sm d-none d-lg-block order-lg-3" href="#signin-modal" data-bs-toggle="modal"><i class="fi-envelope me-2"></i>Login</a>
+        <a class="btn btn-primary btn-sm rounded-pill ms-2 order-lg-3" href="#signup-modal" data-bs-toggle="modal"><i class="fi-plus me-2"></i>Sign Up</a>
+        <a class="btn btn-link btn-light btn-sm d-none d-lg-block order-lg-3 pe-0 ms-2" href="#">Donate<i class="ms-2"></i></a>
       <div class="collapse navbar-collapse order-lg-2" id="navbarNav">
         <ul class="navbar-nav navbar-nav-scroll" style="max-height: 35rem;">
           <!-- Demos switcher-->
-          <li class="nav-item dropdown py-2 me-lg-2"><a class="nav-link dropdown-toggle align-items-center border-end-lg border-light py-1 pe-lg-4" href="#" data-bs-toggle="dropdown" role="button" aria-expanded="false"><i class="fi-layers me-2"></i>Demos</a>
-            <ul class="dropdown-menu dropdown-menu-dark">
-              <li><a class="dropdown-item" href="#"><i class="fi-building fs-base me-2"></i>B sub-menu 1</a></li>
-              <li class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#"><i class="fi-car fs-base me-2"></i>B sub-menu 2</a></li>
-              <li class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#"><i class="fi-briefcase fs-base me-2"></i>B sub-menu 3</a></li>
-              <li class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#"><i class="fi-map-pin fs-base me-2"></i>B sub-menu 4</a></li>
-              <li class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#"><i class="fi-home fs-base me-2"></i>B sub-menu 5</a></li>
-              <li><a class="dropdown-item" href="#"><i class="fi-list fs-base me-2"></i>B sub-menu 6</a></li>
-              <li><a class="dropdown-item" href="#"><i class="fi-file fs-base me-2"></i>B sub-menu 7</a></li>
-            </ul>
-          </li>
-          <!-- Menu items-->
-          <li class="nav-item dropdown active"><a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Home</a>
-            <ul class="dropdown-menu dropdown-menu-dark">
-              <li><a class="dropdown-item" href="real-estate-account-info.html">For Students</a></li>
-              <li><a class="dropdown-item" href="job-board-account-profile.html">For Tutors</a></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Catalog</a>
-            <ul class="dropdown-menu dropdown-menu-dark">
-              <li><a class="dropdown-item" href="#">Item one</a></li>
-              <li><a class="dropdown-item" href="#">Item two</a></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Account</a>
-            <ul class="dropdown-menu dropdown-menu-dark">
-              <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#">Account Pages</a>
-                <ul class="dropdown-menu dropdown-menu-dark">
-                  <li><a class="dropdown-item" href="#">Profile Settings</a></li>
-                  <li><a class="dropdown-item" href="#">My students</a></li>
-                  <li><a class="dropdown-item" href="#">Saved tutors</a></li>
-                  <li><a class="dropdown-item" href="#">Notifications</a></li>
-                </ul>
-              </li>
-              <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#">Post Resume</a>
-                <ul class="dropdown-menu dropdown-menu-dark">
-                  <li><a class="dropdown-item" href="#">Step 1: Basic Info</a></li>
-                  <li><a class="dropdown-item" href="#">Step 2: Education</a></li>
-                  <li><a class="dropdown-item" href="#">Step 3: Work Experience</a></li>
-                  <li><a class="dropdown-item" href="#">Step 4: Skills</a></li>
-                  <li><a class="dropdown-item" href="#">Step 5: Review</a></li>
-                </ul>
-              </li>
-              <li><a class="dropdown-item" href="job-board-promotion.html">Ad Promotion Page</a></li>
-              <li><a class="dropdown-item" href="job-board-employer-single.html">Employer / Company Page</a></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Blog</a>
-            <ul class="dropdown-menu dropdown-menu-dark">
-              <li><a class="dropdown-item" href="job-board-blog.html">Blog List</a></li>
-              <li><a class="dropdown-item" href="job-board-blog-single.html">Single Post</a></li>
-            </ul>
-          </li>
+          <li class="nav-item"><a class="nav-link align-items-center" href="/">Home</a></li>
+          <li class="nav-item"><a class="nav-link align-items-center" href="/">About us</a></li>
+          <li class="nav-item"><a class="nav-link align-items-center" href="/">MsZora</a></li>
+          <li class="nav-item"><a class="nav-link align-items-center" href="/">Contact</a></li>
+        
+          
           <li class="nav-item d-lg-none"><a class="nav-link" href="#signin-modal" data-bs-toggle="modal"><i class="fi-user me-2"></i>Sign in</a></li>
         </ul>
       </div>
