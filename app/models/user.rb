@@ -21,6 +21,8 @@ class User < ApplicationRecord
   mount_uploader :id_card, DocumentUploader
 
   enum province: [:Eastern_Cape, :Free_State, :Gauteng, :KwaZulu_Natal, :Limpopo, :Mpumalanga, :Northern_Cape, :North_West, :Western_Cape]
+  enum subject: [:English, :Math, :Chemistry, :Zulu]
+  enum grade: [:"Grade 1", :"Grade 2", :"Grade 3", :"Grade 4"]
 
   validates :first_name, :last_name, :email, presence: true
 

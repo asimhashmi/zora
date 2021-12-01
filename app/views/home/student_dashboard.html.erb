@@ -1,13 +1,8 @@
-      <!-- Page content-->
       <div class="container pt-5 pb-lg-4 mt-5 mb-sm-2">
         <!-- Breadcrumb-->
         <nav class="mb-4 pt-md-3" aria-label="Breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="real-estate-home.html">Dashboard</a></li>
-            <!--
-              <li class="breadcrumb-item"><a href="real-estate-account-info.html">Account</a></li>
-              <li class="breadcrumb-item active" aria-current="page">My Properties</li>
-              -->
           </ol>
         </nav>
 
@@ -34,10 +29,10 @@
                           class="fas fa-search"></i>Find a tutor today!</a></li>
                   </ul>
                 </div>
-                <%= search_form_for @q, url: 'student' do |f| %>
+                <%= search_form_for @q, url: 'student_dashboard' do |f| %>
                   <div class="offcanvas-body py-lg-4">
                     <div class="pb-4 mb-2">
-                      <h3 class="h6">Location</h3>
+                      <h3 class="h6">Search</h3>
 
                       <%= f.search_field :first_name_or_last_name_cont, placeholder: 'search First name, last name... ', class: "form-control mb-2" %>
 
@@ -45,7 +40,7 @@
                         {:include_blank => 'Select province'}, class: "form-select" %>
 
                     </div>
-                    <div class="pb-4 mb-2">
+                    <!--<div class="pb-4 mb-2">
                       <h3 class="h6">Subject</h3>
                       <div class="overflow-auto" data-simplebar data-simplebar-auto-hide="false" style="height: 11rem;">
                         <div class="form-check">
@@ -93,10 +88,10 @@
                         <div class="mx-2">&mdash;</div>
                         <input class="form-control w-100" type="number" min="20" max="500" step="10" placeholder="Max">
                       </div>
-                    </div>
+                    </div>-->
                     <div class="border-top py-4">
 
-                      <%= f.submit %>
+                      <%= f.submit :'Find Tutor', class: "btn btn-outline-primary"%>
 
                       <% form_tag student_path, :method => 'get' do %>
                         <p>
@@ -105,10 +100,8 @@
                         </p>
                       <% end %>
 
-                      <button class="btn btn-outline-primary" type="button"><i class="fi-rotate-right me-2"></i>Find
-                        Tutor</button>
-                      <button class="btn btn-outline-primary" type="button"><i class="fi-rotate-right me-2"></i>Reset
-                        filters</button>
+                      <!--<button class="btn btn-outline-primary" type="button"><i class="fi-rotate-right me-2"></i>Find Tutor</button>
+                      <button class="btn btn-outline-primary" type="button"><i class="fi-rotate-right me-2"></i>Reset filters</button>-->
                     </div>
                   </div>
                 <% end %>

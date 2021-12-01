@@ -1,50 +1,175 @@
 <% if current_user.is_student?%>
 
-  <h1>Student</h1>
-  <p class="lead">Use this for your student home page</p>
+        <div class="container pt-5 pb-lg-4 mt-5 mb-sm-2">
+        <!-- Breadcrumb-->
+        <nav class="mb-4 pt-md-3" aria-label="Breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="real-estate-home.html">Dashboard</a></li>
+          </ol>
+        </nav>
 
-  <%= search_form_for @q, url: 'student' do |f| %>
+        <div class="row">
+          <h2>Hired Tutors</h2>
+          <!-- Sidebar-->
+          <aside class="col-lg-4">
+            <%= render 'hires/dashboardList', hires: current_user.student_hires %>
+          </aside>
 
-    <%= f.label :Name %>
-    <%= f.search_field :first_name_or_last_name_cont, placeholder: 'search First name, last name... ' %>
-    <%= f.select :province_eq, User.provinces.to_a.map { |w| [w[0].humanize, w[1]] },
-          {:include_blank => 'Select province'} %>
+          <!-- Page content-->
+          <div class="col-lg-8">
+            <div class="row g-0 mt-n3">
 
+              <!-- Filters sidebar (Offcanvas on mobile)-->
+              <div class="container" id="filters-sidebar">
+                <div class="offcanvas-header d-flex d-lg-none align-items-center">
+                  <h2 class="h5 mb-0">Filters</h2>
+                  <button class="btn-close" type="button" data-bs-dismiss="offcanvas"></button>
+                </div>
+                <%= search_form_for @q, url: 'student' do |f| %>
+                <div class="offcanvas-header d-block border-bottom pt-0 pt-lg-4 px-lg-0">
+                  <ul class="nav nav-tabs mb-0">
+                    <li class="nav-item"><a class="nav-link active" href="real-estate-catalog-rent.html"><i class="fas fa-search"></i>Find a tutor today!</a></li>
 
-    <%= f.submit %>
-  <% end %>
+                  </ul>
+                </div>
+                
+                  <div class="offcanvas-body">
+                    <div class="mb-4">
+                      <h3 class="h6 pb-2" style="float:left">Search</h3>
+                      <%= f.submit :'Find Tutor', class: "btn btn-outline-primary", style: "float:right"%>
 
-  <% form_tag student_path, :method => 'get' do %>
-    <p>
-      <%= text_field_tag :search, params[:search] %>
-      <%= submit_tag "Search", :name => nil %>
-    </p>
-  <% end %>
-  <br>
-  <br>
+                      <%= f.search_field :first_name_or_last_name_cont, placeholder: 'search First name, last name... ', class: "form-control mb-2" %>
 
-    <h5>List of verified teachers</h5>
+                      <%= f.select :province_eq, User.provinces.to_a.map { |w| [w[0].humanize, w[1]] },
+                        {:include_blank => 'Select province'}, class: "form-select" %>
 
-        <table class="table table-striped table-inverse table-responsive">
-            <thead class="thead-inverse">
-                <tr>
-                    <th>name</th>
-                    <th>Bio</th>
-                    <th>Province</th>
-                </tr>
-                </thead>
-                <tbody>
-                    <% @teacher_list.each do |teacher|%>
-                        <tr>
-                            <td scope="row"><%= link_to teacher.name, user_path(teacher.id) %></td>
-                            <td><%= teacher.bio %></td>
-                            <td><%= teacher.province %></td>
-                        </tr>
-                    <% end %>
-                </tbody>
-        </table>
+                    </div>
+                    <!--<div class="pb-4 mb-2">
+                      <h3 class="h6">Subject</h3>
+                      <div class="overflow-auto" data-simplebar data-simplebar-auto-hide="false" style="height: 11rem;">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="house">
+                          <label class="form-check-label fs-sm" for="house">Mathematics</label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="apartment" checked>
+                          <label class="form-check-label fs-sm" for="apartment">Information Technology</label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="room">
+                          <label class="form-check-label fs-sm" for="room">Physical Science</label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="office">
+                          <label class="form-check-label fs-sm" for="office">Biology</label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="commercial">
+                          <label class="form-check-label fs-sm" for="commercial">Economics</label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="land">
+                          <label class="form-check-label fs-sm" for="land">Accounting</label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="daily">
+                          <label class="form-check-label fs-sm" for="daily">English</label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="new-building">
+                          <label class="form-check-label fs-sm" for="new-building">French</label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="parking-lot">
+                          <label class="form-check-label fs-sm" for="parking-lot">Life Orientation</label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="pb-4 mb-2">
+                      <h3 class="h6 pt-1">Price Per Hour</h3>
+                      <div class="d-flex align-items-center">
+                        <input class="form-control w-100" type="number" min="20" max="500" step="10" placeholder="Min">
+                        <div class="mx-2">&mdash;</div>
+                        <input class="form-control w-100" type="number" min="20" max="500" step="10" placeholder="Max">
+                      </div>
+                    </div>-->
+                    <!--<div class="border-top py-4">
 
-  <%= render 'hires/list', hires: current_user.student_hires %>
+                      <%#= f.submit :'Find Tutor', class: "btn btn-outline-primary"%>
+
+                      <%# form_tag student_path, :method => 'get' do %>
+                        <p>
+                          <%#= text_field_tag :search, params[:search] %>
+                          <%#= submit_tag "Search", :name => nil %>
+                        </p>
+                      <%# end %>
+
+                      <button class="btn btn-outline-primary" type="button"><i class="fi-rotate-right me-2"></i>Find Tutor</button>
+                      <button class="btn btn-outline-primary" type="button"><i class="fi-rotate-right me-2"></i>Reset filters</button>
+                    </div>-->
+                  </div>
+                <% end %>
+              </div>
+              <div class="container">
+                <div class="title">
+                  <h3>Tutors Found</h3>
+                </div>
+                <div class="row">
+
+                <% @teacher_list.each do |teacher|%>  
+                  <div class="col-md-4">
+                    <div class="card text-center">
+                      <div class="col">
+                        <div class="card shadow-sm card-hover border-0 h-100">                       
+                          <div class="d-flex d-md-block d-lg-flex align-items-start pt-lg-2 mb-4 align-items-center justify-content-center">
+
+                            <%= image_tag avatar_path(@user, size: 40), width: 40, class: "rounded-circle" %>
+                            
+                            <div class="pt-md-2 pt-lg-0 ps-3 ps-md-0 ps-lg-3">
+                              <h2 class="fs-lg mb-0">
+                                <%= link_to teacher.name, user_path(teacher.id), class: "nav-link stretched-link" %>
+                              </h2>
+                              <span class="star-rating">
+                              <i class="star-rating-icon fi-star-filled active"></i>
+                              <i class="star-rating-icon fi-star-filled active"></i>
+                              <i class="star-rating-icon fi-star-filled active"></i>
+                              <i class="star-rating-icon fi-star-filled active"></i>
+                              <i class="star-rating-icon fi-star-filled active"></i>
+                              </span>
+                            </div>
+                          </div>
+                          <div class="card-img-top card-img-hover">
+                            <a class="img-overlay" href="real-estate-single.html"></a>
+                            <div class="position-absolute start-0 top-0 pt-3 ps-3"><span class="d-table badge bg-success mb-1">Verified</span><span class="d-table badge bg-info">New</span></div>
+                            <div class="content-overlay end-0 top-0 pt-3 pe-3">
+                              <button class="btn btn-icon btn-light btn-xs text-primary rounded-circle" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Wishlist"><i class="fi-heart"></i></button>
+                            </div>
+                          </div>
+                          <div class="card-body position-relative pb-3">
+                            <p class="mb-2 fs-sm text-muted"><%= teacher.bio %></p>
+                            <p class="mb-2 fs-sm text-muted"><%= teacher.province %></p>
+                          </div>
+                          <div class="card-footer d-flex align-items-center justify-content-center mx-3 pt-3 text-nowrap">
+                            <div class="fw-bold"><i class="fi-cash mt-n1 me-2 lead align-middle opacity-70"></i>R<%= teacher.price%> per session</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Filters sidebar toggle button (mobile)-->
+<button class="btn btn-primary btn-sm w-100 rounded-0 fixed-bottom d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#filters-sidebar"><i class="fi-sidebar-right me-2"></i>Fiters</button>
+<!-- Back to top button-->
+<a class="btn-scroll-top" href="#top" data-scroll><span class="btn-scroll-top-tooltip text-muted fs-sm me-2">Top</span><i class="btn-scroll-top-icon fi-chevron-up"></i></a>
 
 <% elsif current_user.is_teacher? %>
     <h1>Wrong Page</h1>

@@ -21,3 +21,11 @@
 body > .alert {
   margin-bottom: 0;
 }
+
+.no-underline{
+  text-decoration:none
+}
+
+.no-underline:hover{
+  color: #666276;
+}

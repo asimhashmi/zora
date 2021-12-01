@@ -1,7 +1,4 @@
 <% if current_user.is_teacher? %>
-  <h1>Teacher</h1>
-  <p class="lead">Use this for your teacher home page</p>
-  <%= link_to "Schedule a Meeting", new_meeting_path(student_id: 1, teacher_id: params[:id]), remote: true %>
 
   <%= render 'hires/list', hires: current_user.teacher_hires %>
 

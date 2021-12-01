@@ -33,6 +33,18 @@
         <div class="mb-3">
           <%= f.number_field :price, class: 'form-control', min: 1, placeholder: 'price per session', required: true%>
         </div>
+
+        <div class="mb-3">
+          <%= f.select :subject, User.subjects.keys, class: 'form-control', placeholder: 'Subject' %>
+        </div>
+
+        <div class="mb-3">
+          <%= f.select :grade, User.grades.keys, class: 'form-control', placeholder: 'Grade' %>
+        </div>
+
+        <div class="mb-3">
+          <%= f.number_field :years_of_experience, class: 'form-control', min: 1, placeholder: 'years_of_experience', required: true%>
+        </div>
       <% end %>
 
       <div class="mb-3">
