@@ -1,0 +1,5 @@
+/* line 4, app/assets/stylesheets/meetings.scss */
+.close_alert {
+  display: flex;
+  float: right;
+}
