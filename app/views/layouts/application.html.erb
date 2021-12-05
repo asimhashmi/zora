@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <%= render 'shared/newhead' %>
+
+    <% if current_user %>
+      <%= render 'shared/accounthead' %>
+    <% else %>
+      <%= render 'shared/newhead' %>
+    <% end %>
+    
   </head>
 
   <body>
@@ -15,7 +21,12 @@
 
     <%= yield %>
 
-    <%= render 'shared/newfooter' %>
+    <% if current_user %>
+      <%= render 'shared/accountfooter' %>
+    <% else %>
+      <%= render 'shared/newfooter' %>
+    <% end %>
+    
   </body>
   <script>
     $(".notice-alert").delay(5000).slideUp(200, function() {
