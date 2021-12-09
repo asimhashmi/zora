@@ -1,3 +1,114 @@
+<div class="container pt-5 pb-lg-4 mt-5 mb-sm-2">
+  <!-- Breadcrumb-->
+  <nav class="mb-4 pt-md-3" aria-label="Breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="real-estate-home.html">Dashboard</a></li>
+    </ol>
+  </nav>
+
+  <div class="">
+    <h2>Meeting List</h2>
+    <!-- Page content-->
+    <div class="">
+      <div class="row g-0 mt-n3">
+        <div class="container">
+          <div class="row">
+            <%# hires.order("created_at desc").each do |hire| %>
+              <%#= content_tag :tr, id: dom_id(hire), class: dom_class(hire) do %>
+            <% meetings.order("created_at desc").each do |meeting| %>
+              <%= content_tag :tr, id: dom_id(meeting), class: dom_class(meeting) do %>
+                <div class="col-lg-3">
+                  <div class="card card-body border-0 shadow-sm pb-1 me-lg-1" style="margin-bottom: 1rem;">
+                    <div class="d-flex d-md-block d-lg-flex align-items-start pt-lg-2">
+                      <div class="pt-md-2 pt-lg-0 ps-3 ps-md-0 ps-lg-3" style="text-align:center">
+                        <h2 class="fs-lg mb-0">
+                          <td>
+                            <%= link_to meeting.title, meeting %>
+                          </td>
+                        </h2>
+                        <p class="mb-0">
+                          <%= meeting.purpose%>
+                        </p>
+                      </div>
+                    </div>
+                    <ul class="list-unstyled fs-sm mt-3 mb-0">
+                      <li>
+                        <div class="row">
+                          <!-- <i class="col fi-clock opacity-60 me-2"></i> -->
+                          <div class="col-7">
+                            <p>By: <%= meeting.time.strftime("%-d/%-m/%y: %H:%M") %>
+                            </p>
+                          </div>
+                          <div class="col-5">
+                            For: <%= meeting.duration %> mins
+                          </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                          <div class="col-7">
+                            <% if current_user.is_student? %>
+                              <p>
+                                With: <strong><%= meeting.teacher.name%></strong>
+                              </p>
+                            <%else%>
+                              <p>
+                                With: <strong><%= meeting.student.name%></strong>
+                              </p>
+                            <%end%>
+                          </div>
+                          <div class="col-5">
+                            <%= meeting.meeting_url ? (link_to 'Join Meeting', meeting.meeting_url, target:"_blank") : 'N/A' %>
+                          </div>
+                        </div>
+                        <div style="text-align:center;">
+                          <%# if current_user.is_teacher? && current_user==hire.hire_to && hire.status=="requested" %>
+                            <%#= link_to 'Accept' , hire_path(hire.id, { status: "processing" }), method: :patch, class:"no-underline" %>
+                            <%#= link_to 'Reject' , hire_path(hire.id, { status: "reject" }), method: :patch, class:"no-underline", style:"border-left: 1px solid;" , data: { confirm: "Are you sure to Reject?" }%>
+                          <%# elsif current_user.is_student? && current_user==hire.hire_by && hire.status=="processing" %>
+                              <%#= link_to 'Proceed Payment' , hire_path(hire.id, { status: "hired" }), method: :patch, class:"no-underline" %>
+                          <%# end %>
+                        </div>
+                      </li>
+                      <!-- <li><a class="nav-link fw-normal p-0" href="mailto:annette_black@email.com"><i
+                            class="fi-mail opacity-60 me-2"></i>damiomi@email.com</a></li> -->
+                    </ul>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</main>
+
+<!-- Filters sidebar toggle button (mobile)-->
+<button class="btn btn-primary btn-sm w-100 rounded-0 fixed-bottom d-lg-none" type="button" data-bs-toggle="offcanvas"
+  data-bs-target="#filters-sidebar"><i class="fi-sidebar-right me-2"></i>Fiters</button>
+<!-- Back to top button-->
+<a class="btn-scroll-top" href="#top" data-scroll><span
+    class="btn-scroll-top-tooltip text-muted fs-sm me-2">Top</span><i class="btn-scroll-top-icon fi-chevron-up"></i></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div class="table-responsive">
   <table class="table table-striped table-bordered table-hover">
     <thead>

@@ -18,14 +18,6 @@ class HomeController < ApplicationController
   def teacher_home
   end
 
-  def frontend
-  end
-
-  def student_dashboard
-    @q = Role.find_by_name('teacher').users.where(:is_verified => true).ransack(params[:q])
-    @teacher_list = @q.result(distinct: true)
-  end
-
   def terms
   end
 

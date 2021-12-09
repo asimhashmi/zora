@@ -1,29 +1,59 @@
-<div class="page-header">
-  <%= link_to hires_path, class: 'btn btn-warning' do %>
-    All Hirings
-  <% end %>
-  <h1>Show hire</h1>
-</div>
+<!-- Page header-->
+<section class="container pt-5 mt-5">
+  <!-- Breadcrumb-->
+  <nav class="mb-3 pt-md-3" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><%= link_to "home", root_path%></li>
+      <li class="breadcrumb-item active" aria-current="page"">Hires</li>
+    </ol>
+  </nav>
+  
+<!-- Post content-->
+<section class="container mb-5 pb-1">
+  <div class="row">
+    <div class="col-md-12 mb-md-0 mb-4">
+      <div class="row">
+        <h2 class="col-6 h3 mb-4 pb-4 border-bottom">Total Price: R<%= @hire.total_price %><span class="d-inline-block ms-1 fs-base fw-normal text-body">.00</span></h2>
+        <h2 class="col-6 h3 mb-4 pb-4 border-bottom">R<%= @hire.price %><span class="d-inline-block ms-1 fs-base fw-normal text-body">/per session</span></h2>
+      </div>
 
-<dl class="dl-horizontal">
-  <dt>Grade</dt>
-  <dd><%= @hire.grade %></dd>
-  <dt>Subject:</dt>
-  <dd><%= @hire.subject %></dd>
-  <dt>Price/week:</dt>
-  <dd><%= @hire.price %>$</dd>
-  <dt>Sesssion/week:</dt>
-  <dd><%= @hire.number_of_session %></dd>
-  <dt>Duration:</dt>
-  <dd><%= @hire.duration %>Weeks</dd>
-  <dt>Student:</dt>
-  <dd><%= @hire.hire_by_id %></dd>
-  <dt>Teacher:</dt>
-  <dd><%= @hire.hire_to_id %></dd>
-  <dt>Status:</dt>
-  <dd><%= @hire.status %></dd>
-  <% if @hire.end_contract.present? %>
-    <dt>Contract End Date:</dt>
-    <dd><%= @hire.end_contract %></dd>
-  <% end %>
-</dl>
+      <!-- Overview-->
+      <div class="mb-4 col-md-12">
+        <h3 class="h4">Status: <%= @hire.status %></h3>
+        <h6 class="mb-1">Subject: <span style="color: #FD5631"><%= @hire.subject %></span></h6>
+        <p class="mb-1">Grade <%= @hire.grade %></p>
+      </div>
+      <!-- Property Details-->
+      <div class="row mb-4 pb-md-3">
+        <div class="col-lg-3">
+          <h3 class="h4">Hire Details</h3>
+          <ul class="list-unstyled mb-0">
+
+            <% if current_user.is_student? %>
+              <li>
+                With: <strong><%= @hire.hire_to.name %></strong>
+              </li>
+            <%else%>
+              <li>
+                With: <strong><%= @hire.hire_by.name %></strong>
+              </li>
+            <%end%>
+            
+            <li>Sessions per week: <%= @hire.number_of_session %></li>
+            <li>Duration: <%= @hire.duration %> Weeks</li>
+            <li>Contract ends on: <%= @hire.end_contract %></li>
+
+          </ul>
+        </div>
+        <div class="col-lg-9">
+          <%#= render 'meetings/show', meetings: @meetings %>
+        </div>
+
+      </div>
+      <div class="d-flex flex-sm-row flex-column align-items-sm-center align-items-stretch justify-content-between">
+      </div>
+
+      <div id="meeting_model"></div>
+
+    </div>
+</section>

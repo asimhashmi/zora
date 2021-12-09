@@ -12,8 +12,6 @@ Rails.application.routes.draw do
   get '/terms', to: 'home#terms'
   get '/student', to: 'home#student_home'
   get '/teacher', to: 'home#teacher_home'
-  get '/frontendhome', to: 'home#frontend'
-  get '/student_dashboard', to: 'home#student_dashboard'
 
 authenticate :user, lambda { |u|  u.is_admin? } do
   mount Sidekiq::Web => '/sidekiq'

@@ -36,77 +36,21 @@
                   <div class="offcanvas-body">
                     <div class="mb-4">
                       <h3 class="h6 pb-2" style="float:left">Search</h3>
-                      <%= f.submit :'Find Tutor', class: "btn btn-outline-primary", style: "float:right"%>
+                      <div class="" style= "float:right">
+                        <%= f.submit :'Find Tutor', class: "btn btn-outline-primary"%>
+                        <a class="btn btn-outline-primary" type="button" href="/"><i class="fi-rotate-right me-2"></i>Reset
+                          filters</a>
+                      </div>
 
                       <%= f.search_field :first_name_or_last_name_cont, placeholder: 'search First name, last name... ', class: "form-control mb-2" %>
 
                       <%= f.select :province_eq, User.provinces.to_a.map { |w| [w[0].humanize, w[1]] },
-                        {:include_blank => 'Select province'}, class: "form-select" %>
+                        {:include_blank => 'Select province'}, class: "form-select mb-2" %>
+
+                      <%= f.select :tutor_type_eq, User.tutor_types.to_a.map { |w| [w[0].humanize, w[1]] },
+                        {:include_blank => 'Select tutor type'}, class: "form-select" %>
 
                     </div>
-                    <!--<div class="pb-4 mb-2">
-                      <h3 class="h6">Subject</h3>
-                      <div class="overflow-auto" data-simplebar data-simplebar-auto-hide="false" style="height: 11rem;">
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="house">
-                          <label class="form-check-label fs-sm" for="house">Mathematics</label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="apartment" checked>
-                          <label class="form-check-label fs-sm" for="apartment">Information Technology</label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="room">
-                          <label class="form-check-label fs-sm" for="room">Physical Science</label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="office">
-                          <label class="form-check-label fs-sm" for="office">Biology</label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="commercial">
-                          <label class="form-check-label fs-sm" for="commercial">Economics</label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="land">
-                          <label class="form-check-label fs-sm" for="land">Accounting</label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="daily">
-                          <label class="form-check-label fs-sm" for="daily">English</label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="new-building">
-                          <label class="form-check-label fs-sm" for="new-building">French</label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="parking-lot">
-                          <label class="form-check-label fs-sm" for="parking-lot">Life Orientation</label>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="pb-4 mb-2">
-                      <h3 class="h6 pt-1">Price Per Hour</h3>
-                      <div class="d-flex align-items-center">
-                        <input class="form-control w-100" type="number" min="20" max="500" step="10" placeholder="Min">
-                        <div class="mx-2">&mdash;</div>
-                        <input class="form-control w-100" type="number" min="20" max="500" step="10" placeholder="Max">
-                      </div>
-                    </div>-->
-                    <!--<div class="border-top py-4">
-
-                      <%#= f.submit :'Find Tutor', class: "btn btn-outline-primary"%>
-
-                      <%# form_tag student_path, :method => 'get' do %>
-                        <p>
-                          <%#= text_field_tag :search, params[:search] %>
-                          <%#= submit_tag "Search", :name => nil %>
-                        </p>
-                      <%# end %>
-
-                      <button class="btn btn-outline-primary" type="button"><i class="fi-rotate-right me-2"></i>Find Tutor</button>
-                      <button class="btn btn-outline-primary" type="button"><i class="fi-rotate-right me-2"></i>Reset filters</button>
-                    </div>-->
                   </div>
                 <% end %>
               </div>
@@ -116,7 +60,7 @@
                 </div>
                 <div class="row">
 
-                <% @teacher_list.each do |teacher|%>  
+                <% @teacher_list.limit(6).each do |teacher|%>  
                   <div class="col-md-4">
                     <div class="card text-center">
                       <div class="col">
@@ -146,8 +90,8 @@
                             </div>
                           </div>
                           <div class="card-body position-relative pb-3">
-                            <p class="mb-2 fs-sm text-muted"><%= teacher.bio %></p>
-                            <p class="mb-2 fs-sm text-muted"><%= teacher.province %></p>
+                            <p class="mb-2 fs-sm text-muted"><%= truncate teacher.bio , length: 160 %></p>
+                            <p class="mb-2 fs-sm text-muted"><span style="color: #FD5631"><%= teacher.province %></span></p>
                           </div>
                           <div class="card-footer d-flex align-items-center justify-content-center mx-3 pt-3 text-nowrap">
                             <div class="fw-bold"><i class="fi-cash mt-n1 me-2 lead align-middle opacity-70"></i>R<%= teacher.price%> per session</div>

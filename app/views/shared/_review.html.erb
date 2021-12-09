@@ -1,0 +1,101 @@
+<!-- Reviews-->
+      <div class="mb-4 pb-4 border-bottom">
+        <h3 class="h4 pb-3"><i class="fi-star-filled mt-n1 me-2 lead align-middle text-warning"></i>4,9 (32 reviews)</h3>
+          <div class="d-flex align-items-center ms-sm-4">
+            <label class="me-2 pe-1 text-nowrap" for="reviews-sorting"><i class="fi-arrows-sort text-muted mt-n1 me-2"></i>Sort by:</label>
+            <select class="form-select" id="reviews-sorting">
+              <option>Newest</option>
+              <option>Oldest</option>
+              <option>Popular</option>
+              <option>High rating</option>
+              <option>Low rating</option>
+            </select>
+          </div>
+      </div>
+      <!-- Review-->
+      <div class="mb-4 pb-4 border-bottom">
+        <div class="d-flex justify-content-between mb-3">
+          <div class="d-flex align-items-center pe-2">
+            <%= image_tag avatar_path(current_user, size: 40), width: 48, class: "rounded-circle" %>
+            <!--<img class="rounded-circle me-1" src="frontend/img/avatars/03.jpg" width="48" alt="Avatar">-->
+            <div class="ps-2">
+              <h6 class="fs-base mb-0">Annette Black</h6><span class="star-rating"><i class="star-rating-icon fi-star-filled active"></i><i class="star-rating-icon fi-star-filled active"></i><i class="star-rating-icon fi-star-filled active"></i><i class="star-rating-icon fi-star-filled active"></i><i class="star-rating-icon fi-star-filled active"></i></span>
+            </div>
+          </div><span class="text-muted fs-sm">Jan 17, 2021</span>
+        </div>
+        <p>Very patient and makes you feel confident when learning physics</p>
+        <div class="d-flex align-items-center">
+          <button class="btn-like" type="button"><i class="fi-like"></i><span>(3)</span></button>
+          <div class="border-end me-1">&nbsp;</div>
+          <button class="btn-dislike" type="button"><i class="fi-dislike"></i><span>(0)</span></button>
+        </div>
+      </div>
+      <!-- Review-->
+      <div class="mb-4 pb-4 border-bottom">
+        <div class="d-flex justify-content-between mb-3">
+          <div class="d-flex align-items-center pe-2">
+          
+          <%= image_tag avatar_path(current_user), width: 48, class: "rounded-circle me-1" %>
+          <!--<img class="rounded-circle me-1" src="frontend/img/avatars/13.png" width="48" alt="Avatar">-->
+            <div class="ps-2">
+              <h6 class="fs-base mb-0">Darrell Steward</h6><span class="star-rating"><i class="star-rating-icon fi-star-filled active"></i><i class="star-rating-icon fi-star-filled active"></i><i class="star-rating-icon fi-star-filled active"></i><i class="star-rating-icon fi-star"></i><i class="star-rating-icon fi-star"></i></span>
+            </div>
+          </div><span class="text-muted fs-sm">Dec 1, 2020</span>
+        </div>
+        <p>Amazing tutor, helped me expand my knowledge and made concepts easier to understand</p>
+        <div class="d-flex align-items-center">
+          <button class="btn-like" type="button"><i class="fi-like"></i><span>(0)</span></button>
+          <div class="border-end me-1">&nbsp;</div>
+          <button class="btn-dislike" type="button"><i class="fi-dislike"></i><span>(1)</span></button>
+        </div>
+      </div>
+      <!-- Review-->
+      <div class="mb-4 pb-4 border-bottom">
+        <div class="d-flex justify-content-between mb-3">
+          <div class="d-flex align-items-center pe-2">
+          
+          <%= image_tag avatar_path(current_user), width: 48, class: "rounded-circle me-1" %>
+          <!--<img class="rounded-circle me-1" src="frontend/img/avatars/05.jpg" width="48" alt="Avatar">-->
+            <div class="ps-2">
+              <h6 class="fs-base mb-0">Floyd Miles</h6><span class="star-rating"><i class="star-rating-icon fi-star-filled active"></i><i class="star-rating-icon fi-star-filled active"></i><i class="star-rating-icon fi-star-filled active"></i><i class="star-rating-icon fi-star-filled active"></i><i class="star-rating-icon fi-star-filled active"></i></span>
+            </div>
+          </div><span class="text-muted fs-sm">Oct  28, 2020</span>
+        </div>
+        <p>Rates are quite expensive, but the tutor is amazing and worth the investment!</p>
+        <div class="d-flex align-items-center">
+          <button class="btn-like" type="button"><i class="fi-like"></i><span>(2)</span></button>
+          <div class="border-end me-1">&nbsp;</div>
+          <button class="btn-dislike" type="button"><i class="fi-dislike"></i><span>(1)</span></button>
+        </div>
+      </div>
+      <!-- Review-->
+      <div class="mb-4 pb-4 border-bottom">
+        <div class="d-flex justify-content-between mb-3">
+          <div class="d-flex align-items-center pe-2">
+          
+          <%= image_tag avatar_path(current_user), width: 48, class: "rounded-circle me-1" %>
+          <!--<img class="rounded-circle me-1" src="frontend/img/avatars/04.jpg" width="48" alt="Avatar">-->
+            <div class="ps-2">
+              <h6 class="fs-base mb-0">Ralph Edwards</h6><span class="star-rating"><i class="star-rating-icon fi-star-filled active"></i><i class="star-rating-icon fi-star-filled active"></i><i class="star-rating-icon fi-star-filled active"></i><i class="star-rating-icon fi-star-filled active"></i><i class="star-rating-icon fi-star"></i></span>
+            </div>
+          </div><span class="text-muted fs-sm">Sep 14, 2020</span>
+        </div>
+        <p>Communication was top notch, found it easy to have lessons and the tutor was very helpful.</p>
+        <div class="d-flex align-items-center">
+          <button class="btn-like" type="button"><i class="fi-like"></i><span>(0)</span></button>
+          <div class="border-end me-1">&nbsp;</div>
+          <button class="btn-dislike" type="button"><i class="fi-dislike"></i><span>(0)</span></button>
+        </div>
+      </div>
+      <!-- Pagination-->
+      <nav class="mt-2 mb-4" aria-label="Reviews pagination">
+        <ul class="pagination">
+          <li class="page-item d-sm-none"><span class="page-link page-link-static">1 / 5</span></li>
+          <li class="page-item active d-none d-sm-block" aria-current="page"><span class="page-link">1<span class="visually-hidden">(current)</span></span></li>
+          <li class="page-item d-none d-sm-block"><a class="page-link" href="#">2</a></li>
+          <li class="page-item d-none d-sm-block"><a class="page-link" href="#">3</a></li>
+          <li class="page-item d-none d-sm-block">...</li>
+          <li class="page-item d-none d-sm-block"><a class="page-link" href="#">8</a></li>
+          <li class="page-item"><a class="page-link" href="#" aria-label="Next"><i class="fi-chevron-right"></i></a></li>
+        </ul>
+      </nav>

@@ -1,197 +1,101 @@
 <!-- Review modal-->
-      <div class="modal fade" id="modal-review" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header d-block position-relative border-0 pb-0 px-sm-5 px-4">
-              <h3 class="modal-title mt-4 text-center">Leave a review</h3>
-              <button class="btn-close position-absolute top-0 end-0 mt-3 me-3" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body px-sm-5 px-4">
-              <form class="needs-validation" novalidate>
-                <div class="mb-3">
-                  <label class="form-label" for="review-name">Name <span class='text-danger'>*</span></label>
-                  <input class="form-control" type="text" id="review-name" placeholder="Your name" required>
-                  <div class="invalid-feedback">Please let us know your name.</div>
-                </div>
-                <div class="mb-3">
-                  <label class="form-label" for="review-email">Email <span class='text-danger'>*</span></label>
-                  <input class="form-control" type="email" id="review-email" placeholder="Your email address" required>
-                  <div class="invalid-feedback">Please provide a valid email address.</div>
-                </div>
-                <div class="mb-3">
-                  <label class="form-label" for="review-rating">Rating <span class='text-danger'>*</span></label>
-                  <select class="form-control form-select" id="review-rating" required>
-                    <option value="" selected disabled hidden>Choose rating</option>
-                    <option value="5 stars">5 stars</option>
-                    <option value="4 stars">4 stars</option>
-                    <option value="3 stars">3 stars</option>
-                    <option value="2 stars">2 stars</option>
-                    <option value="1 star">1 star</option>
-                  </select>
-                  <div class="invalid-feedback">Please rate the property.</div>
-                </div>
-                <div class="mb-4">
-                  <label class="form-label" for="review-text">Review <span class='text-danger'>*</span></label>
-                  <textarea class="form-control" id="review-text" rows="5" placeholder="Your review message" required></textarea>
-                  <div class="invalid-feedback">Please write your review.</div>
-                </div>
-                <button class="btn btn-primary d-block w-100 mb-4" type="submit">Submit a review</button>
-              </form>
-            </div>
-          </div>
-        </div>
+<div class="modal fade" id="modal-review" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header d-block position-relative border-0 pb-0 px-sm-5 px-4">
+        <h3 class="modal-title mt-4 text-center">Leave a review</h3>
+        <button class="btn-close position-absolute top-0 end-0 mt-3 me-3" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <!-- Page header-->
-      <section class="container pt-5 mt-5">
-        <!-- Breadcrumb-->
-        <nav class="mb-3 pt-md-3" aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><%= link_to "home", root_path%></li>
-            <li class="breadcrumb-item">Users</li>
-            <li class="breadcrumb-item active" aria-current="page"><%= @user.name %></li>
-          </ol>
-        </nav>
-        
-    
-      <!-- Post content-->
-      <section class="container mb-5 pb-1">
-        <div class="row">
-          <div class="col-md-12 mb-md-0 mb-4"><span class="badge bg-success me-2 mb-3">Verified</span><span class="badge bg-info me-2 mb-3">New</span>
-            <h2 class="h3 mb-4 pb-4 border-bottom">R<%= @user.price %><span class="d-inline-block ms-1 fs-base fw-normal text-body">/per session</span></h2>
-            <!-- Overview-->
-            <div class="mb-4 col-md-12">
-              <h3 class="h4">Overview</h3>
-              <p class="mb-1"><%= @user.bio %></p>
-            </div>
-            <!-- Property Details-->
-            <div class="mb-4 pb-md-3">
-              <h3 class="h4">Tutor Details</h3>
-              <ul class="list-unstyled mb-0">
-                <li><b>Subjects: </b><%= @user.subject %></li>
-                <li><b>Grade: </b><%= @user.grade %></li>
-                <li><b>Years of experience: </b><%= @user.years_of_experience %></li>
-                <li><b>Province: </b><%= @user.province %></li>
-                
-            </div>
-            <div class="d-flex flex-sm-row flex-column align-items-sm-center align-items-stretch justify-content-between">
-            </div>
-
-
-            <div id="meeting_model"></div>
-
-
-            <!-- Post meta-->
-            <div class="mb-lg-5 mb-md-4 pb-lg-2 py-4 border-top">
-              <ul class="d-flex mb-4 list-unstyled fs-sm">
-                <% if current_user.is_student? %>
-                  <% if @user.is_teacher? %>
-                    <li class="me-3 pe-3 border-end"><b><%= link_to "Hire Tutor", new_hire_path(student_id: current_user.id, teacher_id: @user.id), class:"no-underline" %></b></li>
-                  <% end %>
-                <% end %>                
-                <li class="me-3 pe-3 border-end"><b><%= link_to "Schedule a Meeting", new_meeting_path(student_id: current_user.id, teacher_id: @user.id), remote: true, class:"no-underline" %></b></li>
-                <li class="me-3 pe-3"><b><%= link_to "Send Message", conversations_path(sender_id: current_user.id, recipient_id: @user.id), method: "post", class:"no-underline"%> </b></li>
-              </ul>
-            </div>
-            <!-- Reviews-->
-            <div class="mb-4 pb-4 border-bottom">
-              <h3 class="h4 pb-3"><i class="fi-star-filled mt-n1 me-2 lead align-middle text-warning"></i>4,9 (32 reviews)</h3>
-                <div class="d-flex align-items-center ms-sm-4">
-                  <label class="me-2 pe-1 text-nowrap" for="reviews-sorting"><i class="fi-arrows-sort text-muted mt-n1 me-2"></i>Sort by:</label>
-                  <select class="form-select" id="reviews-sorting">
-                    <option>Newest</option>
-                    <option>Oldest</option>
-                    <option>Popular</option>
-                    <option>High rating</option>
-                    <option>Low rating</option>
-                  </select>
-                </div>
-            </div>
-            <!-- Review-->
-            <div class="mb-4 pb-4 border-bottom">
-              <div class="d-flex justify-content-between mb-3">
-                <div class="d-flex align-items-center pe-2">
-                  <%= image_tag avatar_path(current_user, size: 40), width: 48, class: "rounded-circle" %>
-                  <!--<img class="rounded-circle me-1" src="frontend/img/avatars/03.jpg" width="48" alt="Avatar">-->
-                  <div class="ps-2">
-                    <h6 class="fs-base mb-0">Annette Black</h6><span class="star-rating"><i class="star-rating-icon fi-star-filled active"></i><i class="star-rating-icon fi-star-filled active"></i><i class="star-rating-icon fi-star-filled active"></i><i class="star-rating-icon fi-star-filled active"></i><i class="star-rating-icon fi-star-filled active"></i></span>
-                  </div>
-                </div><span class="text-muted fs-sm">Jan 17, 2021</span>
-              </div>
-              <p>Very patient and makes you feel confident when learning physics</p>
-              <div class="d-flex align-items-center">
-                <button class="btn-like" type="button"><i class="fi-like"></i><span>(3)</span></button>
-                <div class="border-end me-1">&nbsp;</div>
-                <button class="btn-dislike" type="button"><i class="fi-dislike"></i><span>(0)</span></button>
-              </div>
-            </div>
-            <!-- Review-->
-            <div class="mb-4 pb-4 border-bottom">
-              <div class="d-flex justify-content-between mb-3">
-                <div class="d-flex align-items-center pe-2">
-                
-                <%= image_tag avatar_path(current_user), width: 48, class: "rounded-circle me-1" %>
-                <!--<img class="rounded-circle me-1" src="frontend/img/avatars/13.png" width="48" alt="Avatar">-->
-                  <div class="ps-2">
-                    <h6 class="fs-base mb-0">Darrell Steward</h6><span class="star-rating"><i class="star-rating-icon fi-star-filled active"></i><i class="star-rating-icon fi-star-filled active"></i><i class="star-rating-icon fi-star-filled active"></i><i class="star-rating-icon fi-star"></i><i class="star-rating-icon fi-star"></i></span>
-                  </div>
-                </div><span class="text-muted fs-sm">Dec 1, 2020</span>
-              </div>
-              <p>Amazing tutor, helped me expand my knowledge and made concepts easier to understand</p>
-              <div class="d-flex align-items-center">
-                <button class="btn-like" type="button"><i class="fi-like"></i><span>(0)</span></button>
-                <div class="border-end me-1">&nbsp;</div>
-                <button class="btn-dislike" type="button"><i class="fi-dislike"></i><span>(1)</span></button>
-              </div>
-            </div>
-            <!-- Review-->
-            <div class="mb-4 pb-4 border-bottom">
-              <div class="d-flex justify-content-between mb-3">
-                <div class="d-flex align-items-center pe-2">
-                
-                <%= image_tag avatar_path(current_user), width: 48, class: "rounded-circle me-1" %>
-                <!--<img class="rounded-circle me-1" src="frontend/img/avatars/05.jpg" width="48" alt="Avatar">-->
-                  <div class="ps-2">
-                    <h6 class="fs-base mb-0">Floyd Miles</h6><span class="star-rating"><i class="star-rating-icon fi-star-filled active"></i><i class="star-rating-icon fi-star-filled active"></i><i class="star-rating-icon fi-star-filled active"></i><i class="star-rating-icon fi-star-filled active"></i><i class="star-rating-icon fi-star-filled active"></i></span>
-                  </div>
-                </div><span class="text-muted fs-sm">Oct  28, 2020</span>
-              </div>
-              <p>Rates are quite expensive, but the tutor is amazing and worth the investment!</p>
-              <div class="d-flex align-items-center">
-                <button class="btn-like" type="button"><i class="fi-like"></i><span>(2)</span></button>
-                <div class="border-end me-1">&nbsp;</div>
-                <button class="btn-dislike" type="button"><i class="fi-dislike"></i><span>(1)</span></button>
-              </div>
-            </div>
-            <!-- Review-->
-            <div class="mb-4 pb-4 border-bottom">
-              <div class="d-flex justify-content-between mb-3">
-                <div class="d-flex align-items-center pe-2">
-                
-                <%= image_tag avatar_path(current_user), width: 48, class: "rounded-circle me-1" %>
-                <!--<img class="rounded-circle me-1" src="frontend/img/avatars/04.jpg" width="48" alt="Avatar">-->
-                  <div class="ps-2">
-                    <h6 class="fs-base mb-0">Ralph Edwards</h6><span class="star-rating"><i class="star-rating-icon fi-star-filled active"></i><i class="star-rating-icon fi-star-filled active"></i><i class="star-rating-icon fi-star-filled active"></i><i class="star-rating-icon fi-star-filled active"></i><i class="star-rating-icon fi-star"></i></span>
-                  </div>
-                </div><span class="text-muted fs-sm">Sep 14, 2020</span>
-              </div>
-              <p>Communication was top notch, found it easy to have lessons and the tutor was very helpful.</p>
-              <div class="d-flex align-items-center">
-                <button class="btn-like" type="button"><i class="fi-like"></i><span>(0)</span></button>
-                <div class="border-end me-1">&nbsp;</div>
-                <button class="btn-dislike" type="button"><i class="fi-dislike"></i><span>(0)</span></button>
-              </div>
-            </div>
-            <!-- Pagination-->
-            <nav class="mt-2 mb-4" aria-label="Reviews pagination">
-              <ul class="pagination">
-                <li class="page-item d-sm-none"><span class="page-link page-link-static">1 / 5</span></li>
-                <li class="page-item active d-none d-sm-block" aria-current="page"><span class="page-link">1<span class="visually-hidden">(current)</span></span></li>
-                <li class="page-item d-none d-sm-block"><a class="page-link" href="#">2</a></li>
-                <li class="page-item d-none d-sm-block"><a class="page-link" href="#">3</a></li>
-                <li class="page-item d-none d-sm-block">...</li>
-                <li class="page-item d-none d-sm-block"><a class="page-link" href="#">8</a></li>
-                <li class="page-item"><a class="page-link" href="#" aria-label="Next"><i class="fi-chevron-right"></i></a></li>
-              </ul>
-            </nav>
+      <div class="modal-body px-sm-5 px-4">
+        <form class="needs-validation" novalidate>
+          <div class="mb-3">
+            <label class="form-label" for="review-name">Name <span class='text-danger'>*</span></label>
+            <input class="form-control" type="text" id="review-name" placeholder="Your name" required>
+            <div class="invalid-feedback">Please let us know your name.</div>
           </div>
-      </section>
+          <div class="mb-3">
+            <label class="form-label" for="review-email">Email <span class='text-danger'>*</span></label>
+            <input class="form-control" type="email" id="review-email" placeholder="Your email address" required>
+            <div class="invalid-feedback">Please provide a valid email address.</div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="review-rating">Rating <span class='text-danger'>*</span></label>
+            <select class="form-control form-select" id="review-rating" required>
+              <option value="" selected disabled hidden>Choose rating</option>
+              <option value="5 stars">5 stars</option>
+              <option value="4 stars">4 stars</option>
+              <option value="3 stars">3 stars</option>
+              <option value="2 stars">2 stars</option>
+              <option value="1 star">1 star</option>
+            </select>
+            <div class="invalid-feedback">Please rate the property.</div>
+          </div>
+          <div class="mb-4">
+            <label class="form-label" for="review-text">Review <span class='text-danger'>*</span></label>
+            <textarea class="form-control" id="review-text" rows="5" placeholder="Your review message" required></textarea>
+            <div class="invalid-feedback">Please write your review.</div>
+          </div>
+          <button class="btn btn-primary d-block w-100 mb-4" type="submit">Submit a review</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Page header-->
+<section class="container pt-5 mt-5">
+  <!-- Breadcrumb-->
+  <nav class="mb-3 pt-md-3" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><%= link_to "home", root_path%></li>
+      <li class="breadcrumb-item">Users</li>
+      <li class="breadcrumb-item active" aria-current="page"><%= @user.name %></li>
+    </ol>
+  </nav>
+</section>
+<!-- Post content-->
+<section class="container mb-5 pb-1">
+  <div class="row">
+    <div class="col-md-12 mb-md-0 mb-4"><span class="badge bg-success me-2 mb-3">Verified</span><span class="badge bg-info me-2 mb-3">New</span>
+      <h2 class="h3 mb-4 pb-4 border-bottom">R<%= @user.price %><span class="d-inline-block ms-1 fs-base fw-normal text-body">/per session</span></h2>
+      <!-- Overview-->
+      <div class="mb-4 col-md-12">
+        <h3 class="h4"><%= @user.name %></h3>
+        <p class="mb-1"><%= @user.bio %></p>
+      </div>
+      <!-- Property Details-->
+      <div class="row mb-4 pb-md-3">
+        <div class="col-lg-3">
+          <h3 class="h4">Tutor Details</h3>
+          <ul class="list-unstyled mb-0">
+            <li><b>Subjects: </b><%= @user.subject %></li>
+            <li><b>Grade: </b><%= @user.grade %></li>
+            <li><b>Years of experience: </b><%= @user.years_of_experience %></li>
+            <li><b>Province: </b><%= @user.province %></li>
+          </ul>
+        </div>
+        <div class="col-lg-9">
+          <%= render 'meetings/show', meetings: @meetings %>
+        </div>
+
+      </div>
+      <div class="d-flex flex-sm-row flex-column align-items-sm-center align-items-stretch justify-content-between">
+      </div>
+
+      <div id="meeting_model"></div>
+
+      <!-- Post meta-->
+      <div class="mb-lg-5 mb-md-4 pb-lg-2 py-4 border-top">
+        <ul class="d-flex mb-4 list-unstyled fs-sm">
+          <% if current_user.is_student? %>
+            <% if @user.is_teacher? %>
+              <li class="me-3 pe-3 border-end"><b><%= link_to "Hire Tutor", new_hire_path(student_id: current_user.id, teacher_id: @user.id), class:"no-underline" %></b></li>
+            <% end %>
+          <% end %>                
+          <li class="me-3 pe-3 border-end"><b><%= link_to "Schedule a Meeting", new_meeting_path(student_id: current_user.id, teacher_id: @user.id), remote: true, class:"no-underline" %></b></li>
+          <li class="me-3 pe-3"><b><%= link_to "Send Message", conversations_path(sender_id: current_user.id, recipient_id: @user.id), method: "post", class:"no-underline"%> </b></li>
+        </ul>
+      </div>
+      <%= render 'shared/review' %>
+    </div>
+  </div>
+</section>

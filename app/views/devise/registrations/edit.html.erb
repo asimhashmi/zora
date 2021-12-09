@@ -1,99 +1,232 @@
-<div class="row">
-  <div class="col-lg-4 offset-lg-4">
-    <h1 class="text-center">Account</h1>
-
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-      <%= render "devise/shared/error_messages", resource: resource %>
-
-      <div class="mb-3">
-        <%= f.text_field :name, autofocus: false, class: 'form-control', placeholder: "Full name" %>
-      </div>
-
-      <%= current_user.email %>
-
-      <!--
-      <div class="mb-3">
-        <%= f.email_field :email, class: 'form-control', placeholder: 'Email Address' %>
-      </div>
-      -->
-
-      <div class="mb-3">
-        <%= f.text_area :bio, class: 'form-control', placeholder: 'Short Bio' %>
-      </div>
-
-      <div class="mb-3">
-        <%= f.select :province, User.provinces.keys, class: 'form-control', placeholder: 'Province' %>
-      </div>
-
-      <div class="mb-3">
-        <%= f.text_area :address, class: 'form-control', placeholder: 'Address' %>
-      </div>
-
-      <% if current_user.is_teacher? %>
-        <div class="mb-3">
-          <%= f.number_field :price, class: 'form-control', min: 1, placeholder: 'price per session', required: true%>
+<section class="container pt-5 mt-5">
+  <!-- Page content-->
+  <div class="row">
+    <!-- Sidebar-->
+    <aside class="col-lg-4 col-md-5 pe-xl-4 mb-5">
+      <!-- Account nav-->
+      <div class="card card-body border-0 shadow-sm pb-1 me-lg-1">
+        <div class="d-flex d-md-block d-lg-flex align-items-start pt-lg-2 mb-4">
+        <%= image_tag avatar_path(current_user, size: 40), width: 48, class: "rounded-circle" %>
+          <div class="pt-md-2 pt-lg-0 ps-3 ps-md-0 ps-lg-3">
+            <h2 class="fs-lg mb-0"><%= current_user.name%></h2><span class="star-rating"><i class="star-rating-icon fi-star-filled active"></i><i class="star-rating-icon fi-star-filled active"></i><i class="star-rating-icon fi-star-filled active"></i><i class="star-rating-icon fi-star-filled active"></i><i class="star-rating-icon fi-star-filled active"></i></span>
+            <ul class="list-unstyled fs-sm mt-3 mb-0">
+              <li><a class="nav-link fw-normal p-0" href="tel:3025550107"><i class="fi-phone opacity-60 me-2"></i>(+27) 76 555 1234</a></li>
+              <li><a class="nav-link fw-normal p-0" href="mailto:annette_black@email.com"><i class="fi-mail opacity-60 me-2"></i><%= current_user.email%></a></li>
+            </ul>
+          </div>
+        </div><a class="btn btn-primary btn-lg w-100 mb-3" href="real-estate-add-property.html"><i class="fi-plus me-2"></i>Invite Your Friend</a><a class="btn btn-outline-secondary d-block d-md-none w-100 mb-3" href="#account-nav" data-bs-toggle="collapse"><i class="fi-align-justify me-2"></i>Menu</a>
+        <div class="collapse d-md-block mt-3" id="account-nav">
+          <div class="card-nav">
+          <a class="card-nav-link active" href="#">
+            <i class="fi-user opacity-60 me-2"></i>Personal Info</a>
+          <a class="card-nav-link" href="#">
+            <i class="fi-star opacity-60 me-2"></i>Reviews
+          </a>
+          <a class="card-nav-link" href="#">
+            <i class="fi-help opacity-60 me-2"></i>Help
+          </a>
         </div>
-
-        <div class="mb-3">
-          <%= f.select :subject, User.subjects.keys, class: 'form-control', placeholder: 'Subject' %>
         </div>
+      </div>
+    </aside>
+    <!-- Content-->
+    <div class="col-lg-8 col-md-7 mb-5">
+      <h1 class="h2">Personal Info</h1>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+          <label class="form-label pt-2" for="account-bio">Short bio</label>
+          <div class="row pb-2">
+            <div class="col-lg-9 col-sm-8 mb-4">
+              <%= f.text_area :bio, class: 'form-control', id:"account-bio", rows:"6", placeholder: 'Write your bio here. It will be displayed on your public profile.' %>
+            </div>
+            <div class="col-lg-3 col-sm-4 mb-4">
+              <%= image_tag avatar_path(f.object), class: "rounded border shadow-sm d-block mx-auto my-3" %>
+              <%= f.file_field :avatar, accept:'image/*', class:"file-uploader bg-secondary" %>
 
-        <div class="mb-3">
-          <%= f.select :grade, User.grades.keys, class: 'form-control', placeholder: 'Grade' %>
-        </div>
+            </div>
+          </div>
+          <div class="border rounded-3 p-3 mb-4" id="personal-info">
+            <!-- Name-->
+            <div class="border-bottom pb-3 mb-3">
+              <div class="d-flex align-items-center justify-content-between">
+                <div class="pe-2">
+                  <label class="form-label fw-bold">Full name</label>
+                  <div id="name-value"><%= current_user.name %></div>
+                </div>
+                <div class="me-n3" data-bs-toggle="tooltip" title="Edit"><a class="nav-link py-0" href="#name-collapse" data-bs-toggle="collapse"><i class="fi-edit"></i></a></div>
+              </div>
+              <div class="collapse" id="name-collapse" data-bs-parent="#personal-info">
+                <%= f.text_field :name, autofocus: false, class: 'form-control mt-3', placeholder: "Full name" %>
+              </div>
+            </div>
+            <!-- Phone number-->
+            <div class="border-bottom pb-3 mb-3">
+              <div class="d-flex align-items-center justify-content-between">
+                <div class="pe-2">
+                  <label class="form-label fw-bold">Phone number</label>
+                  <div id="phone-value">(+27) 76 555 1234</div>
+                </div>
+                <div class="me-n3" data-bs-toggle="tooltip" title="Edit">
+                <a class="nav-link py-0" href="#phone-collapse" data-bs-toggle="collapse"><i class="fi-edit"></i></a></div>
+              </div>
+              <div class="collapse" id="phone-collapse" data-bs-parent="#personal-info">
+                <input class="form-control mt-3" type="text" data-bs-binded-element="#phone-value" data-bs-unset-value="Not specified" value="(302) 555-0107">
+              </div>
+            </div>
+            <!-- Company name-->
+            <div class="border-bottom pb-3 mb-3">
+              <div class="d-flex align-items-center justify-content-between">
+                <div class="pe-2">
+                  <label class="form-label fw-bold">Grade</label>
+                  <div id="company-value"><%= current_user.grade%></div>
+                </div>
+                <div class="me-n3" data-bs-toggle="tooltip" title="Edit">
+                <a class="nav-link py-0" href="#grade-collapse" data-bs-toggle="collapse"><i class="fi-edit"></i></a></div>
+              </div>
+              <div class="collapse" id="grade-collapse" data-bs-parent="#personal-info">
+                <%= f.select :grade, User.grades.keys, class: 'form-select mt-3'%>
+              </div>
+            </div>
+            <% if current_user.is_teacher? %>
+              <!-- Company name-->
+              <div class="border-bottom pb-3 mb-3">
+                <div class="d-flex align-items-center justify-content-between">
+                  <div class="pe-2">
+                    <label class="form-label fw-bold">Years of Experience</label>
+                    <div id="company-value"><%= current_user.years_of_experience%></div>
+                  </div>
+                  <div class="me-n3" data-bs-toggle="tooltip" title="Edit">
+                  <a class="nav-link py-0" href="#years-collapse" data-bs-toggle="collapse"><i class="fi-edit"></i></a></div>
+                </div>
+                <div class="collapse" id="years-collapse" data-bs-parent="#personal-info">
+                  <%= f.text_field :years_of_experience, autofocus: false, class: 'form-control mt-3', placeholder: "1-12" %>
+                </div>
+              </div>
+            
+              <div class="border-bottom pb-3 mb-3">
+                <div class="d-flex align-items-center justify-content-between">
+                  <div class="pe-2">
+                    <label class="form-label fw-bold">Price per session</label>
+                    <div id="company-value"><%= current_user.price%></div>
+                  </div>
+                  <div class="me-n3" data-bs-toggle="tooltip" title="Edit">
+                  <a class="nav-link py-0" href="#price-collapse" data-bs-toggle="collapse"><i class="fi-edit"></i></a></div>
+                </div>
+                <div class="collapse" id="price-collapse" data-bs-parent="#personal-info">
+                  <%= f.text_field :price, autofocus: false, class: 'form-control mt-3', placeholder: "1-9999" %>
+                </div>
+              </div>
+            <% end %>
+            <div class="border-bottom pb-3 mb-3">
+              <div class="d-flex align-items-center justify-content-between">
+                <div class="pe-2">
+                  <label class="form-label fw-bold">Address</label>
+                  <div id="company-value"><%= current_user.address%></div>
+                </div>
+                <div class="me-n3" data-bs-toggle="tooltip" title="Edit">
+                <a class="nav-link py-0" href="#address-collapse" data-bs-toggle="collapse"><i class="fi-edit"></i></a></div>
+              </div>
+              <div class="collapse" id="address-collapse" data-bs-parent="#personal-info">
+                <%= f.text_field :address, autofocus: false, class: 'form-control mt-3', row:"6", placeholder: "Write your address here. It will NOT be displayed on your public profile." %>
+              </div>
+            </div>
+            <div class="border-bottom pb-3 mb-3">
+              <div class="d-flex align-items-center justify-content-between">
+                <div class="pe-2">
+                  <label class="form-label fw-bold">Date of Birth</label>
+                  <div id="company-value"><%= current_user.birth_date%></div>
+                </div>
+                <div class="me-n3" data-bs-toggle="tooltip" title="Edit">
+                <a class="nav-link py-0" href="#dob-collapse" data-bs-toggle="collapse"><i class="fi-edit"></i></a></div>
+              </div>
+              <div class="collapse" id="dob-collapse" data-bs-parent="#personal-info">
+                <%= f.date_field :birth_date, class: 'form-control', placeholder: 'Date of Birth' %>
+              </div>
+            </div>
+            <!-- Address-->
+            <div>
+              <div class="d-flex align-items-center justify-content-between">
+                <div class="pe-2">
+                  <label class="form-label fw-bold">City of Residence</label>
+                  <div id="address-value"><%= current_user.province%></div>
+                </div>
+                <div class="me-n3" data-bs-toggle="tooltip" title="Edit">
+                <a class="nav-link py-0" href="#province-collapse" data-bs-toggle="collapse"><i class="fi-edit"></i></a></div>
+              </div>
+              <div class="collapse" id="province-collapse" data-bs-parent="#personal-info">
+                <%= f.select :province, User.provinces.keys, class: 'form-select mt-3', placeholder: 'Province' %>
+              </div>
+            </div>
+            <div>
+              <div class="d-flex align-items-center justify-content-between">
+                <div class="pe-2">
+                  <label class="form-label fw-bold">Subject</label>
+                  <div id="address-value"><%= current_user.subject%></div>
+                </div>
+                <div class="me-n3" data-bs-toggle="tooltip" title="Edit">
+                <a class="nav-link py-0" href="#subject-collapse" data-bs-toggle="collapse"><i class="fi-edit"></i></a></div>
+              </div>
+              <div class="collapse" id="subject-collapse" data-bs-parent="#personal-info">
+                <%= f.select :subject, User.subjects.keys, class: 'form-select mt-3', placeholder: 'Province' %>
+              </div>
+            </div>
+            <% if current_user.is_teacher? %>
+              <div>
+                <div class="d-flex align-items-center justify-content-between">
+                  <div class="pe-2">
+                    <label class="form-label fw-bold">Tutor Type</label>
+                    <div id="address-value"><%= current_user.tutor_type%></div>
+                  </div>
+                  <div class="me-n3" data-bs-toggle="tooltip" title="Edit">
+                  <a class="nav-link py-0" href="#type-collapse" data-bs-toggle="collapse"><i class="fi-edit"></i></a></div>
+                </div>
+                <div class="collapse" id="type-collapse" data-bs-parent="#personal-info">
+                  <%= f.select :tutor_type, User.tutor_types.keys, class: 'form-select mt-3', placeholder: 'Province' %>
+                </div>
+              </div>
+              <div>
+                <div class="d-flex align-items-center justify-content-between">
+                  <label class="form-label fw-bold">Verification Document</label>
+                  <% if @user.id_card? %>
+                    <%= image_tag @user.id_card.thumb.url, class: "rounded border shadow-sm d-block mx-auto my-3" %>
+                  <% end %>
+                  <div id="address-value"><%= f.file_field :id_card %></div>
+                </div>
+                
+              </div>
+            <% end %>
+          </div>
+          
+          <%= f.password_field :current_password, autocomplete: "off", class: 'form-control', placeholder: 'Current Password'  %>
+          <p class="form-text text-muted"><small>We need your current password to confirm your changes</small></p>
+          <div class="d-flex align-items-center justify-content-between border-top mt-4 pt-4 pb-1">
+            <%= f.submit "Save Changes", class: 'btn btn-primary px-3 px-sm-4' %>
 
-        <div class="mb-3">
-          <%= f.number_field :years_of_experience, class: 'form-control', min: 1, placeholder: 'years_of_experience', required: true%>
-        </div>
+            <button class="btn btn-link btn-sm px-0" type="button"><i class="fi-trash me-2"></i><%= link_to "Deactivate my account", registration_path(resource_name), data: { confirm: "Are you sure? You cannot undo this." }, method: :delete, class:"btn btn-link btn-sm px-0" %></button>
+          </div>
       <% end %>
-
-      <div class="mb-3">
-        <%= f.date_field :birth_date, class: 'form-control', placeholder: 'Date of Birth' %>
-      </div>
-
-      <div class="mb-3">
-        <%= f.label :avatar, class: "form-label" %>
-        <%= f.file_field :avatar, accept:'image/*' %>
-      </div>
-
-      <%= image_tag avatar_path(f.object), class: "rounded border shadow-sm d-block mx-auto my-3" %>
-
-      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-        <div class="alert alert-warning">Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-      <% end %>
-
-      <!--
-      <div class="mb-3">
-        <%#= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: 'Password'  %>
-        <p class="form-text text-muted"><small>Leave password blank if you don't want to change it</small></p>
-      </div>
-
-      <div class="mb-3">
-        <%#= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control', placeholder: 'Confirm Password'  %>
-      </div>
-      -->
-
-      <div class="mb-3">
-        <%= f.label :"Verification Document", class: "form-label" %>
-        <%= f.file_field :id_card %>
-      </div>
-
-      <%#= image_tag @user.id_card.thumb.url, class: "rounded border shadow-sm d-block mx-auto my-3" %>
-      <% if @user.id_card == !nil %>
-        <%= image_tag @user.id_card.thumb.url, class: "rounded border shadow-sm d-block mx-auto my-3" %>
-      <% end %>
-
-      <div class="mb-3">
-        <%= f.password_field :current_password, autocomplete: "off", class: 'form-control', placeholder: 'Current Password'  %>
-        <p class="form-text text-muted"><small>We need your current password to confirm your changes</small></p>
-      </div>
-
-      <div class="mb-3 d-grid">
-        <%= f.submit "Save Changes", class: 'btn btn-lg btn-primary' %>
-      </div>
-    <% end %>
-    <hr>
-
-    <p class="text-center"><%= link_to "Deactivate my account", registration_path(resource_name), data: { confirm: "Are you sure? You cannot undo this." }, method: :delete %></p>
+    </div>
   </div>
-</div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
