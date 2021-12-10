@@ -1,46 +1,5 @@
 <!-- Review modal-->
-<div class="modal fade" id="modal-review" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header d-block position-relative border-0 pb-0 px-sm-5 px-4">
-        <h3 class="modal-title mt-4 text-center">Leave a review</h3>
-        <button class="btn-close position-absolute top-0 end-0 mt-3 me-3" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body px-sm-5 px-4">
-        <form class="needs-validation" novalidate>
-          <div class="mb-3">
-            <label class="form-label" for="review-name">Name <span class='text-danger'>*</span></label>
-            <input class="form-control" type="text" id="review-name" placeholder="Your name" required>
-            <div class="invalid-feedback">Please let us know your name.</div>
-          </div>
-          <div class="mb-3">
-            <label class="form-label" for="review-email">Email <span class='text-danger'>*</span></label>
-            <input class="form-control" type="email" id="review-email" placeholder="Your email address" required>
-            <div class="invalid-feedback">Please provide a valid email address.</div>
-          </div>
-          <div class="mb-3">
-            <label class="form-label" for="review-rating">Rating <span class='text-danger'>*</span></label>
-            <select class="form-control form-select" id="review-rating" required>
-              <option value="" selected disabled hidden>Choose rating</option>
-              <option value="5 stars">5 stars</option>
-              <option value="4 stars">4 stars</option>
-              <option value="3 stars">3 stars</option>
-              <option value="2 stars">2 stars</option>
-              <option value="1 star">1 star</option>
-            </select>
-            <div class="invalid-feedback">Please rate the property.</div>
-          </div>
-          <div class="mb-4">
-            <label class="form-label" for="review-text">Review <span class='text-danger'>*</span></label>
-            <textarea class="form-control" id="review-text" rows="5" placeholder="Your review message" required></textarea>
-            <div class="invalid-feedback">Please write your review.</div>
-          </div>
-          <button class="btn btn-primary d-block w-100 mb-4" type="submit">Submit a review</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
+
 <!-- Page header-->
 <section class="container pt-5 mt-5">
   <!-- Breadcrumb-->
@@ -55,7 +14,12 @@
 <!-- Post content-->
 <section class="container mb-5 pb-1">
   <div class="row">
-    <div class="col-md-12 mb-md-0 mb-4"><span class="badge bg-success me-2 mb-3">Verified</span><span class="badge bg-info me-2 mb-3">New</span>
+    <div class="col-md-12 mb-md-0 mb-4">
+      <% if @user.is_verified? %>
+        <span class="badge bg-success me-2 mb-3">Verified</span>
+      <% else %>
+      <% end %>
+      <span class="badge bg-info me-2 mb-3">New</span>
       <h2 class="h3 mb-4 pb-4 border-bottom">R<%= @user.price %><span class="d-inline-block ms-1 fs-base fw-normal text-body">/per session</span></h2>
       <!-- Overview-->
       <div class="mb-4 col-md-12">
@@ -83,7 +47,7 @@
 
       <div id="meeting_model"></div>
 
-      <!-- Post meta-->
+      <!-- Users Action-->
       <div class="mb-lg-5 mb-md-4 pb-lg-2 py-4 border-top">
         <ul class="d-flex mb-4 list-unstyled fs-sm">
           <% if current_user.is_student? %>
@@ -92,9 +56,12 @@
             <% end %>
           <% end %>                
           <li class="me-3 pe-3 border-end"><b><%= link_to "Schedule a Meeting", new_meeting_path(student_id: current_user.id, teacher_id: @user.id), remote: true, class:"no-underline" %></b></li>
-          <li class="me-3 pe-3"><b><%= link_to "Send Message", conversations_path(sender_id: current_user.id, recipient_id: @user.id), method: "post", class:"no-underline"%> </b></li>
+          <li class="me-3 pe-3 border-end"><b><%= link_to "Send Message", conversations_path(sender_id: current_user.id, recipient_id: @user.id), method: "post", class:"no-underline"%> </b></li>
+          <li class="me-3 pe-3" href="#modal-review" data-bs-toggle="modal" style="color: #FD5631;"><strong><i class="fi-edit me-1"></i>Add review</strong></li>
         </ul>
       </div>
+
+      <!-- Render User Review -->
       <%= render 'shared/review' %>
     </div>
   </div>
