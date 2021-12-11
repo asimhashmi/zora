@@ -82,3 +82,4 @@ gem 'ransack', github: 'activerecord-hackery/ransack'
  
 gem "nokogiri", ">= 1.5.9" 
 gem 'htmlbeautifier'
+gem "turbo-rails", "~> 0.9.0"

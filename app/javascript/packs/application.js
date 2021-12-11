@@ -14,6 +14,7 @@ window.dropin = require('braintree-web-drop-in')
 window.Rails = Rails
 
 import 'bootstrap'
+import "@hotwired/turbo-rails"
 
 document.addEventListener("turbolinks:load", () => {
   var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
