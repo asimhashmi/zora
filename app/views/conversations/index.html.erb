@@ -1,15 +1,15 @@
-<div>
-  <h2> all conversations  </h2>
-  <%= turbo_stream_from "messages" %>
-  <% @conversations.each do |conversation| %>
-    <% if conversation.sender_id == current_user.id || conversation.recipient_id == current_user.id %>
-      <% if conversation.sender_id == current_user.id %>
-        <% recipient = User.find(conversation.recipient_id) %>
-      <% else %>
-        <% recipient = User.find(conversation.sender_id) %>
-      <% end %>
-      <h3><%= link_to recipient.name, conversation_messages_path(conversation)%></h3>
-    <% end %>
-  <% end %>
+<div class='row main-chat-page' >
+  <div class='col contact-list'>
+    <h2> all conversations  </h2>
+    <div id=''>
+      <%= render @conversations unless nil? %>
+    </div>
+  </div>
+  <div class='col pt-3 contact-messages'>
+    <%= turbo_stream_from @conversation %>
+    <div id='messages'>
+      <%= render @messages unless @messages.nil? %>
+    </div>
+    <%= render partial: 'shared/newMessage' %>
+  </div>
 </div>
-<div> message </div>
