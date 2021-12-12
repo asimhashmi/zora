@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_11_200654) do
+ActiveRecord::Schema.define(version: 2021_12_11_231918) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -125,6 +125,15 @@ ActiveRecord::Schema.define(version: 2021_12_11_200654) do
     t.index ["recipient_type", "recipient_id"], name: "index_notifications_on_recipient"
   end
 
+  create_table "participants", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "conversation_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["conversation_id"], name: "index_participants_on_conversation_id"
+    t.index ["user_id"], name: "index_participants_on_user_id"
+  end
+
   create_table "ratings", force: :cascade do |t|
     t.bigint "rater_id"
     t.bigint "ratee_id"
@@ -201,6 +210,8 @@ ActiveRecord::Schema.define(version: 2021_12_11_200654) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "hires", "users", column: "hire_by_id"
   add_foreign_key "hires", "users", column: "hire_to_id"
+  add_foreign_key "participants", "conversations"
+  add_foreign_key "participants", "users"
   add_foreign_key "ratings", "users", column: "ratee_id"
   add_foreign_key "ratings", "users", column: "rater_id"
   add_foreign_key "services", "users"
