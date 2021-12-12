@@ -6,4 +6,6 @@ class Conversation < ApplicationRecord
     scope :between, -> (sender_id, recipient_id) do 
         where("(conversations.sender_id = ? AND   conversations.recipient_id =?) OR (conversations.sender_id = ? AND conversations.recipient_id =?)", sender_id, recipient_id, recipient_id, sender_id)
     end
+
+    after_create_commit {broadcast_append_to "messages"}
 end

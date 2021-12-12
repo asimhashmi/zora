@@ -17,6 +17,8 @@ class User < ApplicationRecord
 
   has_many :student_meetings, foreign_key: :student_id, class_name: "Meeting", dependent: :destroy
   has_many :teacher_meetings, foreign_key: :teacher_id, class_name: "Meeting", dependent: :destroy
+  has_many :ratings, foreign_key: :ratee_id, class_name: "Rating", dependent: :destroy
+  has_many :sent_ratings, foreign_key: :rater_id, class_name: "Rating", dependent: :destroy
 
   mount_uploader :id_card, DocumentUploader
 

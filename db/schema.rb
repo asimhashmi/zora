@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_01_100619) do
+ActiveRecord::Schema.define(version: 2021_12_11_200654) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -125,6 +125,17 @@ ActiveRecord::Schema.define(version: 2021_12_01_100619) do
     t.index ["recipient_type", "recipient_id"], name: "index_notifications_on_recipient"
   end
 
+  create_table "ratings", force: :cascade do |t|
+    t.bigint "rater_id"
+    t.bigint "ratee_id"
+    t.string "message"
+    t.integer "stars"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["ratee_id"], name: "index_ratings_on_ratee_id"
+    t.index ["rater_id"], name: "index_ratings_on_rater_id"
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.string "resource_type"
@@ -189,5 +200,7 @@ ActiveRecord::Schema.define(version: 2021_12_01_100619) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "hires", "users", column: "hire_by_id"
   add_foreign_key "hires", "users", column: "hire_to_id"
+  add_foreign_key "ratings", "users", column: "ratee_id"
+  add_foreign_key "ratings", "users", column: "rater_id"
   add_foreign_key "services", "users"
 end
