@@ -8,10 +8,9 @@
       <li class="breadcrumb-item active" aria-current="page"><%= @meeting.title %></li>
     </ol>
   </nav>
-  
-
+</section>
 <!-- Post content-->
-<section class="container mb-5 pb-1">
+<section class="container pb-1">
   <div class="row">
     <div class="col-md-12 mb-md-0 mb-4">
       <!-- Overview-->
@@ -40,34 +39,10 @@
               </li>
             <%end%>
           </ul>
-        </div>
-        <div class="col-lg-9">
-          <%#= render 'meetings/show', meetings: @meetings %>
-        </div>
-
-          
+        </div>          
       </div>
-      <div class="d-flex flex-sm-row flex-column align-items-sm-center align-items-stretch justify-content-between">
-      </div>
-
-
-      <div id="meeting_model"></div>
-
-
-      <!-- Post meta-->
-      <div class="mb-lg-5 mb-md-4 pb-lg-2 py-4 border-top">
-        <ul class="d-flex mb-4 list-unstyled fs-sm">
-          <%# if current_user.is_student? %>
-            <%# if @user.is_teacher? %>
-              <li class="me-3 pe-3 border-end"><b><%#= link_to "Hire Tutor", new_hire_path(student_id: current_user.id, teacher_id: @user.id), class:"no-underline" %></b></li>
-            <%# end %>
-          <%# end %>                
-          <li class="me-3 pe-3 border-end"><b><%#= link_to "Schedule a Meeting", new_meeting_path(student_id: current_user.id, teacher_id: @user.id), remote: true, class:"no-underline" %></b></li>
-          <li class="me-3 pe-3"><b><%#= link_to "Send Message", conversations_path(sender_id: current_user.id, recipient_id: @user.id), method: "post", class:"no-underline"%> </b></li>
-        </ul>
-      </div>
-      
     </div>
+  </div >
 </section>
 
 
