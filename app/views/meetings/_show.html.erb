@@ -13,8 +13,8 @@
     <tbody>
       <% meetings.order("created_at desc").limit(3).each do |meeting| %>
         <%= content_tag :tr, id: dom_id(meeting), class: dom_class(meeting) do %>
-          <td><%= meeting.meeting_url ? (link_to 'Join Meeting', meeting.meeting_url) : 'N/A' %></td>
-          <td><%= link_to meeting.title, meeting %></td>
+          <td><%= meeting.meeting_url ? (link_to 'Join Meeting', meeting.meeting_url, target:"_blank", class:"no-underline") : 'N/A' %></td>
+          <td><%= link_to meeting.title, meeting, class:"no-underline" %></td>
           <td><%= meeting.time.strftime("%-d/%-m/%y: %H:%M") %></td>
           <td><%= meeting.duration %> Mins</td>
           <td><%= meeting.purpose %></td>
