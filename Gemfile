@@ -84,3 +84,5 @@ gem 'htmlbeautifier'
 
 
 gem "turbo-rails", "~> 0.9.0"
+
+gem 'serviceworker-rails'
