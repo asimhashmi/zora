@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
 
-  before_action :authenticate_user!, except: [:index]
+  before_action :authenticate_user!, except: [:index, :about, :contact, :privacy, :terms]
 
   def index
     if user_signed_in? && current_user.is_teacher?
@@ -27,6 +27,12 @@ class HomeController < ApplicationController
   end
 
   def privacy
+  end
+
+  def contact
+  end
+
+  def about
   end
 
 end

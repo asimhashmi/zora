@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   end
   get '/privacy', to: 'home#privacy'
   get '/terms', to: 'home#terms'
+  get '/about', to: 'home#about'
+  get '/contact', to: 'home#contact'
   get '/student', to: 'home#student_home'
   get '/teacher', to: 'home#teacher_home'
   get '/tutors', to: 'home#tutor_list'
