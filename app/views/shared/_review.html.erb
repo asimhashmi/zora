@@ -35,47 +35,25 @@
 </div>
 <!-- Reviews-->
 <div class="mb-4 pb-4 border-bottom">
-  <% @user_reviews = User.find(params[:id]) %>
-  <% @user_reviews = @user_reviews.ratings %>
   <h3 class="h4 pb-3"><i class="fi-star-filled mt-n1 me-2 lead align-middle text-warning"></i> <%= @total_rating %> ( <%=  @user_reviews.size  %> reviews )</h3>
   <div class="d-flex align-items-center ms-sm-4">
     <label class="me-2 pe-1 text-nowrap" for="reviews-sorting"><i class="fi-arrows-sort text-muted mt-n1 me-2"></i>Sort by:</label>
-    <select class="form-select" id="reviews-sorting">
-      <option>Newest</option>
-      <option>Oldest</option>
-      <option>Popular</option>
-      <option>High rating</option>
-      <option>Low rating</option>
-    </select>
+    <%= form_with url: "", method: :get, data: { turbo_frame: "ratings", turbo_action: "advance" } do |form| %>
+      <select class="form-select" onchange="this.form.requestSubmit()" name="sort" id="sort reviews-sorting">
+        <option>Newest</option>
+        <option>Oldest</option>
+        <option>High rating</option>
+        <option>Low rating</option>
+      </select>
+    <% end %>
   </div>
 </div>
 <!-- Review-->
-<% @user_reviews.each do |review|  %>
-  <% @rater = User.find(review.rater_id) unless !review.rater_id  %>
-  <div class="mb-4 pb-4 border-bottom">
-    <div class="d-flex justify-content-between mb-3">
-      <div class="d-flex align-items-center pe-2">
-        <%= image_tag avatar_path(@rater, size: 40), width: 48, class: "rounded-circle" %>
-        <div class="ps-2">
-          <h6 class="fs-base mb-0"><%= @rater.first_name %> <%= @rater.last_name %></h6>
-          <span class="star-rating">
-            <% review.stars.times do   %>
-              <i class="star-rating-icon fi-star-filled active"></i>
-            <% end  %>
-          </span>
-        </div>
-      </div>
-      <span class="text-muted fs-sm">Jan 17, 2021</span>
-    </div>
-    <p> <%= review.message %> </p>
-    <div class="d-flex align-items-center">
-      <button class="btn-like" type="button"><i class="fi-like"></i><span>(3)</span></button>
-      <div class="border-end me-1">&nbsp;</div>
-      <button class="btn-dislike" type="button"><i class="fi-dislike"></i><span>(0)</span></button>
-    </div>
-  </div>
+<%= turbo_frame_tag "ratings" do %>
+  <%= render @user_reviews %>
 <% end  %>
 <!-- Pagination-->
+<%== pagy_nav(@pagy) %>
 <nav class="mt-2 mb-4" aria-label="Reviews pagination">
   <ul class="pagination">
     <li class="page-item d-sm-none"><span class="page-link page-link-static">1 / 5</span></li>

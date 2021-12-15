@@ -14,9 +14,13 @@ class UsersController < ApplicationController
     elsif @user.is_teacher?
       @meetings = @user.teacher_meetings.where(student: current_user)
     end
+ 
+    @pagy, @user_reviews = pagy(@user.ratings.reorder(params[:sort] == 'Oldest' ? 'created_at ASC' : 'created_at DESC' ))
+
+
     ratings = @user.ratings
     star_arr = []
-    p ratings
+
     star_arr << ratings.select {|e| e.stars == 1}
     star_arr << ratings.select {|e| e.stars == 2}
     star_arr << ratings.select {|e| e.stars == 3}
@@ -40,6 +44,13 @@ class UsersController < ApplicationController
     # redirect_to conversation_messages_path(@conversation)
   end
 
+  def sort_column
+    %w{ created_at }.include?(params[:sort]) ? params[:sort] : "created_at"
+  end
+
+  def sort_direction
+    %w{ asc desc }.include?(params[:Oldest]) ? params[:Oldest] : "asc"
+  end
   private
 
   def set_user
