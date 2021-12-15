@@ -36,7 +36,8 @@ authenticate :user, lambda { |u|  u.is_admin? } do
 end
 
   resources :hires
-  resources :ratings
+  resources :likes
+  resources :ratings 
   resources :notifications, only: [:index]
   resources :announcements, only: [:index]
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }

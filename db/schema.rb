@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_11_231918) do
+ActiveRecord::Schema.define(version: 2021_12_15_073644) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,6 +87,15 @@ ActiveRecord::Schema.define(version: 2021_12_11_231918) do
     t.date "end_contract"
     t.index ["hire_by_id"], name: "index_hires_on_hire_by_id"
     t.index ["hire_to_id"], name: "index_hires_on_hire_to_id"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "rating_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["rating_id"], name: "index_likes_on_rating_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "meetings", force: :cascade do |t|
@@ -187,13 +196,13 @@ ActiveRecord::Schema.define(version: 2021_12_11_231918) do
     t.string "id_card"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "zoom_user_id"
     t.string "braintree_id"
     t.float "price"
     t.integer "subject"
     t.integer "grade"
     t.integer "years_of_experience"
     t.integer "tutor_type"
-    t.string "zoom_user_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

@@ -1,0 +1,26 @@
+<% @rater = User.find(rating.rater_id) unless !rating.rater_id  %>
+<div id="<%= dom_id rating %>" class="mb-4 pb-4 border-bottom">
+  <div class="d-flex justify-content-between mb-3">
+    <div class="d-flex align-items-center pe-2">
+      <%= image_tag avatar_path(@rater, size: 40), width: 48, class: "rounded-circle" %>
+      <div class="ps-2">
+        <h6 class="fs-base mb-0"><%= @rater.first_name %> <%= @rater.last_name %></h6>
+        <span class="star-rating">
+          <% rating.stars.times do   %>
+            <i class="star-rating-icon fi-star-filled active"></i>
+          <% end  %>
+        </span>
+      </div>
+    </div>
+    <span class="text-muted fs-sm">Jan 17, 2021</span>
+  </div>
+  <p> <%= rating.message %> </p>
+  <div class="d-flex align-items-center">
+    <%= form_with model: Like.new, method: :post, data: { turbo_frame: "likes", turbo_action: "advance" } do |form| %>
+      <%= form.hidden_field :rating_id, value: rating.id %>
+      <button class="btn-like" onclick="this.form.requestSubmit()" type="button"><i class="fi-like"></i><span>(3)</span></button>
+    <% end  %>
+    <div class="border-end me-1">&nbsp;</div>
+    <button class="btn-dislike" type="button"><i class="fi-dislike"></i><span>(0)</span></button>
+  </div>
+</div>
