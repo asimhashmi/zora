@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :authorize_user!, only: %i[show]
   before_action :authenticate_user!
   before_action :set_user
 
@@ -59,5 +60,11 @@ class UsersController < ApplicationController
 
   def conversation_params
       params.permit(:sender_id, :recipient_id)
+  end
+
+  def authorize_user!
+    if current_user.is_teacher?
+      redirect_to root_path, notice: 'You are not authorized to access'
+    end
   end
 end

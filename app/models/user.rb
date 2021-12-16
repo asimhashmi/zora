@@ -49,6 +49,10 @@ class User < ApplicationRecord
     roles_name.join(', ').titleize
   end
 
+  def new_user?
+    (Date.current - created_at.to_date).to_i < 30
+  end
+
   def store_zoom_user_id
     service = Zoom::Api::CreateCustomerService.new(self).perform
     if service.success?
