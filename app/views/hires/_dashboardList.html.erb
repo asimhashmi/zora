@@ -2,7 +2,7 @@
     <%= content_tag :tr, id: dom_id(hire), class: dom_class(hire) do %>
     <div class="card card-body border-0 shadow-sm pb-1 me-lg-1" style="margin-bottom: 1rem;">
         <div class="d-flex d-md-block d-lg-flex align-items-start pt-lg-2">
-        <%# @hirer = User.find(@hire.hire_to) %>
+        <% @hirer = User.find(hire.hire_to_id) %>
             <%= image_tag avatar_path(@hirer, size: 40), width: 48, class: "rounded-circle" %>
         <%# end %>
         <div class="pt-md-2 pt-lg-0 ps-3 ps-md-0 ps-lg-3">

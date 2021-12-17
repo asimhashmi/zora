@@ -63,8 +63,12 @@ class UsersController < ApplicationController
   end
 
   def authorize_user!
-    if current_user.is_teacher?
-      redirect_to root_path, notice: 'You are not authorized to access'
+    if current_user.is_teacher? &&
+     !(Hire.find_by(hire_by_id: current_user.id, hire_to_id: params[:id]).present? || 
+      Hire.find_by(hire_by_id: params[:id], hire_to_id: current_user.id).present?) &&
+      !Conversation.between(current_user.id, params[:id]).present? 
+
+      redirect_to root_path, notice: 'You are not authorized to access this page'
     end
   end
 end
