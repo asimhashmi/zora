@@ -8,9 +8,15 @@
             <div class="tab-pane fade show active" id="job-seeker" role="tabpanel">
               <h3>Register to get your tutor or to tutor</h3>
               <p class="pb-3">Get access to all the functions of the site that will help you find a great tutor.</p>
-              <div class="row gx-2 gx-md-4">
-                <div class="col-sm-6 mb-3"><a class="btn btn-outline-info w-100 rounded-pill" href="#"><i class="fi-google fs-lg me-1"></i>Sign in with Google</a></div>
-                <div class="col-sm-6 mb-3"><a class="btn btn-outline-info w-100 rounded-pill" href="#"><i class="fi-facebook fs-lg me-1"></i>Sign in with Facebook</a></div>
+              <div class="row gx-2 gx-md-4" >
+
+                
+                <div class="col-sm-6 mb-3"><%= button_to ("Sign in with Google"), user_google_oauth2_omniauth_authorize_path, method: :post, :data => {turbo: "false"}, class: "btn btn-outline-info w-100 rounded-pill" %></div>
+                <div class="col-sm-6 mb-3">
+                  <%= button_to "Register with Facebook", user_facebook_omniauth_authorize_path, method: :post, :data => {turbo: "false"}, class: "btn btn-outline-info w-100 rounded-pill"  %>
+                  <!-- <a class="btn btn-outline-info w-100 rounded-pill" href="#"><i class="fi-facebook fs-lg me-1"></i>Sign in with Facebook</a> -->
+
+                </div>
               </div>
               <div class="d-flex align-items-center py-2 mb-2">
                 <hr class="w-100">
