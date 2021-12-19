@@ -20,3 +20,4 @@ jobs:
       with:
         target: production
         deploy_key: ${{ secrets.DEPLOY_ENC_KEY }}
+        working-directory: './'
