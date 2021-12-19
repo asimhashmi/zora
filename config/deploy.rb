@@ -3,7 +3,7 @@ lock "~> 3.16.0"
 
 set :application, "zoratutor"
 set :repo_url, "git@github.com:asimhashmi/zora.git"
-set :branch, ENV['BRANCH'] if ENV['BRANCH']
+set :branch, ENV['BRANCH'] ? ENV['BRANCH'] : 'main'
 
 set :deploy_to, "/home/deploy/#{fetch :application}"
 
