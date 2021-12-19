@@ -1,0 +1,25 @@
+<div class="table-responsive">
+  <h3 class="h4">Meeting Info</h3>
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Meeting url</th>
+        <th>Title</th>
+        <th>Strat time</th>
+        <th>Duration</th>
+        <th>Purpose</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% meetings.order("created_at desc").limit(3).each do |meeting| %>
+        <%= content_tag :tr, id: dom_id(meeting), class: dom_class(meeting) do %>
+          <td><%= meeting.meeting_url ? (link_to 'Join Meeting', meeting.meeting_url, target:"_blank", class:"no-underline") : 'N/A' %></td>
+          <td><%= link_to meeting.title, meeting, class:"no-underline" %></td>
+          <td><%= meeting.time.strftime("%-d/%-m/%y: %H:%M") %></td>
+          <td><%= meeting.duration %> Mins</td>
+          <td><%= meeting.purpose %></td>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

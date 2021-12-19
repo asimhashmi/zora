@@ -1,0 +1,23 @@
+name: Deploy to Azure
+
+on:
+  push:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 3.0.1
+        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+    - uses: miloserdow/capistrano-deploy@master
+      with:
+        target: production
+        deploy_key: ${{ secrets.DEPLOY_ENC_KEY }}
+        working-directory: './'

@@ -1,0 +1,56 @@
+<!-- Review Modal-->
+<div class="modal fade" id="modal-review" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header d-block position-relative border-0 pb-0 px-sm-5 px-4">
+        <h3 class="modal-title mt-4 text-center">Leave a review</h3>
+        <button class="btn-close position-absolute top-0 end-0 mt-3 me-3" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body px-sm-5 px-4">
+        <%= form_for Rating.new, url: { controller: 'ratings', action: :create} do |f| %>
+          <% @ratee = params[:id]   %>
+          <%= f.hidden_field :ratee, value: @ratee  %>
+          <div class="mb-3">
+            <label class="form-label" for="review-rating">Rating <span class='text-danger'>*</span></label>
+            <select class="form-control form-select" id="rating[stars]" name="rating[stars]" required>
+              <option value="" selected disabled hidden>Choose rating</option>
+              <option value="5">5 stars</option>
+              <option value="4">4 stars</option>
+              <option value="3">3 stars</option>
+              <option value="2">2 stars</option>
+              <option value="1">1 star</option>
+            </select>
+            <div class="invalid-feedback">Please rate the property.</div>
+          </div>
+          <div class="mb-4">
+            <label class="form-label" for="review-text">Review <span class='text-danger'>*</span></label>
+            <%= f.text_area :message, class: 'form-control', size: "70x5", placeholder: 'Your review message' %>
+            <div class="invalid-feedback">Please write your review.</div>
+          </div>
+          <%= f.submit 'Submit a review', class: 'btn btn-primary d-block w-100 mb-4' %>
+        <% end  %>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Reviews-->
+<div class="mb-4 pb-4 border-bottom">
+  <h3 class="h4 pb-3"><i class="fi-star-filled mt-n1 me-2 lead align-middle text-warning"></i> <%= @total_rating %> ( <%=  @user_reviews.size  %> reviews )</h3>
+  <div class="d-flex align-items-center ms-sm-4">
+    <label class="me-2 pe-1 text-nowrap" for="reviews-sorting"><i class="fi-arrows-sort text-muted mt-n1 me-2"></i>Sort by:</label>
+    <%= form_with url: "", method: :get, data: { turbo_frame: "ratings", turbo_action: "advance" } do |form| %>
+      <select class="form-select" onchange="this.form.requestSubmit()" name="sort" id="sort reviews-sorting">
+        <option>Newest</option>
+        <option>Oldest</option>
+        <option>High rating</option>
+        <option>Low rating</option>
+      </select>
+    <% end %>
+  </div>
+</div>
+<!-- Review-->
+<%= turbo_frame_tag "ratings" do %>
+  <%= render @user_reviews %>
+<% end  %>
+<!-- Pagination-->
+<%== pagy_nav(@pagy) %>

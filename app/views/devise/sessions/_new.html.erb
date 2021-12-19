@@ -1,0 +1,61 @@
+<main class="page-wrapper">
+  <!-- Sign In Modal-->
+  <div class="modal fade" id="signin-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered p-2 my-0 mx-auto" style="max-width: 950px;">
+      <div class="modal-content">
+        <div class="modal-body px-0 py-2 py-sm-0">
+          <button class="btn-close position-absolute top-0 end-0 mt-3 me-3" type="button" data-bs-dismiss="modal"></button>
+          <div class="row mx-0 align-items-center">
+            <div class="col-md-6 border-end-md p-4 p-sm-5">
+              <h2 class="h3 mb-4 mb-sm-5">Hey there!<br>Welcome back.</h2><img class="d-block mx-auto" src="frontend/img/signin-modal/signin.svg" width="344" alt="Illustartion">
+              <div class="mt-4 mt-sm-5">Don't have an account? <a href="#signup-modal" data-bs-toggle="modal" data-bs-dismiss="modal">Sign up here</a></div>
+            </div>
+            <div class="col-md-6 px-4 pt-2 pb-4 px-sm-5 pb-sm-5 pt-md-5"><a class="btn btn-outline-info w-100 rounded-pill mb-3" href="#"><i class="fi-google fs-lg me-1"></i>Sign in with Google</a><a class="btn btn-outline-info w-100 rounded-pill mb-3" href="#"><i class="fi-facebook fs-lg me-1"></i>Sign in with Facebook</a>
+              <div class="d-flex align-items-center py-3 mb-3">
+                <hr class="w-100">
+                <div class="px-3">Or</div>
+                <hr class="w-100">
+              </div>
+
+              <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                <div class="mb-4">
+                  <label class="form-label mb-2" for="signin-email">Email address</label>
+                  <%= f.email_field :email, autofocus: true, placeholder: 'Email Address', class: 'form-control' %>
+                </div>
+
+                <div class="mb-4">
+                  <div class="d-flex align-items-center justify-content-between mb-2">
+                    <label class="form-label mb-0" for="signin-password">Password</label>
+                    <%= link_to "Forgot your password?", new_password_path(resource_name), class:"fs-sm" %>
+                  </div>
+                  <div class="password-toggle">
+                    <%= f.password_field :password, autocomplete: "off", placeholder: 'Password', class: 'form-control' %>
+                    <!--<input class="form-control" type="password" id="signin-password" placeholder="Enter password" required> -->
+                    <label class="password-toggle-btn" aria-label="Show/hide password">
+                      <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
+                    </label>
+                  </div>
+                </div>
+
+                <% if devise_mapping.rememberable? -%>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <%= f.check_box :remember_me, class: "form-check-input" %>
+                      Remember me
+                    </label>
+                  </div>
+                <% end -%>
+
+                <div class="mb-3 d-grid">
+                  <%= f.submit "Log in", class: "btn btn-primary btn-lg w-100 rounded-pill" %>
+                </div>
+              <% end %>
+
+
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

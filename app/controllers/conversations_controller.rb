@@ -6,6 +6,7 @@ class ConversationsController < ApplicationController
     @conversations = Conversation.all
     @teacher_list = Role.find_by_name('teacher').users.where(is_verified: true)
   end
+
   def create  
     if Conversation.between(params[:sender_id], params[:recipient_id]).present? 
        @conversation = Conversation.between(params[:sender_id], params[:recipient_id]).first
@@ -13,6 +14,15 @@ class ConversationsController < ApplicationController
        @conversation = Conversation.create!(conversation_params)
     end
     redirect_to conversation_messages_path(@conversation)
+  end
+
+  def show 
+    @conversations = Conversation.all
+    @message = Message.new 
+    @conversation = Conversation.find(params[:id])
+    @messages = @conversation.messages
+    @current_user_id = current_user.id
+    render :index
   end
   private
   def conversation_params

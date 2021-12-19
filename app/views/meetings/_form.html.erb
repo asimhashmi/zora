@@ -1,47 +1,49 @@
-<div class="modal fade" id="meeting-modal" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+<div class="modal fade" id="meeting-modal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered p-2 my-0 mx-auto" style="max-width: 950px;">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Meeting</h5><br>
-        <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="alert alerts alert-danger"  id="error_messages" hidden>
-      </div>
-      <%= form_for(@meeting, as: :meeting, url: meetings_path(@meeting), html: { method: :post, remote: true }) do |f| %>
-        <div class="modal-body">
-          <strong><%= current_user.name.titleize %></strong>
-          <hr>
-          <div class="form__row">
-            <div class="component__block">
-            <label for="fname">Title</label>
-            <%= f.text_field :title, value: @meeting.title, class: "form-control" %>
-
-            <label for="fname">Start Time</label>
-            <%= f.datetime_field :time, autocomplete: "time", placeholder: "please select your time", class: "form-control" %>
-            <label for="fname">Duration</label>
-            <%= f.select :duration, Meeting::DURATIONS, { include_blank: 'Select a duration', disabled: false}, class: "form-control" %>
-            <label for="fname">Purpose</label>
-            <%= f.text_field :purpose, value: @meeting.purpose, class: "form-control" %>            
-            </div>
-          </div>
-          <div class="form__row mt-3">
-            <div class="component__block">
+      <div class="modal-body px-0 py-2 py-sm-0">
+        <button class="btn-close position-absolute top-0 end-0 mt-3 me-3" type="button" data-bs-dismiss="modal"></button>
+        <div class="mx-0 align-items-center">
+          
+          <div class="px-4 pt-2 pb-4 px-sm-5 pb-sm-5 pt-md-5">
             
 
-            <label for="fname">Please give a small description about your doubts.</label>
-            <%= f.text_area :description, value: @meeting.description, class: "form-control", rows: "4" %>
-            </div>
+
+
+            <%= form_for(@meeting, as: :meeting, url: meetings_path(@meeting), html: { method: :post, remote: true }) do |f| %>
+            <form class="needs-validation" novalidate>
+              <div class="mb-4">
+                <label class="form-label mb-2" for="signin-email">Name</label>
+                <%= f.text_field :title, value: @meeting.title, class: "form-control" %>
+              </div>
+              <div class="row">
+                <div class="col-lg-6 mb-4">
+                  <label class="form-label mb-2" for="signin-email">Time</label>
+                  <%= f.datetime_field :time, autocomplete: "time", placeholder: "please select your time", class: "form-control" %>
+                </div>
+                <div class="col-lg-6 mb-4">
+                  <label class="form-label mb-2" for="signin-email">Duration</label>
+                  <%= f.select :duration, Meeting::DURATIONS, { include_blank: 'Select a duration', disabled: false}, class: "form-control" %>
+                </div>
+              </div>
+              <div class="mb-4">
+                <label class="form-label mb-2" for="signin-email">Purpose</label>
+                <%= f.text_field :purpose, value: @meeting.purpose, class: "form-control" %>
+              </div>
+              <div class="mb-4">
+                <label class="form-label mb-2" for="signin-email">Description</label>
+                <%= f.text_area :description, value: @meeting.description, class: "form-control", rows: "4" %>
+              </div>
+              <%= f.hidden_field :teacher_id, value: params[:teacher_id] %>
+              <%= f.hidden_field :student_id, value: params[:student_id] %>
+              
+
+              <%= f.submit "Call Request", class: "btn btn-primary btn-lg rounded-pill w-100" %>
+            </form>
+            <% end %>
           </div>
-          <%= f.hidden_field :teacher_id, value: params[:teacher_id] %>
-          <%= f.hidden_field :student_id, value: params[:student_id] %>
         </div>
-        <div class="modal-footer">
-          <%= f.submit "Call Request", class: "btn ftf-round-btn" %>
-        </div>
-      <% end %>
+      </div>
     </div>
   </div>
 </div>
-

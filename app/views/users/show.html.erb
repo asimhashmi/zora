@@ -1,31 +1,71 @@
-<h1><%= @user.name.titleize %></h1>
-<div id="meeting_model"></div>
-<%= render 'meetings/list', meetings: @meetings %>
+<!-- Review modal-->
 
-<% if current_user.is_student? %>
-  <%= link_to "Schedule a Meeting", new_meeting_path(student_id: current_user.id, teacher_id: @user.id), remote: true %>
-<% end %>
+<!-- Page header-->
+<section class="container pt-5 mt-5">
+  <!-- Breadcrumb-->
+  <nav class="mb-3 pt-md-3" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><%= link_to "home", root_path%></li>
+      <li class="breadcrumb-item">Users</li>
+      <li class="breadcrumb-item active" aria-current="page"><%= @user.name %></li>
+    </ol>
+  </nav>
+</section>
+<!-- Post content-->
+<section class="container mb-5 pb-1">
+  <div class="row">
+    <div class="col-md-12 mb-md-0 mb-4">
+      <% if @user.is_verified? %>
+        <%= image_tag 'verified', size:'32x32' %>
+      <% else %>
+      <% end %>
 
-<%= @user.name %><br>
-<%= @user.bio %><br>
-<%= @user.role_name %><br>
-<%= @user.province %><br>
-<%= @user.address %>
-<br><br><br><br>
-<h5>Profile Picture</h5>
-<%= image_tag(@user.avatar, :size => "260x180") if @user.avatar.attached?%>
-<br><br><br><br>
-<h5>ID Card</h5>
+      <% if @user.new_user? %>
+        <span class="badge bg-info me-2 mb-3">New</span>
+      <% end %>
+      <h2 class="h3 mb-4 pb-4 border-bottom">R<%= @user.price %><span class="d-inline-block ms-1 fs-base fw-normal text-body">/per session</span></h2>
+      <!-- Overview-->
+      <div class="mb-4 col-md-12">
+        <h3 class="h4"><%= @user.name %></h3>
+        <p class="mb-1"><%= @user.bio %></p>
+      </div>
+      <!-- Property Details-->
+      <div class="row mb-4 pb-md-3">
+        <div class="col-lg-3">
+          <h3 class="h4">Tutor Details</h3>
+          <ul class="list-unstyled mb-0">
+            <li><b>Subjects: </b><%= @user.subject %></li>
+            <li><b>Grade: </b><%= @user.grade %></li>
+            <li><b>Years of experience: </b><%= @user.years_of_experience %></li>
+            <li><b>Province: </b><%= @user.province %></li>
+          </ul>
+        </div>
+        <div class="col-lg-9">
+          <%= render 'meetings/show', meetings: @meetings %>
+        </div>
 
+      </div>
+      <div class="d-flex flex-sm-row flex-column align-items-sm-center align-items-stretch justify-content-between">
+      </div>
 
-<img src="<%= @user.id_card %>" style="width:260px">
+      <div id="meeting_model"></div>
 
+      <!-- Users Action-->
+      <div class="mb-lg-5 mb-md-4 pb-lg-2 py-4 border-top">
+        <ul class="d-flex mb-4 list-unstyled fs-sm">
+          <% if current_user.is_student? %>
+            <% if @user.is_teacher? %>
+              <li class="me-3 pe-3 border-end"><b><%= link_to "Hire Tutor", new_hire_path(student_id: current_user.id, teacher_id: @user.id), class:"no-underline" %></b></li>
+            <% end %>
+          <% end %>                
+          <li class="me-3 pe-3 border-end"><b><%= link_to "Schedule a Meeting", new_meeting_path(student_id: current_user.id, teacher_id: @user.id), remote: true, class:"no-underline" %></b></li>
+          <li class="me-3 pe-3 border-end"><b><%= link_to "Send Message", conversations_path(sender_id: current_user.id, recipient_id: @user.id), method: "post", class:"no-underline"%> </b></li>
+          <li class="me-3 pe-3" href="#modal-review" data-bs-toggle="modal" style="color: #FD5631;"><strong><i class="fi-edit me-1"></i>Add review</strong></li>
+        </ul>
+      </div>
 
-
-
-<%#= link_to "Message", conversations_path(sender_id: current_user.id, recipient_id: teacher.id), method: "post"%></h3>
-
-<h1>Message</h1>
-<%# if teacher.id != current_user.id %><h3>
-    <%= link_to @user.name, conversations_path(sender_id: current_user.id, recipient_id: @user.id), method: "post"%></h3>
-<%# end %>
+      <!-- Render User Review -->
+      <%= render 'shared/review' %>
+    </div>
+  </div>
+</section>

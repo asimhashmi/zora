@@ -1,0 +1,8 @@
+<% if current_user.id == params[:student_id].to_i %>
+  <h1>New Hiring</h1>
+
+  <%= render 'form', hire: @hire %>
+<% else %>
+
+  <h1>Error not Accessable</h1>
+<% end %>

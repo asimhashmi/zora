@@ -2,7 +2,7 @@ class User < ApplicationRecord
   rolify
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :masqueradable, :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :omniauthable
+  devise :masqueradable, :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: %i[facebook google_oauth2]
 
   scope :filtered, ->(query_params) { User::Filter.new.filter(self, query_params) }
 
@@ -12,12 +12,21 @@ class User < ApplicationRecord
   has_many :notifications, as: :recipient, dependent: :destroy
   has_many :services, dependent: :destroy
 
+  has_many :student_hires, foreign_key: :hire_by_id, class_name: "Hire", dependent: :destroy
+  has_many :teacher_hires, foreign_key: :hire_to_id, class_name: "Hire", dependent: :destroy
+
   has_many :student_meetings, foreign_key: :student_id, class_name: "Meeting", dependent: :destroy
   has_many :teacher_meetings, foreign_key: :teacher_id, class_name: "Meeting", dependent: :destroy
+  has_many :ratings, foreign_key: :ratee_id, class_name: "Rating", dependent: :destroy
+  has_many :sent_ratings, foreign_key: :rater_id, class_name: "Rating", dependent: :destroy
 
   mount_uploader :id_card, DocumentUploader
 
-  enum province: [:Eastern_Cape, :Free_State, :Gauteng, :KwaZulu_Natal, :Limpopo, :Mpumalanga, :Northern_Cape, :North_West, :Western_Cape]
+  enum province: [:"Eastern Cape", :"Free State", :"Gauteng", :"KwaZulu Natal", :"Limpopo", :"Mpumalanga", :"Northern Cape", :"North West", :"Western Cape"]
+  enum subject: [:English, :Math, :Chemistry, :Zulu]
+  enum grade: [:"Grade 1", :"Grade 2", :"Grade 3", :"Grade 4"]
+  enum tutor_type: [:"Registered Teacher", :"Student Tutor"]
+  
 
   validates :first_name, :last_name, :email, presence: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
@@ -40,6 +49,10 @@ class User < ApplicationRecord
     roles_name.join(', ').titleize
   end
 
+  def new_user?
+    (Date.current - created_at.to_date).to_i < 30
+  end
+
   def store_zoom_user_id
     service = Zoom::Api::CreateCustomerService.new(self).perform
     if service.success?
@@ -47,6 +60,13 @@ class User < ApplicationRecord
     else
       errors.add(:zoom, service.resource['message'])
     end
+  end
+
+  def self.from_omniauth(auth)
+    name_split = auth.info.name.split(" ")
+    user = User.where(email: auth.info.email).first
+    user ||= User.create!(provider: auth.provider, uid: auth.uid, last_name: name_split[0], first_name: name_split[1], email: auth.info.email, password: Devise.friendly_token[0, 20])
+    user
   end
 
   def self.search(search)

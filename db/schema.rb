@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_17_173512) do
+ActiveRecord::Schema.define(version: 2021_12_15_140519) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,34 @@ ActiveRecord::Schema.define(version: 2021_11_17_173512) do
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
+  create_table "hires", force: :cascade do |t|
+    t.string "grade"
+    t.string "subject"
+    t.integer "number_of_session"
+    t.integer "duration"
+    t.float "price"
+    t.string "braintree_payment_id"
+    t.float "total_price"
+    t.bigint "hire_by_id"
+    t.bigint "hire_to_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "nonce_id"
+    t.string "status"
+    t.date "end_contract"
+    t.index ["hire_by_id"], name: "index_hires_on_hire_by_id"
+    t.index ["hire_to_id"], name: "index_hires_on_hire_to_id"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "rating_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["rating_id"], name: "index_likes_on_rating_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
   create_table "meetings", force: :cascade do |t|
     t.string "meeting_url"
     t.string "meeting_id"
@@ -104,6 +132,26 @@ ActiveRecord::Schema.define(version: 2021_11_17_173512) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["read_at"], name: "index_notifications_on_read_at"
     t.index ["recipient_type", "recipient_id"], name: "index_notifications_on_recipient"
+  end
+
+  create_table "participants", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "conversation_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["conversation_id"], name: "index_participants_on_conversation_id"
+    t.index ["user_id"], name: "index_participants_on_user_id"
+  end
+
+  create_table "ratings", force: :cascade do |t|
+    t.bigint "rater_id"
+    t.bigint "ratee_id"
+    t.string "message"
+    t.integer "stars"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["ratee_id"], name: "index_ratings_on_ratee_id"
+    t.index ["rater_id"], name: "index_ratings_on_rater_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -148,7 +196,15 @@ ActiveRecord::Schema.define(version: 2021_11_17_173512) do
     t.string "id_card"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "braintree_id"
     t.string "zoom_user_id"
+    t.float "price"
+    t.integer "subject"
+    t.integer "grade"
+    t.integer "years_of_experience"
+    t.integer "tutor_type"
+    t.string "provider"
+    t.string "uid"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -163,5 +219,11 @@ ActiveRecord::Schema.define(version: 2021_11_17_173512) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "hires", "users", column: "hire_by_id"
+  add_foreign_key "hires", "users", column: "hire_to_id"
+  add_foreign_key "participants", "conversations"
+  add_foreign_key "participants", "users"
+  add_foreign_key "ratings", "users", column: "ratee_id"
+  add_foreign_key "ratings", "users", column: "rater_id"
   add_foreign_key "services", "users"
 end

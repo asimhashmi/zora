@@ -2,8 +2,15 @@ class MeetingsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_meeting, only: %i[show edit update destroy]
 
+
   def index
-    @meetings = Meeting.all
+    if current_user.is_student?
+      @meetings = Meeting.where(student_id: current_user.id)
+    elsif current_user.is_teacher?
+      @meetings = Meeting.where(teacher_id: current_user.id)
+    else
+      @meetings = Meeting.all 
+    end
   end
 
   def show

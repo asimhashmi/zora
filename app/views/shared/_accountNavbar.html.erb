@@ -1,0 +1,96 @@
+<main class="page-wrapper">
+  <!-- Navbar-->
+  <header class="navbar navbar-expand-lg navbar-light bg-light fixed-top" data-scroll-header>
+    <div class="container">
+    
+    <%= link_to (image_tag 'tutor.png', alt: "Zora Tutor", class:"navbar-brand me-3 me-xl-4", width:"116"), root_path %>
+
+      <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span
+          class="navbar-toggler-icon"></span></button>
+      <div class="dropdown d-none d-lg-block order-lg-3 my-n2 me-3">
+        
+          <%= image_tag avatar_path(current_user, size: 40), width: 40, class: "rounded-circle" %>
+        
+        <div class="dropdown-menu dropdown-menu-end">
+          <div class="d-flex align-items-start border-bottom px-3 py-1 mb-2" style="width: 16rem;"><img
+              
+
+              <%= image_tag avatar_path(current_user, size: 40), width: 48, class: "rounded-circle" %>
+            
+            
+            <div class="ps-2">
+              <h6 class="fs-base mb-0"><%= current_user.name%></h6><span class="star-rating star-rating-sm"><i
+                  class="star-rating-icon fi-star-filled active"></i><i
+                  class="star-rating-icon fi-star-filled active"></i><i
+                  class="star-rating-icon fi-star-filled active"></i><i
+                  class="star-rating-icon fi-star-filled active"></i><i
+                  class="star-rating-icon fi-star-filled active"></i></span>
+              <div class="fs-xs py-2"><%= role_name %><br><%= current_user.email%></div>
+            </div>
+          </div>
+
+          <%#= link_to "Personal Info", edit_user_registration_path, class: "dropdown-item" %>
+            
+            <a class="dropdown-item" href="/users/edit"><i
+              class="fi-user opacity-60 me-2"></i>Personal Info</a>
+
+            <%= link_to notifications_path, class: "dropdown-item" do %>
+              <span><i class="fi-bell opacity-60 me-2" aria-hidden="true"></i>Notification</span>
+            <% end %>
+            <!--<a class="dropdown-item"
+            href="real-estate-account-notifications.html"><i class="fi-bell opacity-60 me-2"></i>Notifjjnications</a>-->
+
+          <div class="dropdown-divider"></div>
+          <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+        </div>
+      </div>
+
+      <%= link_to "Messages", conversations_path, class: "btn btn-primary btn-sm ms-2 order-lg-3" %>
+
+
+      <!--<a class="btn btn-primary btn-sm ms-2 order-lg-3" href="#"><i class="fi-envelope me-2"></i>Messages</a>-->
+
+
+      <div class="collapse navbar-collapse order-lg-2" id="navbarNav">
+        <ul class="navbar-nav navbar-nav-scroll" style="max-height: 35rem;">
+          
+          <!-- Menu items-->
+          <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+          <li class="nav-item"><%= link_to "Hires", hires_path, class: "nav-link" %></li>
+          <li class="nav-item"><%= link_to "Meetings", meetings_path, class: "nav-link" %></li>
+          <li class="nav-item"><%= link_to "Tutors", tutors_path, class: "nav-link" %></li>
+
+          <li class="nav-item dropdown d-lg-none"><a class="nav-link dropdown-toggle d-flex align-items-center"
+              href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              
+              
+              
+              <%= image_tag avatar_path(current_user, size: 40), width: 30, class: "rounded-circle me-2" %>
+              <!--<img class="rounded-circle me-2"
+                src="frontend/img/avatars/30.jpg" width="30" alt="Annette Black">Annette Black</a>-->
+            <div class="dropdown-menu">
+              <div class="ps-3"><span class="star-rating star-rating-sm"><i
+                    class="star-rating-icon fi-star-filled active"></i><i
+                    class="star-rating-icon fi-star-filled active"></i><i
+                    class="star-rating-icon fi-star-filled active"></i><i
+                    class="star-rating-icon fi-star-filled active"></i><i
+                    class="star-rating-icon fi-star-filled active"></i></span>
+                <div class="fs-xs py-2">(302) 555-0107<br>annette_black@email.com</div>
+              </div><a class="dropdown-item" href="real-estate-account-info.html"><i
+                  class="fi-user opacity-60 me-2"></i>Personal Info</a><a class="dropdown-item"
+                href="real-estate-account-security.html"><i class="fi-lock opacity-60 me-2"></i>Password &amp;
+                Security</a><a class="dropdown-item" href="real-estate-account-properties.html"><i
+                  class="fi-home opacity-60 me-2"></i>Tutors</a><a class="dropdown-item"
+                href="real-estate-account-wishlist.html"><i class="fi-heart opacity-60 me-2"></i>Wishlist</a><a
+                class="dropdown-item" href="real-estate-account-reviews.html"><i
+                  class="fi-star opacity-60 me-2"></i>Reviews</a><a class="dropdown-item"
+                href="real-estate-account-notifications.html"><i class="fi-bell opacity-60 me-2"></i>Notifications</a>
+              <div class="dropdown-divider"></div><a class="dropdown-item" href="#">Help</a><a class="dropdown-item"
+                href="#">Sign Out</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </header>
