@@ -1,20 +1,49 @@
 module Users
   class OmniauthCallbacksController < Devise::OmniauthCallbacksController
-    before_action :set_service
-    before_action :set_user
+    # before_action :set_service
+    # before_action :set_user
 
     attr_reader :service, :user
 
+    # def facebook
+    #   handle_auth "Facebook"
+    # end
+
+    # def twitter
+    #   handle_auth "Twitter"
+    # end
+
+    # def github
+    #   handle_auth "Github"
+    # end
+
     def facebook
-      handle_auth "Facebook"
+      @user = User.from_omniauth(request.env["omniauth.auth"])
+      if @user.persisted?
+          sign_in @user
+          set_flash_message(:notice, :success, kind: "Facebook") if is_navigational_format?
+          redirect_to root_path
+        else
+          session["devise.facebook_data"] = request.env["omniauth.auth"].except(:extra)
+          redirect_to new_user_registration_url
+        end
     end
 
-    def twitter
-      handle_auth "Twitter"
+    def google_oauth2
+      @user = User.from_omniauth(request.env['omniauth.auth'])
+      if @user.persisted?
+        sign_in @user
+        set_flash_message(:notice, :success, kind: 'Google') if is_navigational_format?
+        redirect_to root_path
+      else
+        flash[:error] = 'There was a problem signing you in through Google. Please register or try signing in later.'
+        redirect_to new_user_registration_url
+      end
     end
 
-    def github
-      handle_auth "Github"
+
+    def failure
+      redirect_to root_path
     end
 
     private

@@ -1,0 +1,47 @@
+<% hires.limit(4).each do |hire| %>
+    <%= content_tag :tr, id: dom_id(hire), class: dom_class(hire) do %>
+    <div class="card card-body border-0 shadow-sm pb-1 me-lg-1" style="margin-bottom: 1rem;">
+        <div class="d-flex d-md-block d-lg-flex align-items-start pt-lg-2">
+        <% @hirer = User.find(hire.hire_to_id) %>
+            <%= image_tag avatar_path(@hirer, size: 40), width: 48, class: "rounded-circle" %>
+        <%# end %>
+        <div class="pt-md-2 pt-lg-0 ps-3 ps-md-0 ps-lg-3">
+            <h2 class="fs-lg mb-0">
+                <% if current_user.is_student? %>
+                    <td><%= link_to hire.hire_to.name, user_path(hire.hire_to)  %></td>
+                <%else%>
+                    <td><%= link_to hire.hire_by.name, user_path(hire.hire_by) %></td>
+                <%end%>
+            </h2>
+            <div>
+                <span class="star-rating">
+                    <i class="star-rating-icon fi-star-filled active"></i>
+                    <i class="star-rating-icon fi-star-filled active"></i>
+                    <i class="star-rating-icon fi-star-filled active"></i>
+                    <i class="star-rating-icon fi-star-filled active"></i>
+                    <i class="star-rating-icon fi-star-filled active"></i>
+                </span>
+
+                <%= link_to hire.status, hire_path(hire), class:"col nav-link fw-normal p-0" %>
+            </div>
+          
+                    
+        </div>
+        
+        </div>
+        <div class="d-flex pt-1 text-nowrap">
+            <ul class="row list-unstyled fs-sm mt-3 mb-0">
+                <li class="col-6 "><i class="fi-cash mt-n1 me-2 lead align-left opacity-70"></i>Grade <%= hire.grade%></li>
+                <li class="col-6 "><i class="fi-calendar mt-n1 me-2 lead align-right opacity-70"></i>Subject <%= hire.subject%></li>
+            </ul>
+        </div>
+        <hr/>
+        <div class="d-flex pt-3 text-nowrap">
+            <ul class="row list-unstyled fs-sm mb-0">
+                <li class="col-7 "><i class="fi-cash mt-n1 me-2 lead align-left opacity-70"></i>R<%= hire.total_price%></li>
+                <li class="col-5 "><i class="fi-calendar mt-n1 me-2 lead align-right opacity-70"></i>End: <%= hire.end_contract%></li>
+            </ul>
+        </div>
+    </div>
+    <% end %>
+<% end %>

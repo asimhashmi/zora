@@ -1,0 +1,102 @@
+<div class="container pt-5 pb-lg-4 mt-5 mb-sm-2">
+  <!-- Breadcrumb-->
+  <nav class="mb-4 pt-md-3" aria-label="Breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="real-estate-home.html">Dashboard</a></li>
+    </ol>
+  </nav>
+
+  <div class="">
+    <h2>Hire List</h2>
+    <!-- Page content-->
+    <div class="">
+      <div class="row g-0 mt-n3">
+        <div class="container">
+          <div class="row">
+            <% hires.order("created_at desc").each do |hire| %>
+              <%= content_tag :tr, id: dom_id(hire), class: dom_class(hire) do %>
+                <div class="col-lg-3">
+                  <div class="card card-body border-0 shadow-sm pb-1 me-lg-1" style="margin-bottom: 1rem;">
+                    <div class="d-flex d-md-block d-lg-flex align-items-start pt-lg-2">
+                      <%= image_tag avatar_path(hire, size: 40), width: 48, class: "rounded-circle" %>
+                      <div class="pt-md-2 pt-lg-0 ps-3 ps-md-0 ps-lg-3">
+                        <h2 class="fs-lg mb-0">
+                          <% if current_user.is_student? %>
+                            <td>
+                              <%= link_to hire.hire_to.name, user_path(hire.hire_to), class:"no-underline" %>
+                            </td>
+                          <%else%>
+                            <td>
+                              <%= link_to hire.hire_by.name, user_path(hire.hire_by), class:"no-underline" %>
+                            </td>
+                          <%end%>
+                        </h2>
+
+                        <p class="mb-0">
+                          Subject: <%= link_to hire.subject, hire_path(hire), class:"no-underline fw-normal p-0"%>
+                        </p>
+                        <span class="star-rating">
+                          <i class="star-rating-icon fi-star-filled active"></i>
+                          <i class="star-rating-icon fi-star-filled active"></i>
+                          <i class="star-rating-icon fi-star-filled active"></i>
+                          <i class="star-rating-icon fi-star-filled active"></i>
+                          <i class="star-rating-icon fi-star-filled active"></i>
+                        </span>
+                        
+                      </div>
+                    </div>
+                    <ul class="list-unstyled fs-sm mt-3 mb-0">
+                      <li>
+                        <div class="row">
+                          <!-- <i class="col fi-clock opacity-60 me-2"></i> -->
+                          <div class="col-7">
+                            <p>Status: <%= link_to hire.status, hire_path(hire), class:"no-underline fw-normal p-0" %>
+                            </p>
+                          </div>
+                          <div class="col-5">
+                            Grade: <%= link_to hire.grade, hire_path(hire), class:"no-underline fw-normal p-0" %>
+                          </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                          <!-- <i class="col fi-clock opacity-60 me-2"></i> -->
+                          <div class="col-7">
+                            <p>End: <%= hire.end_contract%>
+                            </p>
+                          </div>
+                          <div class="col-5">
+                            Price: R<%= link_to hire.total_price, hire_path(hire), class:"no-underline fw-normal p-0" %>
+                          </div>
+                        </div>
+                        <div style="text-align:center;">
+                          <% if current_user.is_teacher? && current_user==hire.hire_to && hire.status=="requested" %>
+                            <%= link_to 'Accept' , hire_path(hire.id, { status: "processing" }), method: :patch, class:"no-underline" %>
+                            <%= link_to 'Reject' , hire_path(hire.id, { status: "reject" }), method: :patch, class:"no-underline", style:"border-left: 1px solid;" , data: { confirm: "Are you sure to Reject?" }%>
+                          <% elsif current_user.is_student? && current_user==hire.hire_by && hire.status=="processing" %>
+                              <%= link_to 'Proceed Payment' , hire_path(hire.id, { status: "hired" }), method: :patch, class:"no-underline" %>
+                          <% end %>
+                        </div>
+                      </li>
+                      <!-- <li><a class="nav-link fw-normal p-0" href="mailto:annette_black@email.com"><i
+                            class="fi-mail opacity-60 me-2"></i>damiomi@email.com</a></li> -->
+                    </ul>
+                  </div>
+                </div>
+                <% end %>
+                  <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</main>
+
+<!-- Filters sidebar toggle button (mobile)-->
+<button class="btn btn-primary btn-sm w-100 rounded-0 fixed-bottom d-lg-none" type="button" data-bs-toggle="offcanvas"
+  data-bs-target="#filters-sidebar"><i class="fi-sidebar-right me-2"></i>Fiters</button>
+<!-- Back to top button-->
+<a class="btn-scroll-top" href="#top" data-scroll><span
+    class="btn-scroll-top-tooltip text-muted fs-sm me-2">Top</span><i class="btn-scroll-top-icon fi-chevron-up"></i></a>

@@ -1,0 +1,176 @@
+<!-- Page container-->
+      <div class="container mt-5 mb-md-4 py-5">
+        <div class="row">
+          <!-- Page content-->
+          <div class="col-lg-8">
+            <!-- Breadcrumb-->
+            <nav class="mb-3 pt-2 pt-lg-3" aria-label="Breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="city-guide-home-v1.html">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">New tutor</li>
+              </ol>
+            </nav>
+            <!-- Title-->
+            <div class="mb-4">
+              <h1 class="h2 mb-0">Hire Tutor</h1>              
+            </div>
+            
+            <%= form_tag("/hires", method: "post", id: "payment-form") do %>
+            <!-- Contacts-->
+            <section class="card card-body border-0 shadow-sm p-4 mb-4" id="contacts">
+              <h2 class="h4 mb-4"><i class="fi-phone text-primary fs-5 mt-n1 me-2"></i>Details</h2>
+                <div class="row">
+                    <div class="col-sm-6 mb-3">
+                      <label class="form-label" for="ab-email">Grade <span class="text-danger">*</span></label>
+                      <input class="form-control" name="grade" type="text" placeholder="Enter your grade" required>
+                    </div>
+                    <div class="col-sm-6 mb-3">
+                      <label class="form-label" for="ab-phone">Subject <span class="text-danger">*</span></label>
+                      <input class="form-control" name="subject" type="text" placeholder="Enter your subject" required>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Description-->
+            <section class="card card-body border-0 shadow-sm p-4 mb-4" id="description">
+              <h2 class="h4 mb-4"><i class="fi-edit text-primary fs-5 mt-n1 me-2"></i>Price</h2>
+              <div class="row row-cols-md-3 row-cols-sm-2 row-cols-1 gy-md-4 gy-3 mb-4">
+                <div class="col form-check">
+                  <label class="form-label d-block fw-bold mb-2 pb-1">Tutor's price</label>
+                  <input class="form-check-input" id="ab-on-site-staff-y" type="radio" name="price-check" value="teacher" checked>
+                  <label class="form-check-label" for="ab-on-site-staff-y">Yes</label>
+                </div>
+                <div class="col form-check">
+                  <label class="form-label d-block fw-bold mb-2 pb-1">Make an offer</label>
+                  <input class="form-check-input" id="ab-on-site-staff-n" type="radio" name="price-check" value="offer">
+                  <label class="form-check-label" for="ab-on-site-staff-n">No</label>
+                </div>
+                <div class="col">
+                  <label for="amount" id="teacher">
+                    <div class="input-wrapper amount-wrapper">
+                      <label class="form-label d-block fw-bold mb-2 pb-1">Price per session</label>
+                      <input class="form-control" type="number" name="price" type="tel" min="1" value = "<%= User.find_by(id: params[:teacher_id]).price.present? ? User.find_by(id: params[:teacher_id]).price : 20 %>" readonly>
+                    </div>
+                  </label>
+                  <label for="amount" id="offer">
+                    <div class="input-wrapper amount-wrapper">
+                      <label class="form-label d-block fw-bold mb-2 pb-1">Price per session</label>
+                      <input class="form-control" type="number" name="price" type="tel" min="1" required>
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </section>
+            
+            <!-- Contacts-->
+            <section class="card card-body border-0 shadow-sm p-4 mb-4" id="contacts">
+              <h2 class="h4 mb-4"><i class="fi-phone text-primary fs-5 mt-n1 me-2"></i>Duration</h2>
+                <div class="row">
+                    <div class="col-sm-6 mb-3">
+                      <label class="form-label" for="ab-email">Sessions per Week <span class="text-danger">*</span></label>
+                      <input class="form-control" type="number" name="number_of_session" placeholder="How many sessions per week?" min="1" required>
+                    </div>
+                    <div class="col-sm-6 mb-3">
+                      <label class="form-label" for="ab-phone">No of Weeks <span class="text-danger">*</span></label>
+                      <input class="form-control" type="number" name="duration" type="number" placeholder="For how many weeks?" min="1" required>
+                    </div>
+                </div>
+                
+                <div class="bt-drop-in-wrapper">
+                    <div id="bt-dropin"></div>
+                  </div>
+                </section>
+                <input type="hidden" name="hire_to_id" value= <%= params[:teacher_id]%> />
+                <input type="hidden" name="hire_by_id" value=<%= params[:student_id]%> />
+                <input type="hidden" id="nonce" name="nonce_id" />
+                <!-- Action buttons -->
+                <section class="d-sm-flex justify-content-between pt-2">
+                  <button class="btn btn-primary btn-lg d-block rounded-pill mb-2" type="submit"><span>Make Payment</span></button>
+                </section>
+              <% end %>
+            </section>
+
+
+
+
+ 
+            
+            
+            
+          </div>
+          <!-- Progress of completion-->
+          <aside class="col-lg-3 offset-lg-1 d-none d-lg-block">
+            <div class="sticky-top pt-5">
+              <h6 class="pt-5 mt-3 mb-2">Tutor's price info</h6>
+              <div class="progress mb-4" style="height: .25rem;">
+                <div class="progress-bar bg-danger" role="progressbar" style="width: 60%" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+              <p>
+                You can either go with the tutor's price or make an offer to the tutor.<br>
+                The tutor can either accept your offer or reject it.<br>
+                We would recommend that you send a message to the tutor stating the price you want to pay and get him/her to accept before hiring.
+              </p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  var form = document.querySelector('#payment-form');
+  var client_token = "<%= Braintree::ClientToken.generate %>";
+
+  dropin.create({
+    authorization: client_token,
+    container: '#bt-dropin',
+    paypal: {
+          flow: 'checkout',
+          amount: '10.00',
+          currency: 'USD'
+        }
+    }, function (createErr, instance) {
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      instance.requestPaymentMethod(function (err, payload) {
+        if (err) {
+          console.log('Error', err);
+          return;
+        }
+
+        // Add the nonce to the form and submit
+        document.querySelector('#nonce').value = payload.nonce;
+        form.submit();
+      });
+    });
+  });
+
+$(document).ready(function(){
+
+  function show_hide(radio)
+  {
+    if($(radio).attr("value") == 'teacher')
+        {
+          $("#teacher").show();
+          $("#teacher :input").attr('disabled', false);
+          $("#offer").hide();
+          $("#offer :input").attr('disabled', true);
+        }
+    if($(radio).attr("value") == 'offer')
+      {
+        $("#teacher").hide();
+        $("#teacher :input").attr('disabled', true);
+        $("#offer").show();
+        $("#offer :input").attr('disabled', false);
+      }
+  }
+
+  show_hide(document.querySelector('input[type="radio"]'));
+
+  $('input[type="radio"]').click(function(){
+    show_hide(this);
+  });
+});
+</script>

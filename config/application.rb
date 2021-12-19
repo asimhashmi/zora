@@ -6,6 +6,8 @@ require "rails/all"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+Dotenv::Railtie.load if ['development', 'test'].include? ENV['RAILS_ENV']
+
 module Zoratutorr
   class Application < Rails::Application
     config.active_job.queue_adapter = :sidekiq

@@ -1,4 +1,72 @@
-<div class="page-header">
+<!-- Page header-->
+<section class="container pt-5 mt-5">
+  <!-- Breadcrumb-->
+  <nav class="mb-3 pt-md-3" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><%= link_to "home", root_path%></li>
+      <li class="breadcrumb-item">Meetings</li>
+      <li class="breadcrumb-item active" aria-current="page"><%= @meeting.title %></li>
+    </ol>
+  </nav>
+</section>
+<!-- Post content-->
+<section class="container pb-1">
+  <div class="row">
+    <div class="col-md-12 mb-md-0 mb-4">
+      <!-- Overview-->
+      <div class="mb-4 col-md-12">
+        <h3 class="h4">Title: <%= @meeting.title %></h3>
+        <h6 class="mb-1" style="color: #FD5631">Purpose: <%= @meeting.purpose %></h6>
+        <p class="mb-1"><%= @meeting.description %></p>
+      </div>
+      <!-- Property Details-->
+      <div class="row mb-4 pb-md-3">
+        <div class="col-lg-3">
+          <h3 class="h4">Meeting Details</h3>
+          <ul class="list-unstyled mb-0">
+            <li><%= link_to "Join Meeting", @meeting.meeting_url %></li>
+            <li>By: <%= @meeting.time %></li>
+            <li>For <%= @meeting.duration %> Mins</li>
+
+
+            <% if current_user.is_student? %>
+              <li>
+                With: <strong><%= @meeting.teacher.name%></strong>
+              </li>
+            <%else%>
+              <li>
+                With: <strong><%= @meeting.student.name%></strong>
+              </li>
+            <%end%>
+          </ul>
+        </div>          
+      </div>
+    </div>
+  </div >
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<div class="page-header">
   <%= link_to meetings_path, class: 'btn btn-default' do %>
     All Meetings
   <% end %>
@@ -25,4 +93,4 @@
   <dd><%= @meeting.student_id %></dd>
   <dt>Teacher:</dt>
   <dd><%= @meeting.teacher_id %></dd>
-</dl>
+</dl>-->

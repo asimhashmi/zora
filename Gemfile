@@ -18,19 +18,28 @@ gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 4.0'
+gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
+
+#pagination 
+gem 'kaminari'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
+# To use Braintree + PayPal, also include:
+gem 'braintree', '>= 4.4', '< 5.0'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
-
+gem 'pagy'
+gem "stimulus-rails", ">= 0.4.0"
+gem "pg_search", "~> 2.3"
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'dotenv-rails'
 end
 
 group :development do
@@ -52,6 +61,8 @@ group :test do
   gem 'webdrivers'
 end
 
+
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'bootstrap', '5.0.0'
@@ -64,11 +75,12 @@ gem 'madmin'
 gem 'mini_magick', '~> 4.10', '>= 4.10.1'
 gem 'name_of_person', '~> 1.1'
 gem 'noticed', '~> 1.2'
+gem 'omniauth-rails_csrf_protection'
+gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook', '~> 8.0'
 gem 'omniauth-github', '~> 2.0'
 gem 'omniauth-twitter', '~> 1.4'
 gem 'pundit', '~> 2.1'
-gem 'redis', '~> 4.2', '>= 4.2.2'
 gem 'sidekiq', '~> 6.2'
 gem 'sitemap_generator', '~> 6.1', '>= 6.1.2'
 gem 'whenever', require: false
@@ -78,3 +90,14 @@ gem 'carrierwave', '~> 2.0'
 gem 'ransack', github: 'activerecord-hackery/ransack'
  
 gem "nokogiri", ">= 1.5.9" 
+gem 'htmlbeautifier'
+
+
+gem "turbo-rails", "~> 0.9.0"
+
+gem 'serviceworker-rails'
+
+gem 'capistrano', '~> 3.11'
+gem 'capistrano-rails', '~> 1.4'
+gem 'capistrano-passenger', '~> 0.2.0'
+gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.4'

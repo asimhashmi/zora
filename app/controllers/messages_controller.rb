@@ -1,4 +1,5 @@
 class MessagesController < ApplicationController
+  before_action :authenticate_user!
     before_action do
         @conversation = Conversation.find(params[:conversation_id])
     end
@@ -15,12 +16,10 @@ class MessagesController < ApplicationController
     end
 
     def create
-        @message = @conversation.messages.new(message_params)
-        @user = current_user
-        if @message.save
-            ModelMailer.new_message_notification(@message, current_user.email).deliver_now
-            redirect_to conversation_messages_path(@conversation), notice: 'Message sent sucessfully.'
-        end
+
+        @message = @conversation.messages.new(message_params).save
+
+    
     end
 
     private

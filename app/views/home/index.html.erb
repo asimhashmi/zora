@@ -1,5 +1,296 @@
-<% if user_signed_in? %>
-  <h1>Welcome to your <%= current_user.role_name %> account <%= current_user.name%>!</h1>
-<% else %>
-  <h1>Welcome to Zora Turors!</h1>
-<% end %>
+<section class="bg-dark pb-3 pt-5">
+<div class="container py-5">
+    <div class="row align-items-center mt-2 mt-md-0 pt-md-4 py-lg-5">
+    <div class="col-md-4 order-md-2 mb-5 mb-md-0">
+        <div class="parallax mx-auto" style="max-width: 416px;">
+        <div class="parallax-layer position-relative" data-depth="0.1"><img src="frontend/img/job-board/hero-banner-2/layer01.svg" alt="Layer"></div>
+        <div class="parallax-layer" data-depth="0.15"><img src="frontend/img/job-board/hero-banner-2/layer02.svg" alt="Layer"></div>
+        <div class="parallax-layer" data-depth="0.2"><img src="frontend/img/job-board/hero-banner-2/layer03.svg" alt="Layer"></div>
+        <div class="parallax-layer" data-depth="0.4"><img src="frontend/img/job-board/hero-banner-2/layer04.svg" alt="Layer"></div>
+        <div class="parallax-layer" data-depth="0.16"><img src="frontend/img/job-board/hero-banner-2/layer05.svg" alt="Layer"></div>
+        <div class="parallax-layer" data-depth="0.2"><img src="frontend/img/job-board/hero-banner-2/layer06.svg" alt="Layer"></div>
+        <div class="parallax-layer" data-depth="0.25"><img src="frontend/img/job-board/hero-banner-2/layer07.svg" alt="Layer"></div>
+        <div class="parallax-layer" data-depth="0.2"><img src="frontend/img/job-board/hero-banner-2/layer08.svg" alt="Layer"></div>
+        </div>
+    </div>
+    <div class="col-md-8 order-md-1">
+        <h1 class="display-4 text-light pb-3 mb-4 mb-lg-5" style="max-width: 746px;">Get your <span class='text-primary'>perfect tutor</span> today! </h1>
+        
+        <!-- Statistics-->
+        <div class="row d-none d-lg-flex pt-5">
+        <div class="col-xl-10 d-flex">
+            <div class="border-end border-light pe-4 me-3">
+            <div class="text-light me-3">
+                <div class="fs-3 fw-bold mb-1">6,000</div>
+                <div class="fs-sm opacity-70">Tutor</div>
+            </div>
+            </div>
+            <div class="border-end border-light px-4 me-3">
+            <div class="text-light me-3">
+                <div class="fs-3 fw-bold mb-1">8,000</div>
+                <div class="fs-sm opacity-70">Tutor Request</div>
+            </div>
+            </div>
+            <div class="border-end border-light px-4 me-3">
+            <div class="text-light me-3">
+                <div class="fs-3 fw-bold mb-1">5,000</div>
+                <div class="fs-sm opacity-70">Students</div>
+            </div>
+            </div>
+            <div class="ps-4">
+            <div class="text-light">
+                <div class="fs-3 fw-bold mb-1">10,000</div>
+                <div class="fs-sm opacity-70">Active members</div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
+</div>
+</section>
+<!-- Categories-->
+<section class="position-relative bg-white rounded-xxl-4 pt-md-3 zindex-5" style="margin-top: -30px;">
+<div class="container pt-5 pb-3 mb-4 mb-md-5">
+    <h2 class="h3 pb-2 pb-sm-3">Subjects</h2>
+    <div class="d-flex flex-wrap flex-column flex-sm-row">
+        <a class="icon-box card flex-row align-items-center flex-shrink-0 card-hover border-0 bg-secondary rounded-pill py-2 ps-2 pe-4 mb-2 mb-sm-3 me-sm-3 me-xxl-4" href="/">
+            <div class="icon-box-media bg-light text-primary rounded-circle me-2">
+                <i class="fi-accounting"></i>
+            </div>
+            <h3 class="icon-box-title fs-sm ps-1 pe-2 mb-0">Mathematics</h3>
+        </a>
+        <a class="icon-box card flex-row align-items-center flex-shrink-0 card-hover border-0 bg-secondary rounded-pill py-2 ps-2 pe-4 mb-2 mb-sm-3 me-sm-3 me-xxl-4" href="/">
+            <div class="icon-box-media bg-light text-primary rounded-circle me-2">
+                <i class="fi-pie-chart"></i>
+            </div>
+            <h3 class="icon-box-title fs-sm ps-1 pe-2 mb-0">Physical Science</h3>
+        </a>
+        <a class="icon-box card flex-row align-items-center flex-shrink-0 card-hover border-0 bg-secondary rounded-pill py-2 ps-2 pe-4 mb-2 mb-sm-3 me-sm-3 me-xxl-4" href="/">
+            <div class="icon-box-media bg-light text-primary rounded-circle me-2">
+                <i class="fi-meds"></i>
+            </div>
+            <h3 class="icon-box-title fs-sm ps-1 pe-2 mb-0">Technology</h3>
+        </a>
+        <a class="icon-box card flex-row align-items-center flex-shrink-0 card-hover border-0 bg-secondary rounded-pill py-2 ps-2 pe-4 mb-2 mb-sm-3 me-sm-3 me-xxl-4" href="/">
+            <div class="icon-box-media bg-light text-primary rounded-circle me-2">
+                <i class="fi-plant"></i>
+            </div>
+            <h3 class="icon-box-title fs-sm ps-1 pe-2 mb-0">Engineering</h3>
+        </a>
+        <a class="icon-box card flex-row align-items-center flex-shrink-0 card-hover border-0 bg-secondary rounded-pill py-2 ps-2 pe-4 mb-2 mb-sm-3 me-sm-3 me-xxl-4" href="/">
+            <div class="icon-box-media bg-light text-primary rounded-circle me-2">
+                <i class="fi-computer"></i>
+            </div>
+            <h3 class="icon-box-title fs-sm ps-1 pe-2 mb-0">IT</h3>
+        </a>
+        <a class="icon-box card flex-row align-items-center flex-shrink-0 card-hover border-0 bg-secondary rounded-pill py-2 ps-2 pe-4 mb-2 mb-sm-3 me-sm-3 me-xxl-4" href="/">
+            <div class="icon-box-media bg-light text-primary rounded-circle me-2">
+                <i class="fi-security"></i>
+            </div>
+            <h3 class="icon-box-title fs-sm ps-1 pe-2 mb-0">English</h3>
+        </a>
+        <div class="dropdown mb-2 mb-sm-3">
+            <a class="icon-box card flex-row align-items-center flex-shrink-0 card-hover border-0 bg-secondary rounded-pill py-2 ps-2 pe-4" href="/">
+                <div class="icon-box-media bg-light text-primary rounded-circle me-2">
+                    <i class="fi-dots-horisontal"></i>
+                </div>
+                <h3 class="icon-box-title fs-sm ps-1 pe-2 mb-0">And More</h3>
+            </a>
+        </div>
+    </div>
+</div>
+</section>
+<!-- Post vacancy CTA-->
+<section class="container pb-5 mb-md-3">
+<div class="row align-items-center">
+    <div class="col-md-5 col-lg-4 text-center text-md-start">
+    <h2 class="mb-md-4">Bringing Tutors and Learners Together</h2>
+    <p class="fs-lg p-2 pb-md-3">Find the right tutor you need to improve your academic performance. Begin the process today!</p>
+    <a class="btn btn-primary btn-lg rounded-pill ms-sm-auto"  href="#signin-modal" data-bs-toggle="modal">Begin<i class="fi-chevron-right fs-sm ms-2"></i></a>
+    </div>
+    <div class="col-md-7 col-lg-8 pt-4 pt-md-0"><img class="d-block mx-auto me-md-0" src="frontend/img/job-board/illustrations/post-vacancy-cta.svg" alt="Illustration"></div>
+</div>
+</section>
+<!-- Steps-->
+<section class="container pb-5 mb-md-3 mt-n2 mt-lg-0">
+<div class="row g-2 g-xl-4">
+    <div class="col-lg-3 col-sm-6">
+    <div class="card card-body card-hover border-0 h-100">
+        <div class="fs-2 fw-bold text-primary lh-base mb-2">01</div>
+        <h3 class="h5 mb-2">Learner/Parent profile setup</h3>
+        <p class="fs-sm mb-0">Students and parents whom are interested in using the MsZora Tutor platform may setup or update their profiles on the system before finding an appropriate tutor</p>
+    </div>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+    <div class="card card-body card-hover border-0 h-100">
+        <div class="fs-2 fw-bold text-primary lh-base mb-2">02</div>
+        <h3 class="h5 mb-2">Finding the right tutor to meet learners needs</h3>
+        <p class="fs-sm mb-0">Learners or parents will be able to search for a suitable tutor, and also filter through the results to view the listed candidates who meet the clients desires</p>
+    </div>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+    <div class="card card-body card-hover border-0 h-100">
+        <div class="fs-2 fw-bold text-primary lh-base mb-2">03</div>
+        <h3 class="h5 mb-2">Reach out to selected tutor and conduct an interview</h3>
+        <p class="fs-sm mb-0">Once a learner and/or parent finds a tutor which meets the required standard, he or she may contact the tutor and make a request for an interview.</p>
+    </div>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+    <div class="card card-body card-hover border-0 h-100">
+        <div class="fs-2 fw-bold text-primary lh-base mb-2">04</div>
+        <h3 class="h5 mb-2">Payments and contracts</h3>
+        <p class="fs-sm mb-0">After the necessary discusiions, a client (learner/parent) may hire a tutor using a blockchain smart contarct or a normal e-contract.</p>
+    </div>
+    </div>
+</div>
+</section>
+<!-- Mobile app CTA-->
+<section class="container pb-5 mb-md-4">
+<div class="bg-faded-accent rounded-3 px-3 pt-5 pt-md-0">
+    <div class="row align-items-center">
+    <div class="col-md-4 order-md-2 text-center">
+        <h2 class="mb-md-4">MsZora</h2>
+        <p class="fs-lg mb-4 mb-md-0">Go to the MsZora website to further your academic learning experience!</p>
+    </div>
+    <div class="col-md-4 order-md-3">
+        <div class="right"><img class="d-block mx-auto" src="frontend/img/job-board/ms-zora.png" width="300" alt="Mobile app"></div>
+   
+    -->
+    </div>
+    <div class="col-md-4 order-md-1 pt-2 pt-md-4"><img class="d-block mx-auto" src="frontend/img/job-board/home-mobile.png" width="255" alt="Mobile app"></div>
+    </div>
+</div>
+</section>
+<!-- Pricing-->
+
+
+<!-- Resumes by city-->
+<section class="container pb-5 mb-md-4">
+<div class="d-sm-flex align-items-center justify-content-between pb-4 mb-sm-2">
+    <h2 class="h3 mb-sm-0">Number of tutors in each city</h2>
+</div>
+<div class="tns-carousel-wrapper tns-controls-outside-xxl tns-nav-outside">
+    <div class="tns-carousel-inner" data-carousel-options="{&quot;nav&quot;: true, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1, &quot;gutter&quot;: 16},&quot;420&quot;:{&quot;items&quot;:2, &quot;gutter&quot;: 16},&quot;700&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 20},&quot;850&quot;:{&quot;items&quot;:4, &quot;gutter&quot;: 20},&quot;1300&quot;:{&quot;nav&quot;: false, &quot;items&quot;:5, &quot;gutter&quot;: 24}}}">
+    <div>
+        <div class="position-relative">
+        <div class="bg-secondary rounded-3 p-4 mb-3"><img class="d-block mx-auto" src="frontend/img/job-board/city/new-york.svg" alt="New York"></div>
+        <div class="text-center"><a class="nav-link stretched-link p-0" href="/">Johannesburg</a><span class="fs-xs">25 tutors</span></div>
+        </div>
+    </div>
+    <div>
+        <div class="position-relative">
+        <div class="bg-secondary rounded-3 p-4 mb-3"><img class="d-block mx-auto" src="frontend/img/job-board/city/paris.svg" alt="Paris"></div>
+        <div class="text-center"><a class="nav-link stretched-link p-0" href="/">Pretoria</a><span class="fs-xs">12 tutors</span></div>
+        </div>
+    </div>
+    <div>
+        <div class="position-relative">
+        <div class="bg-secondary rounded-3 p-4 mb-3"><img class="d-block mx-auto" src="frontend/img/job-board/city/london.svg" alt="London"></div>
+        <div class="text-center"><a class="nav-link stretched-link p-0" href="/">Bloemfontein</a><span class="fs-xs">18 tutors</span></div>
+        </div>
+    </div>
+    <div>
+        <div class="position-relative">
+        <div class="bg-secondary rounded-3 p-4 mb-3"><img class="d-block mx-auto" src="frontend/img/job-board/city/bangkok.svg" alt="Bangkok"></div>
+        <div class="text-center"><a class="nav-link stretched-link p-0" href="/">Cape Town</a><span class="fs-xs">24 tutors</span></div>
+        </div>
+    </div>
+    <div>
+        <div class="position-relative">
+        <div class="bg-secondary rounded-3 p-4 mb-3"><img class="d-block mx-auto" src="frontend/img/job-board/city/barcelona.svg" alt="Barcelona"></div>
+        <div class="text-center"><a class="nav-link stretched-link p-0" href="/">Mpumalanga</a><span class="fs-xs">10 tutors</span></div>
+        </div>
+    </div>
+    <div>
+        <div class="position-relative">
+        <div class="bg-secondary rounded-3 p-4 mb-3"><img class="d-block mx-auto" src="frontend/img/job-board/city/dubai.svg" alt="Dubai"></div>
+        <div class="text-center"><a class="nav-link stretched-link p-0" href="/">Durban</a><span class="fs-xs">24 tutors</span></div>
+        </div>
+    </div>
+    <div>
+        <div class="position-relative">
+        <div class="bg-secondary rounded-3 p-4 mb-3"><img class="d-block mx-auto" src="frontend/img/job-board/city/kuala-lumpur.svg" alt="Kuala Lumpur"></div>
+        <div class="text-center"><a class="nav-link stretched-link p-0" href="/">Mbombela</a><span class="fs-xs">14 tutors</span></div>
+        </div>
+    </div>
+    <div>
+        <div class="position-relative">
+        <div class="bg-secondary rounded-3 p-4 mb-3"><img class="d-block mx-auto" src="frontend/img/job-board/city/kuala-lumpur.svg" alt="Kuala Lumpur"></div>
+        <div class="text-center"><a class="nav-link stretched-link p-0" href="/">Mafikeng</a><span class="fs-xs">14 tutors</span></div>
+        </div>
+    </div>
+    <div>
+        <div class="position-relative">
+        <div class="bg-secondary rounded-3 p-4 mb-3"><img class="d-block mx-auto" src="frontend/img/job-board/city/kuala-lumpur.svg" alt="Kuala Lumpur"></div>
+        <div class="text-center"><a class="nav-link stretched-link p-0" href="/">Port Elizabeth</a><span class="fs-xs">14 tutors</span></div>
+        </div>
+    </div>
+    </div>
+</div>
+</section>
+<!-- Reviews-->
+<section class="container pt-lg-2 pb-5 mb-md-4">
+<div class="row">
+    <div class="col-md-4 mb-3 mb-md-0"><img class="d-block mx-auto" src="frontend/img/job-board/illustrations/reviews.svg" alt="Illustartion"></div>
+    <div class="col-lg-1 d-none d-lg-block">
+    <hr class="hr-vertical mx-auto">
+    </div>
+    <div class="col-md-8 col-lg-7">
+    <div class="tns-carousel-wrapper">
+        <div class="tns-carousel-inner" data-carousel-options="{&quot;mode&quot;: &quot;gallery&quot;, &quot;controlsContainer&quot;: &quot;#agents-carousel-controls&quot;, &quot;nav&quot;: false}">
+        <div class="p-3">
+            <div class="card border-0 shadow-sm">
+            <blockquote class="blockquote card-body">
+                <p>I really like computer science. Next year, I will be going to high school so I hope to see you guys there. My favourite scratch project was the platform game. Thank you for coming to our school.</p>
+                <footer class="d-flex align-items-center"><img src="frontend/img/job-board/company/zalo-lg.png" width="56" alt="Zalo Logo">
+                <div class="ps-3">
+                    <h6 class="fs-base mb-0">Ratesh</h6>
+                    <div class="text-muted fw-normal fs-sm">Grade 7 | Buccleuch Montessori</div>
+                </div>
+                </footer>
+            </blockquote>
+            </div>
+        </div>
+        <div class="p-3">
+            <div class="card border-0 shadow-sm">
+            <blockquote class="blockquote card-body">
+                <p>Thank you for the opportunity to learn to code. Without Africa Teen Geeks I would never have had an opportunity to learn how to code. I now believe that with technology, I can change the world. </p>
+                <footer class="d-flex align-items-center"><img src="frontend/img/job-board/company/kibana-lg.png" width="56" alt="Kibana Logo">
+                <div class="ps-3">
+                    <h6 class="fs-base mb-0">Makhosonke Nkosi</h6>
+                    <div class="text-muted fw-normal fs-sm">Grade 10 | Khayalami Secondary School</div>
+                </div>
+                </footer>
+            </blockquote>
+            </div>
+        </div>
+        <div class="p-3">
+            <div class="card border-0 shadow-sm">
+            <blockquote class="blockquote card-body">
+                <p>My daughter had been struggling at school. Africa Teen Geeks introduced her to computer science and she has been doing great. She was selected to attend Festival of Code which boosted her self-confidence and her outlook on life.</p>
+                <footer class="d-flex align-items-center"><img src="frontend/img/job-board/company/zalo-lg.png" width="56" alt="Zalo Logo">
+                <div class="ps-3">
+                    <h6 class="fs-base mb-0">Carol Smith</h6>
+                    <div class="text-muted fw-normal fs-sm">Parent</div>
+                </div>
+                </footer>
+            </blockquote>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="tns-carousel-controls justify-content-center justify-content-md-start my-2 ms-md-2" id="agents-carousel-controls">
+        <button class="mx-2" type="button"><i class="fi-chevron-left"></i></button>
+        <button class="mx-2" type="button"><i class="fi-chevron-right"></i></button>
+    </div>
+    </div>
+</div>
+</section>
+<!-- CTA-->
+<section class="container pt-lg-4 pb-5 mb-md-4 mb-lg-5 text-center">
+<h2 class="pb-4">The fastest way to find a tutor!</h2><a class="btn btn-primary btn-lg rounded-pill ms-sm-auto"  href="#signin-modal" data-bs-toggle="modal">Get started<i class="fi-chevron-right fs-sm ms-2"></i></a>
+</section>
+</main>
+    
+    

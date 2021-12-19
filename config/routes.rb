@@ -10,8 +10,11 @@ Rails.application.routes.draw do
   end
   get '/privacy', to: 'home#privacy'
   get '/terms', to: 'home#terms'
+  get '/about', to: 'home#about'
+  get '/contact', to: 'home#contact'
   get '/student', to: 'home#student_home'
   get '/teacher', to: 'home#teacher_home'
+  get '/tutors', to: 'home#tutor_list'
 
 authenticate :user, lambda { |u|  u.is_admin? } do
   mount Sidekiq::Web => '/sidekiq'
@@ -34,6 +37,9 @@ authenticate :user, lambda { |u|  u.is_admin? } do
   end
 end
 
+  resources :hires
+  resources :likes
+  resources :ratings 
   resources :notifications, only: [:index]
   resources :announcements, only: [:index]
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }

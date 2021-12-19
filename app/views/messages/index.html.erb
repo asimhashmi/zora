@@ -2,9 +2,11 @@
   <% if message.body %>
     <% user = User.find(message.user_id) %>
     <div <% if user == current_user %>style="text-align: right;"<% end %> >
-        <%= user.name %>
-        <%= user.created_at.strftime("%H:%M") %><%#= message.message_time %>
-        <%= message.body %> <br>
+        <%#= user.name %>
+        
+        <%#= message.created_at.strftime("%H:%M") %><%#= message.message_time %>
+        <%= distance_of_time_in_words(Time.now, message.created_at)%> ago:
+        <%= message.body %> <br> 
     </div>
   <% end %>
 <% end %>
